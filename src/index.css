@@ -1,13 +1,183 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* @import url("./assets/css/owl.css"); */
+@import url('./template/assets/css/owl.css');
+/* @import url("./assets/css/fontawesome.css"); */
+@import url('../src/template/assets/css/fontawesome.css');
+/* @import url("./assets/css/flex-slider.css"); */
+@import url('./template/assets/css/flex-slider.css');
+
+/* @import url("./vendor/bootstrap/css/bootstrap.css"); */
+@import url('./template/vendor/bootstrap/css/bootstrap.css');
+/* @import url("./vendor/bootstrap/css/bootstrap.css.map"); */
+/* @import url("./vendor/bootstrap/css/bootstrap.min.css"); */
+/* @import url("./template/vendor/bootstrap/css/bootstrap.min.css"); */
+/* @import url("./vendor/bootstrap/css/bootstrap.min.css.map"); */
+@import url('./features/Auth/components/auth.css');
+html {
+  scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f7fa;
+  position: relative;
 }
+body.loading-data::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  left: 0;
+  right: 0;
+  height: calc(100% - 190px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 8;
+  top: 189px;
+}
+
+@keyframes animation-loading {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+/* body.loading-data::before,
+div.loading-lazy {
+  position: fixed;
+  content: "";
+  top: 187px;
+  height: 8px;
+  width: 100%;
+  z-index: 1001;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: animation-loading;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, red 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 4px;
+} */
+body.loading-data .header_bottom::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: animation-loading;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #0d9e4c 20%, #dddddd 30%, #eeeeee 50%);
+  background-size: 800px 104px;
+  height: 4px;
+}
+body.loading-data .header_bottom {
+  pointer-events: none;
+  position: sticky;
+}
+body.loading-data .header_middle {
+  pointer-events: none;
+}
+body.loading-data .header_middle input {
+  pointer-events: none;
+}
+p {
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #4a4a4a;
+  line-height: 24px;
+}
+a {
+  text-decoration: none !important;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+}
+button,
+input,
+select {
+  outline: none;
+}
+ul.social-icons li {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+ul.social-icons li:last-child {
+  margin-right: 0px;
+}
+
+ul.social-icons li {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  line-height: 50px;
+  background-color: #eee;
+  color: #121212;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+ul.social-icons li:hover {
+  background-color: #f33f3f;
+  color: #fff;
+}
+
+.filled-button {
+  background-color: #f33f3f;
+  color: #fff;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 300;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+/* ---------------------- Header ---------------------- */
+@import url('./components/Header/styles.css');
+
+/* ---------------------- Banner ---------------------- */
+@import url('./features/Home/components/banners/banner.css');
+
+/* ---------------------- intro ---------------------- */
+@import url('./features/Home/components/intro/intro.css');
+
+/* ---------------------- Infor ---------------------- */
+@import url('./features/Infor/styles.css');
+
+/* ---------------------- ProductList ---------------------- */
+@import url('./features/Product/components/ProductList/productList.css');
+
+@import url('./features/Product/products.css');
+
+/* ---------------------- ProductDetail ---------------------- */
+@import url('./features/Product/pages/ProductDetail/styles.css');
+
+/* ---------------------- Cart ---------------------- */
+@import url('./features//Cart/styles.css');

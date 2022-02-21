@@ -1,0 +1,8 @@
+.load_more {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}

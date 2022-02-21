@@ -1,0 +1,116 @@
+.filters .hastag-sort {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+}
+.filters .hastag-sort .hastag-tag {
+  display: flex;
+}
+.filters .hastag-sort .tag-title {
+  margin-right: 20px;
+}
+.filters .hastag-sort .tag-content ul {
+  list-style: none;
+  display: flex;
+}
+.filters .hastag-sort .tag-content ul li {
+  margin: 0 8px;
+  /* color: #f33f3f; */
+  font-weight: 500px;
+  cursor: pointer;
+}
+.filters .hastag-sort .tag-content ul li.active {
+  font-style: italic;
+  font-weight: 700;
+  color: #087b39;
+}
+
+.filters .hastag-sort .tag-content ul li:hover {
+  transform: translate(-5px, 0);
+  transition: ease-in 0.2s;
+  color: #087b39;
+}
+
+.filter-menu {
+  /* margin-top: 100px; */
+  width: 100%;
+  display: block;
+  justify-items: center;
+  justify-content: space-between;
+  margin: 0px 0;
+  background-color: #fff;
+}
+
+.filter-menu {
+  text-align: center;
+  /* border-bottom: 1px solid rgb(22, 21, 21); */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-menu li {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  color: #121212;
+  display: inline-block;
+  margin: 0px 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.filter-menu ul {
+  padding: 0;
+  margin-top: 100px;
+  list-style: none;
+}
+
+.filter-menu ul li.active,
+.filter-menu ul li:hover {
+  color: #f33f3f;
+}
+
+.filter-menu {
+  min-height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 10px;
+}
+.filter-menu .search_input input,
+.filter-menu .search_input select {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px#e8e8e8;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: normal;
+  height: 42px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  position: relative;
+  text-align: left !important;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  width: auto;
+}
+/* .filter-menu .search_input input {
+  text-transform: capitalize;
+} */
+.filter-menu span {
+  margin-top: 7px;
+  margin-right: 5px;
+}

@@ -1,0 +1,305 @@
+.container_infor {
+  display: flex;
+}
+
+.page_infor {
+  flex: 4;
+  background-color: honeydew;
+  padding: 20px;
+}
+/* Sidebar  */
+.sidebar {
+  flex: 1;
+  height: calc(89vh);
+  background-color: rgb(210, 241, 210);
+  position: sticky;
+  top: 0px;
+  color: black;
+}
+
+.sidebarWrapper {
+  padding: 20px;
+  color: #555;
+  margin-left: 30px;
+}
+
+.sidebarMenu {
+  margin-bottom: 10px;
+}
+
+.sidebarTitle {
+  font-size: 25px;
+  color: rgb(17, 2, 2);
+}
+
+.sidebarList {
+  list-style: none;
+  padding: 5px;
+  color: black;
+}
+
+.sidebarListItem {
+  padding: 5px;
+  cursor: pointer;
+  position: flex;
+  align-items: center;
+  border-radius: 10px;
+  color: black;
+}
+
+.sidebarListItem.active,
+.sidebarListItem:hover {
+  background-color: rgb(10, 129, 10);
+}
+
+.sidebarIcon {
+  margin-right: 5px;
+  font-size: 20px !important;
+  color: black;
+}
+.sidebarListItem li {
+  color: black;
+}
+/* ------------   */
+/* Profile */
+.user {
+  flex: 4;
+  padding: 20px;
+}
+
+.userTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userTitle {
+  margin-bottom: 20px;
+}
+.userTitleIcon {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 50px !important;
+}
+.userAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.userContainer {
+  display: flex;
+}
+.userShow {
+  flex: 1;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.userShowTop {
+  display: flex;
+  align-items: center;
+}
+
+.userShowImg {
+  font-size: 35px !important;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.userShowTopTitle {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.userShowUsername {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.userShowUserTitle {
+  font-weight: 600;
+}
+
+.userShowBottom {
+  margin-top: 20px;
+}
+.userShowTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: rgb(175, 170, 170);
+}
+.userShowInfo {
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+  color: black;
+  font-weight: 500;
+}
+.userShowIcon {
+  font-size: 25px !important;
+}
+.userShowInfoTitle {
+  margin-left: 10px;
+}
+
+.userUpdate {
+  flex: 2;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  margin-left: 20px;
+}
+.userUpdateTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+.userUpdateContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: honeydew;
+}
+
+.userUpdateItem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.userUpdateItem > label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.userUpdateInput {
+  border: none;
+  width: 250px;
+  height: 30px;
+  border-bottom: 1px solid gray;
+  background-color: honeydew;
+}
+
+.userUpdateRight {
+  display: flex;
+  flex-direction: column;
+}
+.userUpdateButton {
+  margin-top: 20px;
+  background-color: teal;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 700;
+  width: 100px;
+  justify-content: center;
+  size: 30px;
+  color: white;
+}
+.update-password-btn {
+  font-size: 15px;
+}
+.warning {
+  color: red;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 10px;
+}
+/* ---------   */
+/* Order */
+.userList {
+  flex: 4;
+}
+.userListTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-weight: 800 !important;
+  justify-content: space-between;
+}
+.userAddButton {
+  height: 35px;
+  width: 100px;
+}
+.userAddButton:hover {
+  background-color: yellow;
+  color: black;
+}
+.usersList {
+  max-width: 1200px;
+  max-height: 600px;
+  height: 500px;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: lightgrey;
+}
+::-webkit-scrollbar-thumb {
+  background-color: grey;
+
+  border-radius: 5px;
+}
+.userListUser {
+  width: '100%';
+  border-collapse: collapse;
+}
+.userListUser td,
+.userListUser th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  min-width: 140px;
+  white-space: nowrap;
+}
+.userListUser tr:nth-child(even) {
+  background: f2f2f2;
+}
+.userListUser th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: #555;
+  color: white;
+}
+.userListUser i {
+  cursor: pointer;
+}
+
+.userListImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.userListDelete {
+  border: none;
+  color: red;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.userListEdit {
+  border: none;
+  color: black;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+}
+.orderListOrder .checked_order {
+  background-color: #087b39;
+  color: #fff;
+}
+.orderListOrder .delay_order {
+  background-color: #d8ca0a;
+  color: #fff;
+}
+.orderListOrder .cancel_order {
+  background-color: #ad2806;
+  color: #fff;
+}
+/* -------   */

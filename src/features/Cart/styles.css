@@ -1,0 +1,145 @@
+.cart_container {
+  width: 1380px;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  margin-top: 40px;
+  padding: 15px 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: none;
+  border-radius: 5px;
+}
+.bill_container {
+  flex: 1;
+
+  background-color: white;
+  max-height: 500px;
+  min-height: 350px;
+  max-width: 400px;
+  width: auto;
+  height: auto;
+  position: sticky;
+  top: 100px;
+  /* -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1); */
+}
+
+.cart_empty {
+  text-align: center;
+  padding: 100px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: gray;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1);
+  font-style: italic;
+}
+
+.cart-shopping .title-cart {
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 0px auto;
+  margin-top: 60px;
+  width: 50%;
+  border-bottom: 1px solid rgb(150, 146, 146);
+}
+.cart-shopping .info_checkout {
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(121, 110, 110);
+  margin-bottom: 10px;
+}
+.cart-shopping .infcheckout_wrapper {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: space-between;
+  background-color: honeydew;
+}
+.cart-shopping .infcheckout_wrapper p {
+  font-weight: 500;
+}
+.cart-shopping .infcheckout_inner {
+  background-color: #fff;
+  padding: 5px 10px;
+}
+.cart-shopping .address_title_container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.ReactModal__Content .verify-infomation-ship {
+  background-color: honeydew;
+  padding: 30px;
+
+  /* max-height: 200px; */
+}
+.ReactModal__Content .verify-infomation-ship .verify-title,
+.ReactModal__Content .verify-infomation-ship .submit-change-infor {
+  margin-top: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.ReactModal__Content .verify-infomation-ship form {
+  padding: 5px;
+  width: 550px;
+  background-color: honeydew;
+}
+.ReactModal__Content .verify-infomation-ship .form-left,
+.ReactModal__Content .verify-infomation-ship .form-right {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  margin-right: 30px;
+}
+.ReactModal__Content .verify-infomation-ship .form-right input,
+.ReactModal__Content .verify-infomation-ship .form-right textarea,
+.ReactModal__Content .verify-infomation-ship .form-right {
+  text-align: right;
+}
+.ReactModal__Content .form-verify {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.ReactModal__Content .form-verify input,
+.ReactModal__Content .form-verify textarea {
+  margin-bottom: 20px;
+  margin-top: -5px;
+  border: none;
+  outline: none;
+  background-color: honeydew;
+  border-bottom: 1px solid black;
+}
+
+.ReactModal__Content .btnclose-modal {
+  border: none;
+  position: absolute;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 0px;
+  background-color: orange;
+  text-align: center;
+  line-height: 20px;
+  top: 19px;
+  right: 20px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.ReactModal__Content button:hover {
+  cursor: pointer;
+}
+.ReactModal__Content .verify-infomation-ship button {
+  width: 85%;
+  background: teal;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 400;
+  text-align: center;
+  padding: 4px;
+}

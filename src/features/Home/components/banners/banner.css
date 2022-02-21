@@ -1,0 +1,220 @@
+/* Banner Style */
+.banner {
+  position: relative;
+  text-align: center;
+  margin-top: -55px;
+}
+
+.banner-item-01 {
+  padding: 300px 0px;
+  /* background-image: url(./images/slide_01.jpg); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.banner-item-02 {
+  padding: 300px 0px;
+  background-image: url(./images/slide_02.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.banner-item-03 {
+  padding: 300px 0px;
+  background-image: url(./images/slide_03.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.banner .banner-item {
+  max-height: 600px;
+}
+
+.banner .text-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+.banner .text-content h4 {
+  color: #f33f3f;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.banner .text-content h2 {
+  color: #fff;
+  font-size: 62px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.owl-banner .owl-dots .owl-dot {
+  border-radius: 3px;
+}
+.owl-banner .owl-dots {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 30px;
+}
+.owl-banner .owl-dots .owl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 10px;
+  background-color: #fff;
+  opacity: 0.5;
+}
+.owl-banner .owl-dots .owl-dot:focus {
+  outline: none;
+}
+.owl-banner .owl-dots .owl-dot.active {
+  background-color: #fff;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .banner .text-content {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .banner .text-content h4 {
+    font-size: 22px;
+  }
+
+  .banner .text-content h2 {
+    font-size: 36px;
+    letter-spacing: 0.5px;
+  }
+  .banner-item-01,
+  .banner-item-02,
+  .banner-item-03 {
+    padding: 180px 0px;
+  }
+  .page-heading .text-content h4 {
+    font-size: 22px;
+  }
+
+  .page-heading .text-content h2 {
+    font-size: 36px;
+    letter-spacing: 0.5px;
+  }
+  .latest-products .section-heading a {
+    float: none;
+    margin-top: 0px;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .product-item .down-content h4 {
+    margin-bottom: 20px !important;
+  }
+  .product-item .down-content h6 {
+    position: absolute !important;
+    top: 30px !important;
+    right: 30px !important;
+  }
+  .product-item .down-content span {
+    position: absolute !important;
+    right: 30px !important;
+    bottom: 30px !important;
+  }
+  .best-features .left-content {
+    margin-bottom: 30px;
+  }
+  .call-to-action .inner-content {
+    text-align: center;
+  }
+  .call-to-action .inner-content .filled-button {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .about-features img {
+    margin-bottom: 30px;
+  }
+  .service-item {
+    margin-bottom: 30px;
+  }
+  .find-us #map {
+    margin-bottom: 30px;
+  }
+  .find-us .left-content {
+    margin-left: 0px;
+  }
+  .send-message .accordion {
+    margin-top: 30px;
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar .navbar-brand {
+    position: absolute;
+    left: 30px;
+    top: 32px;
+  }
+  .navbar .navbar-brand {
+    width: auto;
+  }
+  .navbar:after {
+    display: none;
+  }
+  #navbarResponsive {
+    z-index: 99999;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  .navbar .navbar-nav .nav-item {
+    border-bottom: 1px solid #eee;
+  }
+  .navbar .navbar-nav .nav-item:last-child {
+    border-bottom: none;
+  }
+  .navbar .navbar-nav a.nav-link {
+    padding: 15px 0px;
+    color: #1e1e1e !important;
+  }
+  .navbar .navbar-nav .nav-link:hover,
+  .navbar .navbar-nav .active > .nav-link,
+  .navbar .navbar-nav .nav-link.active,
+  .navbar .navbar-nav .nav-link.show,
+  .navbar .navbar-nav .show > .nav-link {
+    color: #f33f3f !important;
+    border-bottom: none !important;
+    padding-bottom: 15px;
+  }
+  .product-item .down-content h4 {
+    margin-bottom: 10px;
+  }
+  .product-item .down-content h6 {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-bottom: 20px;
+  }
+  .product-item .down-content span {
+    position: relative;
+    right: 0;
+    bottom: 0;
+  }
+}
