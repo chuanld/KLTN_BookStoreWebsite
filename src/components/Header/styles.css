@@ -645,6 +645,7 @@ header .navbar {
   line-height: 28px;
   color: white;
   overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 .dropdown_links1 li a {
   text-transform: capitalize;

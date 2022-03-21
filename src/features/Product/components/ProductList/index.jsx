@@ -8,7 +8,6 @@ import { BookNotFound02 } from '../../../../template/assets/images/index'
 function ProductList(props) {
   const products = props.products
   const { path } = useRouteMatch()
-  console.log(path, 'routematch')
 
   // const [isAdmin] = state.userApi.isAdmin
 

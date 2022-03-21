@@ -8,8 +8,14 @@ import ProductList from './components/ProductList'
 import SidebarWidget from './components/SidebarWidget'
 import withLoading from '../../components/HOC/withLoading'
 import ProductSkeleton from './components/ProductSkeleton'
+import Breadcrumb from 'components/Breadcrumbs'
+import BannerSlide from 'components/BannerSlide'
 
 const queryString = require('query-string')
+/*Note queryString: obj{
+    limit,  page, category, sort, title[regex], price[gte], price[lte]
+}
+End note */
 function Product({ showLoading, hideLoading }) {
   const location = useLocation()
   const history = useHistory()
@@ -83,8 +89,10 @@ function Product({ showLoading, hideLoading }) {
   }
 
   return (
-    <div>
-      <BannerProduct />
+    <>
+      <BannerSlide />
+      <Breadcrumb />
+
       <div className='shop_area shop_reverse mt-100 mb-100'>
         <div className='container'>
           <div className='row'>
@@ -101,7 +109,7 @@ function Product({ showLoading, hideLoading }) {
               {loadingSkt ? (
                 <div className='products'>
                   {new Array(9).fill(undefined).map((item, index) => (
-                    <ProductSkeleton />
+                    <ProductSkeleton key={index} />
                   ))}
                 </div>
               ) : (
@@ -118,7 +126,7 @@ function Product({ showLoading, hideLoading }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

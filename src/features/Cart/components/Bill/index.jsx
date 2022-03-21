@@ -6,7 +6,11 @@ import PaypalExpressBtn from './PaypalButton'
 // import PaypalButtonV2 from "./PaypalButtonV2";
 
 import Modal from 'react-modal'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { deleteAllItem, paymentShipCOD } from 'features/Auth/userSlice'
+
+import { unwrapResult } from '@reduxjs/toolkit'
 // import HelicopterShip from "../../../utils/HelicopterShip/HelicopterShip";
 
 Modal.setAppElement(document.getElementById('root'))
@@ -30,13 +34,15 @@ const customStyles3 = {
   },
 }
 
-export default function Bill({ orderOwner }) {
-  const infor = useSelector((state) => state.user.current)
-  const cart = infor?.cart
+export default function Bill({ orderOwner, infor }) {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.current)
+  console.log(infor, 'INfor props bill')
+  const cart = user?.cart
   const [total, setTotal] = useState(0)
 
   const [orderInfo, setOrderInfo] = useState({})
-  const [onHeli, setOnHeli] = useState(false)
+
   // const [itemid, setItemId] = useState(0);
   useEffect(() => {
     if (orderOwner) {
@@ -80,65 +86,66 @@ export default function Bill({ orderOwner }) {
     // setCallback(!callback);
   }
 
-  const updateCart = async (cart) => {
-    // await axiosClient.patch(
-    //   "/user/addtocart",
-    //   { cart },
-    //   {
-    //     headers: { Authorization: token },
-    //   }
-    // );
-  }
-
   const chkShipCOD = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   if (!infor.address && !orderInfo.address)
-    //     return alert("Please update infomation address for ShipCOD");
-    //   if (window.confirm(`Hi there. Do you confirm checkout`)) {
-    //     document.body.classList.add("loading-data");
-    //     const option = { type: "ShipCOD payment", paywith: "default" };
-    //     var date = new Date();
-    //     var foot =
-    //       date.getDate() +
-    //       "" +
-    //       (date.getMonth() + 1) +
-    //       date.getFullYear() +
-    //       date.getHours() +
-    //       date.getMinutes() +
-    //       date.getMilliseconds();
-    //     const ID = "" + foot;
-    //     const strID = ID.replace(/\s+/g, "");
-    //     const orderID = `ShipCOD-${strID}`;
-    //     await axiosClient.post(
-    //       "/api/order",
-    //       {
-    //         cart,
-    //         orderID,
-    //         address: orderInfo.address ? orderInfo.address : infor.address,
-    //         name: orderInfo.name ? orderInfo.name : infor.name,
-    //         option,
-    //       },
-    //       {
-    //         headers: { Authorization: token },
-    //       }
-    //     );
-    //     setOnHeli(!onHeli);
-    //     setTimeout(() => {
-    //       setOnHeli(false);
-    //       cart.splice(0, cart.length);
-    //       setCart([...cart]);
-    //       updateCart(cart);
-    //       setCallback(!callback);
-    //       toast.success("You have successfully paid. Thanks you for trust us");
-    //       toast.info("Let check order in infomation");
-    //     }, 5000);
-    //     closeModal();
-    //   }
-    // } catch (err) {
-    //   toast.error(err.response.data.msg);
-    // }
-    // document.body.classList.remove("loading-data");
+    e.preventDefault()
+
+    if (!infor.address && !orderInfo.address)
+      return alert('Please update infomation address for ShipCOD')
+    if (window.confirm(`Hi there. Do you confirm checkout`)) {
+      document.body.classList.add('loading-data')
+      const option = { type: 'ShipCOD payment', paywith: 'default' }
+      var date = new Date()
+      var foot =
+        date.getDate() +
+        '' +
+        (date.getMonth() + 1) +
+        date.getFullYear() +
+        date.getHours() +
+        date.getMinutes() +
+        date.getMilliseconds()
+      const ID = '' + foot
+      const strID = ID.replace(/\s+/g, '')
+      const orderID = `ShipCOD-${strID}`
+      // await axiosClient.post(
+      //   "/api/order",
+      //   {
+      //     cart,
+      //     orderID,
+      //     address: orderInfo.address ? orderInfo.address : infor.address,
+      //     name: orderInfo.name ? orderInfo.name : infor.name,
+      //     option,
+      //   },
+      //   {
+      //     headers: { Authorization: token },
+      //   }
+      // );
+      const data = {
+        cart,
+        orderID,
+        address: orderInfo.address ? orderInfo.address : infor.address,
+        name: orderInfo.name ? orderInfo.name : infor.name,
+        option,
+      }
+      // await userApi.paymentShipCOD(data)
+      const action = paymentShipCOD(data)
+      const resultAction = await dispatch(action)
+      const res = unwrapResult(resultAction)
+      if (res.status === 1) {
+        setTimeout(async () => {
+          const action = deleteAllItem()
+          const resultAction = await dispatch(action)
+          const res = unwrapResult(resultAction)
+          toast.success(res.msg)
+          toast.info('Let check order in infomation')
+          document.body.classList.remove('loading-data')
+        }, 5000)
+        closeModal()
+        return
+      }
+      document.body.classList.remove('loading-data')
+      toast.error(res.msg)
+      return
+    }
   }
 
   const [modalIsOpen, setIsOpen] = useState(false)

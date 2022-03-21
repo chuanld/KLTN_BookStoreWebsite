@@ -7,6 +7,11 @@
   background-color: honeydew;
   padding: 20px;
 }
+.page_infor .session-heading .breadcrum-container {
+  margin-left: 0px;
+  margin: 5px 0px;
+  width: 1150px;
+}
 /* Sidebar  */
 .sidebar {
   flex: 1;
@@ -37,7 +42,12 @@
   padding: 5px;
   color: black;
 }
-
+.sidebar .sidebarList li.active {
+  font-weight: 700;
+  color: #087b39;
+  font-style: italic;
+  padding-left: 15px;
+}
 .sidebarListItem {
   padding: 5px;
   cursor: pointer;
@@ -167,7 +177,10 @@
 .userUpdateItem {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin: 25px 0px;
+}
+.userUpdateItem .input-info-update {
+  margin-bottom: -5px;
 }
 .userUpdateItem > label {
   margin-bottom: 5px;
@@ -177,6 +190,7 @@
   border: none;
   width: 250px;
   height: 30px;
+  margin: 0px 0px;
   border-bottom: 1px solid gray;
   background-color: honeydew;
 }
@@ -209,29 +223,29 @@
 }
 /* ---------   */
 /* Order */
-.userList {
+.orderList {
   flex: 4;
 }
-.userListTitle {
+.orderListTitle {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
   font-weight: 800 !important;
   justify-content: space-between;
 }
-.userAddButton {
+.orderAddButton {
   height: 35px;
   width: 100px;
 }
-.userAddButton:hover {
+.orderAddButton:hover {
   background-color: yellow;
   color: black;
 }
-.usersList {
+.ordersList {
   max-width: 1200px;
-  max-height: 600px;
+  /* max-height: 600px;
   height: 500px;
-  overflow: auto;
+  overflow: auto; */
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -243,38 +257,38 @@
 
   border-radius: 5px;
 }
-.userListUser {
+.orderListOrder {
   width: '100%';
   border-collapse: collapse;
 }
-.userListUser td,
-.userListUser th {
+.orderListOrder td,
+.orderListOrder th {
   border: 1px solid #ddd;
   padding: 8px;
   min-width: 140px;
-  white-space: nowrap;
+  white-space: pre-line;
 }
-.userListUser tr:nth-child(even) {
+.orderListOrder tr:nth-child(even) {
   background: f2f2f2;
 }
-.userListUser th {
+.orderListOrder th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background: #555;
   color: white;
 }
-.userListUser i {
+.orderListOrder i {
   cursor: pointer;
 }
 
-.userListImg {
+.orderListImg {
   width: 50px;
   height: 50px;
   object-fit: cover;
   margin-right: 10px;
 }
-.userListDelete {
+.orderListDelete {
   border: none;
   color: red;
   cursor: pointer;
@@ -283,7 +297,7 @@
   margin-left: 20px;
 }
 
-.userListEdit {
+.orderListEdit {
   border: none;
   color: black;
   cursor: pointer;

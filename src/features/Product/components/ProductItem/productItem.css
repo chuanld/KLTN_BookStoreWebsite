@@ -36,17 +36,20 @@
 .product_box h4 {
   color: black;
   width: 100%;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   text-transform: capitalize;
   cursor: pointer;
-  font-family: "Montserrat-Light" !important;
+  font-family: 'Montserrat', sans-serif !important;
+  /* text-align: center; */
+  margin: 4px 0px;
 }
 .product_box h6 {
   color: red;
+  /* text-align: center; */
 }
 .product_box p {
   width: 100%;
@@ -56,13 +59,54 @@
   overflow: hidden;
   white-space: nowrap;
   color: black;
-  font-size: 15px;
-  font-family: "Montserrat-Light" !important;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif !important;
+  /* text-align: center; */
+}
+.product_box .product_box_item {
+  display: flex;
+  justify-content: space-between;
+}
+.product_box .product_box_item .logo-discount {
+  background-color: #f33f3f;
+  color: #ffff;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 5px;
+  z-index: 1;
+}
+.product_box .product_box_item .original {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  /* text-decoration: line-through; */
+}
+.product_box .product_box_item .original .original-box {
+  display: flex;
 }
 .product_card span {
   color: #f33f3f;
 }
-.row_btn {
+.product_card .rating {
+  /* position: absolute; */
+  font-size: 10px;
+  right: 0;
+  bottom: 100px;
+  display: flex;
+  align-items: center;
+}
+.product_card .rating p {
+  font-size: 10px;
+  font-style: italic;
+}
+.product_card .rating span {
+  color: orange !important;
+}
+.product_card .rating .row_btn {
   width: 100%;
   display: flex;
   justify-content: space-between;

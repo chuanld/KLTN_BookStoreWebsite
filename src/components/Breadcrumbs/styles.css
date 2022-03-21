@@ -1,0 +1,10 @@
+.breadcrum-container {
+  height: 30px;
+  margin: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  /* background-color: antiquewhite; */
+  /* margin-bottom: 60px; */
+  border-bottom: 1px solid #eee;
+  width: 1150px;
+}

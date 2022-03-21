@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 import { Controller } from 'react-hook-form'
+import './styles.css'
 
 function InputField(props) {
   const {
@@ -9,11 +10,12 @@ function InputField(props) {
     label,
     disable,
     placeholder,
-    type = 'text',
+    type,
     value,
     className,
     height,
     width,
+    variant,
   } = props
 
   if (!form)
@@ -50,10 +52,11 @@ function InputField(props) {
         //   {invalid && <span>{error?.message}</span>}
         // </div>
         <TextField
-          className={className || ''}
+          color={'success'}
+          InputProps={{ className }}
           name={name}
           label={label}
-          type={type}
+          type={type ? type : 'text'}
           placeholder={placeholder}
           onBlur={onBlur}
           onChange={onChange}
@@ -63,6 +66,7 @@ function InputField(props) {
           helperText={error?.message}
           sx={{ height: height, width: width }}
           margin='dense'
+          variant={variant}
         />
       )}
     />

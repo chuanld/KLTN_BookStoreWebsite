@@ -6,22 +6,40 @@ import SideBar from './components/Sidebar'
 import Profile from './components/Profile'
 import Order from './components/Order'
 import OrderDetail from './components/Order/OrderDetail'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min'
+import Breadcrumb from 'components/Breadcrumbs'
 
 function Infor() {
+  const { path } = useRouteMatch()
+  const user = useSelector((state) => state.user.current)
   return (
     <>
-      <Router>
-        <div className='container_infor'>
-          <SideBar />
-          <div className='page_infor'>
-            <Switch>
-              <Route path='/infor' exact component={Profile} />
-              <Route path='/order' exact component={Order} />
-              <Route path='/order/:id' exact component={OrderDetail} />
-            </Switch>
+      {user ? (
+        <Router>
+          <div className='container_infor'>
+            <SideBar />
+            <div className='page_infor'>
+              <div className='session-heading'>
+                <Breadcrumb />
+              </div>
+
+              <Switch>
+                <Route path={`${path}/infor`} exact component={Profile} />
+                <Route path={`${path}/order`} exact component={Order} />
+                <Route
+                  path={`${path}/order/:id`}
+                  exact
+                  component={OrderDetail}
+                />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      ) : (
+        <Redirect to='/' />
+      )}
     </>
   )
 }

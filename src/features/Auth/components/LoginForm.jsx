@@ -59,23 +59,27 @@ function LoginForm(props) {
           </div>
         </div>
         {/* <span>or use your account</span> */}
-        <InputField
-          name='email'
-          placeholder='Email'
-          form={form}
-          label='Email'
-          className={'input-field'}
-          height={'30px'}
-          width='260px'
-        />
-        <PasswordField
-          name='password'
-          placeholder='Password'
-          form={form}
-          label='Pasword'
-          height='70px'
-          width='260px'
-        />
+        <div className='input-login'>
+          <InputField
+            name='email'
+            placeholder='Email'
+            form={form}
+            label='Email'
+            className='input-field'
+            height={'30px'}
+            width='260px'
+          />
+        </div>
+        <div className='input-login'>
+          <PasswordField
+            name='password'
+            placeholder='Password'
+            form={form}
+            label='Pasword'
+            height='70px'
+            width='260px'
+          />
+        </div>
         <Link to='/forgot'>Forgot your password?</Link>
         <button type='submit'>Sign In</button>
       </form>

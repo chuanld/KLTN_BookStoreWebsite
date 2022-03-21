@@ -19,6 +19,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { LogoHeader } from 'template/assets/images/index'
 import categoryApi from 'api/categoryApi'
 import { StorageKeys } from '../../constant/storageKey'
+import userApi from 'api/userApi'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles1 = {
@@ -53,12 +54,27 @@ function Header() {
   //   setInfo(JSON.parse(localStorage.getItem(StorageKeys.USER)))
   // }, [])
 
-  console.log(info)
-  const cart = info?.cart
-  const isLogged = info?.role === 0 || info?.role === 1 ? true : false || false
-  const isAdmin = info?.role === 1 ? true : false || false
-  console.log(isLogged, isAdmin)
+  const cart = useSelector((state) => state.user.cartCurrent) || []
 
+  // const isLogged = info?.role === 0 || info?.role === 1 ? true : false || false
+  // const isAdmin = info?.role === 1 ? true : false || false
+  const [isLogged, setIsLogged] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    ;(async () => {
+      if (info) {
+        const data = await userApi.getProfile()
+
+        if (data.role === 0) {
+          setIsLogged(true)
+          return
+        }
+        setIsLogged(true)
+        setIsAdmin(true)
+      }
+    })()
+  }, [info])
   // function openModal() {
   //     dispatch(openModal());
   // }
@@ -77,7 +93,6 @@ function Header() {
       left: y || 0,
       behavior: 'smooth',
     })
-    console.log(123)
   }
   const handeleScrollHome = () => {
     window.scroll({
@@ -89,9 +104,9 @@ function Header() {
   const accountAdmin = () => {
     return (
       <>
-        <Link to='/infor' className='auth_acc'>
+        <Link to='/account' className='auth_acc'>
           <p>Admin</p>
-          <p>Hi {info.name}</p>
+          <p>Hi {info?.name}</p>
         </Link>
       </>
     )
@@ -99,9 +114,9 @@ function Header() {
   const accountUser = () => {
     return (
       <>
-        <Link to='/infor' className='auth_acc'>
+        <Link to='/account' className='auth_acc'>
           <p>Account</p>
-          <p>Hi {info.name}</p>
+          <p>Hi {info?.name}</p>
         </Link>
       </>
     )
@@ -196,11 +211,11 @@ function Header() {
                   </div>
                   <div className='header_account_area'>
                     <div className='header_account-list top_links'>
-                      {isLogged && cart.length !== 0 ? (
+                      {info && isLogged && cart.length !== 0 ? (
                         <span className='count'>{cart.length}</span>
                       ) : null}
                       <NotificationImportantOutlined className='icon-users' />
-                      {isLogged && cart.length !== 0 ? (
+                      {info && isLogged && cart.length !== 0 ? (
                         <ul className='dropdown_links'>
                           {cart.map((item) => (
                             <li key={item._id}>
@@ -211,11 +226,11 @@ function Header() {
                       ) : null}
                     </div>
                     <div className='header_account-list mini_cart_wrapper top_links'>
-                      {isLogged && cart.length !== 0 ? (
+                      {info && isLogged && cart.length !== 0 ? (
                         <span className='count'>{cart.length}</span>
                       ) : null}
                       <ShoppingCart className='icon-users' />
-                      {isLogged && cart.length !== 0 ? (
+                      {info && isLogged && cart.length !== 0 ? (
                         <ul className='dropdown_links dropdown-custome-cart'>
                           {cart.map((item) => (
                             <li key={item._id}>
@@ -230,9 +245,9 @@ function Header() {
                         <AccountCircleOutlined className='icon-users' />
                         {/* <i class='fas fa-user' style={{ fontSize: '25px' }} /> */}
                         <div className='col'>
-                          {isAdmin ? (
+                          {info && isAdmin ? (
                             accountAdmin()
-                          ) : isLogged ? (
+                          ) : info && isLogged ? (
                             accountUser()
                           ) : (
                             <Link
@@ -245,10 +260,10 @@ function Header() {
                             </Link>
                           )}
                         </div>
-                        {isLogged ? (
+                        {info && isLogged ? (
                           <ul className='dropdown_links'>
                             <li>
-                              <Link to='/infor'>Information</Link>
+                              <Link to='/account/infor'>Information</Link>
                             </li>
                             <li>
                               <Link to='/cart'>Cart shopping</Link>

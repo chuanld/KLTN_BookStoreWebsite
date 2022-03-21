@@ -8,6 +8,7 @@
   background-color: #fff;
   padding: 14px;
   width: 270px;
+  border-radius: 5px;
 }
 .widget_list h3 {
   font-size: 15px;
@@ -75,8 +76,12 @@
   padding: 10px;
   justify-content: space-around;
 }
-.sidebar_widget .widget_prices span {
-  padding-top: 7px;
+.sidebar_widget .widget_prices span:hover {
+  /* padding-top: 7px; */
+  /* background-color: #0e9448; */
+}
+.sidebar_widget .widget_prices span input:hover {
+  background-color: #0e9448;
 }
 .sidebar_widget .widget_prices input {
   -webkit-tap-highlight-color: transparent;

@@ -8,6 +8,8 @@
   /* justify-items: center; */
   /* justify-content: space-around; */
   background-color: #fff;
+  border-radius: 5px;
+  justify-content: flex-start;
 }
 .products .product_skeleton {
   padding: 0;

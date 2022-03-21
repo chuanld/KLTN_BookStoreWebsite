@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { GlobalState } from "../../GlobalState";
 import ListCart from './components/ListCart'
 import Bill from './components/Bill'
 import Footers from '../../components/Footer'
 import Modal from 'react-modal'
 import { useSelector } from 'react-redux'
+import userApi from 'api/userApi'
+import Breadcrumb from 'components/Breadcrumbs'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles3 = {
@@ -42,8 +44,19 @@ function Cart() {
   }
   console.log(orderOwner)
   const user = useSelector((state) => state.user.current)
-  const [cart] = user?.cart
+  const [info, setInfo] = useState({})
+  const cart = user?.cart || []
+
   const [modalIsOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    ;(async function () {
+      if (user) {
+        const res = await userApi.getProfile()
+        setInfo(res)
+      }
+    })()
+  }, [user])
 
   function openModal() {
     setIsOpen(true)
@@ -75,6 +88,7 @@ function Cart() {
 
   return (
     <>
+      <Breadcrumb />
       <div className='cart-shopping'>
         <h3 className='title-cart'>You have {cart.length} products shopping</h3>
         <div className='cart_container'>
@@ -89,16 +103,16 @@ function Cart() {
               <div className='infcheckout_inner'>
                 <div>
                   <div className='address_title_container'>
-                    <span className='email_title'>Customer: {user.email}</span>
+                    <span className='email_title'>Customer: {info.email}</span>
                     <span className='name_title'>
                       Receiver:{' '}
-                      {onEdit && orderOwner.name ? orderOwner.name : user.name}
+                      {onEdit && orderOwner.name ? orderOwner.name : info.name}
                     </span>
                     <span className='phone_title'>
                       Phone:{' '}
                       {onEdit && orderOwner.phone
                         ? orderOwner.phone
-                        : user.phone}
+                        : info.phone}
                     </span>
                   </div>
                 </div>
@@ -107,16 +121,16 @@ function Cart() {
                     Address:{' '}
                     {onEdit && orderOwner.address
                       ? orderOwner.address
-                      : user.address}
+                      : info.address}
                   </span>
                 </div>
               </div>
             </div>
-            <ListCart />
+            <ListCart cart={cart} />
           </div>
 
           <div className='bill_container'>
-            <Bill orderOwner={orderOwner} />
+            <Bill orderOwner={orderOwner} infor={info} />
           </div>
         </div>
 
@@ -146,7 +160,7 @@ function Cart() {
                   <input
                     type='text'
                     name='name'
-                    placeholder={orderOwner.name ? orderOwner.name : user.name}
+                    placeholder={orderOwner.name ? orderOwner.name : info.name}
                     value={orderOwner.name}
                     onChange={onChangeInput}
                   />
@@ -155,7 +169,7 @@ function Cart() {
                     type='text'
                     name='phone'
                     placeholder={
-                      orderOwner.phone ? orderOwner.phone : user.phone
+                      orderOwner.phone ? orderOwner.phone : info.phone
                     }
                     value={orderOwner.phone}
                     onChange={onChangeInput}
@@ -166,7 +180,7 @@ function Cart() {
                     type='text'
                     name='address'
                     placeholder={
-                      orderOwner.address ? orderOwner.address : user.address
+                      orderOwner.address ? orderOwner.address : info.address
                     }
                     value={orderOwner.address}
                     onChange={onChangeInput}
@@ -177,30 +191,30 @@ function Cart() {
                   <label htmlFor='orderowner'>Account Email</label>
                   <input
                     type='text'
-                    placeholder={user.email}
-                    value={user.email}
+                    placeholder={info.email}
+                    value={info.email}
                     disabled
                   />
                   <label htmlFor='orderowner'>Account Name</label>
                   <input
                     type='text'
-                    placeholder={user.name}
-                    value={user.name}
+                    placeholder={info.name}
+                    value={info.name}
                     disabled
                   />
                   <label htmlFor='orderowner'>Account Phone</label>
                   <input
                     type='text'
-                    placeholder={user.phone}
-                    value={user.phone}
+                    placeholder={info.phone}
+                    value={info.phone}
                     disabled
                   />
                   <label htmlFor='orderowner'>Account Address</label>
 
                   <textarea
                     type='text'
-                    placeholder={user.address}
-                    value={user.address}
+                    placeholder={info.address}
+                    value={info.address}
                     disabled
                     row='2'
                   />

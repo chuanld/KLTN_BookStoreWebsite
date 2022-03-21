@@ -39,6 +39,7 @@
   justify-content: space-between;
   margin: 0px 0;
   background-color: #fff;
+  border-radius: 5px;
 }
 
 .filter-menu {

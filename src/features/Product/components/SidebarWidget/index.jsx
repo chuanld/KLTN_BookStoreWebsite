@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import categoryApi from 'api/categoryApi'
 import ProTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
-const queryString = require('query-string')
+import FilterPrice from './components/FilterPrice'
 
 SidebarWidget.propTypes = {
   onSubmit: ProTypes.func,
@@ -171,6 +171,32 @@ export default function SidebarWidget(props) {
     const newParams = { ...params }
     onSubmit({ ...newParams, 'title[regex]': para })
   }
+  const handleFilterPrice = (values) => {
+    setShowResult(true)
+    if (!values) return
+    const { min, max } = values
+    if (!params['price[gte]'] && !params['price[lte]']) {
+      const newParams = { ...params }
+      onSubmit({ ...newParams, 'price[gte]': min, 'price[lte]': max })
+      return
+    }
+    if (!params['price[gte]']) {
+      const newParams = { ...params }
+      newParams['price[lte]'] = max
+      onSubmit({ ...newParams, 'price[gte]': min })
+      return
+    }
+    if (!params['price[lte]']) {
+      const newParams = { ...params }
+      newParams['price[gte]'] = min
+      onSubmit({ ...newParams, 'price[lte]': max })
+      return
+    }
+    const newParams = { ...params }
+    newParams['price[gte]'] = min
+    newParams['price[lte]'] = max
+    onSubmit({ ...newParams })
+  }
   return (
     <div className='sidebar_widget'>
       <div className='widget_inner'>
@@ -202,7 +228,7 @@ export default function SidebarWidget(props) {
             ))}
           </ul>
         </div>
-        <div className='widget_list widget_prices'>
+        {/* <div className='widget_list widget_prices'>
           <h3>Filter</h3>
           <form onSubmit={submitPrice}>
             <div className='filter-prices'>
@@ -225,7 +251,7 @@ export default function SidebarWidget(props) {
             </div>
             <div className='filter_result'>
               <button type='submit'>Filter</button>
-              {showResult ? (
+              {showResult || params['price[gte]'] || params['price[lte]'] ? (
                 <div>
                   <span>Result({totalResult})</span>
                   <span>
@@ -239,6 +265,67 @@ export default function SidebarWidget(props) {
               )}
             </div>
           </form>
+          <ul>
+            <li
+              className={showResult ? 'hint-prices active' : 'hint-prices'}
+              onClick={cancelFilter}
+            >
+              None limit
+            </li>
+            <li
+              className={
+                params['price[gte]'] === '1' && params['price[lte]'] === '50'
+                  ? 'hint-prices active'
+                  : 'hint-prices'
+              }
+              onClick={() => quickFilter(1, 50)}
+            >
+              $1.00 ~ $50.00
+            </li>
+            <li
+              className={
+                params['price[gte]'] === '100' && params['price[lte]'] === '200'
+                  ? 'hint-prices active'
+                  : 'hint-prices'
+              }
+              onClick={() => quickFilter(100, 200)}
+            >
+              $100.00 ~ $200.00
+            </li>
+            <li
+              className={
+                params['price[gte]'] === '200' && params['price[lte]'] === '500'
+                  ? 'hint-prices active'
+                  : 'hint-prices'
+              }
+              onClick={() => quickFilter(200, 500)}
+            >
+              $200.00 ~ $500.00
+            </li>
+          </ul>
+        </div> */}
+        <div className='widget_list widget_prices'>
+          <h3>Filter</h3>
+          <div>
+            <FilterPrice params={params} onSubmit={handleFilterPrice} />
+          </div>
+          <div className='filter_result'>
+            <div></div>
+            {showResult || params['price[gte]'] || params['price[lte]'] ? (
+              <div>
+                <span>
+                  <i>Result({totalResult}): </i>
+                </span>
+                <span>
+                  ${params['price[gte]']} ~ ${params['price[lte]']}
+                </span>
+              </div>
+            ) : (
+              <i>
+                <span>Slide for filter</span>
+              </i>
+            )}
+          </div>
           <ul>
             <li
               className={showResult ? 'hint-prices active' : 'hint-prices'}

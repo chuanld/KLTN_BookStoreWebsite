@@ -1,9 +1,7 @@
 /* Latest Produtcs */
-
 .latest-products {
-  margin-top: 100px;
+  margin: 20px 0px;
 }
-
 .latest-products .section-heading a {
   float: right;
   margin-top: -35px;
@@ -12,7 +10,16 @@
   font-weight: 700;
   color: #f33f3f;
 }
-
+.latest-products .container {
+  background-color: #ffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  padding-bottom: 0px;
+}
+.latest-products .row {
+  justify-content: space-between;
+}
 .product-item {
   border: 1px solid #eee;
   margin-bottom: 30px;

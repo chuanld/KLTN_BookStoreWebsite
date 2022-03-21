@@ -3,8 +3,17 @@ import React from 'react'
 import { Controller } from 'react-hook-form'
 
 function PasswordField(props) {
-  const { form, name, label, disable, placeholder, className, height, width } =
-    props
+  const {
+    form,
+    name,
+    label,
+    disable,
+    placeholder,
+    className,
+    height,
+    width,
+    variant,
+  } = props
 
   return (
     <Controller
@@ -15,7 +24,7 @@ function PasswordField(props) {
         fieldState: { invalid, error },
       }) => (
         <TextField
-          className={className || ''}
+          InputProps={{ className }}
           label={label}
           name={name}
           type='password'
@@ -26,8 +35,9 @@ function PasswordField(props) {
           disabled={disable}
           error={invalid}
           helperText={error?.message}
-          style={{ height: height, width: width }}
+          sx={{ height: height, width: width }}
           margin='dense'
+          variant={variant}
         />
       )}
     />

@@ -1,14 +1,15 @@
-import React, { useContext } from 'react'
-
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { Delete } from '@mui/icons-material'
 import './styles.css'
+import { useDispatch } from 'react-redux'
+import { unwrapResult } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
+import { addToCart, deleteCartItem } from 'features/Auth/userSlice'
 
-import { useSelector } from 'react-redux'
-
-function ListCart() {
-  const user = useSelector((state) => state.user.current)
-
-  const cart = user?.cart
+function ListCart(props) {
+  const { cart } = props
+  const dispatch = useDispatch()
 
   //Check null
   if (cart.length === 0)
@@ -21,54 +22,68 @@ function ListCart() {
       </>
     )
   //action button count
-  //   const increment = (id) => {
-  //     cart.forEach((item) => {
-  //       if (item._id === id) {
-  //         item.quantity += 1;
-  //       }
-  //     });
-  //     setCart([...cart]);
-  //     updateCart(cart);
-  //   };
-  //   const decrement = (id) => {
-  //     cart.forEach((item) => {
-  //       if (item._id === id) {
-  //         item.quantity === 1 ? (item.quantity = 1) : (item.quantity -= 1);
-  //       }
-  //     });
-  //     setCart([...cart]);
-  //     updateCart(cart);
-  //   };
+  const increment = async (productId) => {
+    const data = {
+      productId,
+      qtyAmount: 1,
+    }
+    const action = addToCart(data)
+    const resultAction = await dispatch(action)
+    const res = unwrapResult(resultAction)
+    if (res.status === 1) {
+      toast.success(res.msg)
+      return
+    }
+    toast.error(res.msg)
+    return
+  }
+
+  const decrement = async (productId) => {
+    // cart.forEach((item) => {
+    //   if (item._id === id) {
+    //     item.quantity === 1 ? (item.quantity = 1) : (item.quantity -= 1)
+    //   }
+    // })
+    // const newCart = [...cart]
+    // onSubmit(newCart)
+    const data = {
+      productId,
+      qtyAmount: -1,
+    }
+    const action = addToCart(data)
+    const resultAction = await dispatch(action)
+    const res = unwrapResult(resultAction)
+    if (res.status === 1) {
+      toast.success(res.msg)
+      return
+    }
+    toast.error(res.msg)
+    return
+  }
 
   //   //Delete cartItem
-  //   const removeCartItem = (id) => {
-  //     if (window.confirm("Are you sure, product will remove from your Cart"))
-  //       cart.forEach((item, index) => {
-  //         if (item._id === id) {
-  //           cart.splice(index, 1);
-  //         }
-  //       });
-  //     setCart([...cart]);
-  //     updateCart(cart);
-  //   };
-
-  //Update DB
-  //   const updateCart = async (cart) => {
-  //     await axiosClient.patch(
-  //       "/user/addtocart",
-  //       { cart },
-  //       {
-  //         headers: { Authorization: token },
-  //       }
-  //     );
-  //   };
+  const removeCartItem = async (id) => {
+    if (window.confirm('Are you sure, product will remove from your Cart')) {
+      const action = deleteCartItem(id)
+      const resultAction = await dispatch(action)
+      const res = unwrapResult(resultAction)
+      if (res.status === 1) {
+        toast.success(res.msg)
+        return
+      }
+      toast.error(res.msg)
+      return
+    }
+  }
 
   return (
     <>
       <div className='list_container'>
         {cart.map((product) => (
           <div className='listcart' key={product._id}>
-            <img src={product.images.url} alt='' className='img_container' />
+            <Link to={`products/${product._id}`}>
+              <img src={product.images.url} alt='' className='img_container' />
+            </Link>
             <div className='listcart-detail'>
               <div className='row'>
                 <h2>{product.title}</h2>
@@ -79,14 +94,14 @@ function ListCart() {
               <p>NXB: {product.publisher}</p>
               <p>Đã mua: {product.sold}</p>
             </div>
-            {/* <div className="amount">
+            <div className='amount'>
               <button onClick={() => decrement(product._id)}> - </button>
               <span> {product.quantity} </span>
               <button onClick={() => increment(product._id)}> + </button>
             </div>
-            <div className="delete" onClick={() => removeCartItem(product._id)}>
+            <div className='delete' onClick={() => removeCartItem(product._id)}>
               <Delete />
-            </div> */}
+            </div>
           </div>
         ))}
       </div>

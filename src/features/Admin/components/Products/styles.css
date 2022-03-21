@@ -1,0 +1,239 @@
+.productList {
+  flex: 4;
+}
+.productListAdmin {
+  margin: 20px;
+  /* overflow-x: auto; */
+}
+.productListTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-weight: 800 !important;
+  justify-content: space-between;
+}
+.productAddButton {
+  height: 35px;
+  width: 100px;
+  background: teal;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.productAddButton:hover {
+  background-color: yellow;
+  color: black;
+}
+.productsList {
+  max-width: 1300px;
+  /* max-height: 600px;
+    height: 500px; */
+  /* overflow: auto; */
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: lightgrey;
+}
+::-webkit-scrollbar-thumb {
+  background-color: grey;
+
+  border-radius: 5px;
+}
+.productListProduct {
+  width: '100%';
+  border-collapse: collapse;
+}
+.productListProduct td,
+.productListProduct th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 145px;
+  white-space: pre-line;
+}
+.productListProduct tr:nth-child(even) {
+  background: #fafafa;
+}
+.productListProduct th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  color: black;
+}
+.productListProduct tbody tr:hover {
+  cursor: pointer;
+  background-color: honeydew;
+  box-shadow: 0 0 30px rgb(197, 195, 195);
+  transition: ease-in 0.1s;
+}
+.productListProduct i {
+  cursor: pointer;
+}
+
+.productListImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.productListDelete {
+  border: none;
+  color: red;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+}
+
+.productListEdit {
+  border: none;
+  color: black;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+}
+.col_action_productlist {
+  text-align: center !important;
+  justify-content: space-between !important;
+}
+.col_title_productlist {
+  width: 600px !important;
+}
+.col_sold_productlist {
+  width: 70px !important;
+}
+.col_price_productlist {
+  width: 70px !important;
+}
+.col_publisher_productlist {
+  width: 270px !important;
+}
+.col_id_productlist {
+  width: 90px !important;
+}
+.col_author_productlist {
+  width: 290px !important;
+}
+.productListTitle .multiselect span {
+  margin-right: 10px;
+  padding: 5px;
+}
+.productListTitle .multiselect input {
+  padding: 5px;
+}
+.productListTitle .productDelAllButton {
+  height: 35px;
+  width: 100px;
+  background: rgb(199, 81, 2);
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-right: 10px;
+}
+.productListTitle .productDelAllButton:hover {
+  background-color: rgb(255, 51, 0);
+  color: black;
+}
+.productListAdmin .pagination-container {
+  margin: 15px 0;
+  text-align: right;
+  position: relative;
+  top: 20px;
+  text-align: center;
+}
+/* -----------------------DetailProduct------------------ */
+.create_product {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin: 40px auto;
+}
+.create_product .uploadimg {
+  max-width: 450px;
+  height: 500px;
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 20px;
+  position: relative;
+}
+#file_up {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+#file_up::before {
+  content: '+';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+  color: rgb(250, 200, 107);
+  font-size: 17rem;
+  text-align: center;
+  cursor: pointer;
+  margin: auto;
+}
+#file_img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+}
+#file_img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+#file_img span {
+  position: absolute;
+  top: -13px;
+  right: -13px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 900;
+  color: orange;
+}
+.create_product form {
+  max-width: 500px;
+  min-width: 290px;
+  width: 100%;
+  margin: 15px 30px;
+}
+.create_product form .row {
+  width: 100%;
+  margin: 15px 0;
+}
+.create_product form input,
+textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 5px;
+}
+.create_product form button {
+  width: 200px;
+  height: 40px;
+  background-color: #555;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.create_product form .update-info-book {
+  margin: 25px 0;
+}

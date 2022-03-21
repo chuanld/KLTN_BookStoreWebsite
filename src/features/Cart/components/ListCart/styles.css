@@ -19,6 +19,9 @@
 }
 .listcart .img_container {
   cursor: pointer;
+  display: block;
+  height: auto;
+  width: 240px;
 }
 .listcart-detail {
   max-width: 430px;
@@ -41,6 +44,7 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .listcart-detail span {
+  color: #111111;
   font-size: 20px;
   font-style: italic;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

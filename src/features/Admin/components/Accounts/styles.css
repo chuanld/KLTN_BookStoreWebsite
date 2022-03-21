@@ -1,0 +1,373 @@
+.userList {
+  flex: 4;
+}
+.userlist {
+  margin: 20px;
+}
+.userListTitle {
+  display: flex;
+  justify-content: center;
+  /* margin-bottom: 10px; */
+  font-weight: 800 !important;
+  justify-content: space-between;
+}
+
+.userAddButton:hover {
+  background-color: yellow;
+  color: black;
+}
+.usersList {
+  max-width: 1300px;
+  /* max-height: 600px;
+    height: 500px; */
+  /* overflow: auto; */
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: lightgrey;
+}
+::-webkit-scrollbar-thumb {
+  background-color: grey;
+
+  border-radius: 5px;
+}
+.userListUser {
+  width: '100%';
+  border-collapse: collapse;
+}
+.userListUser td,
+.userListUser th {
+  border: 1px solid #f0f0f0;
+  padding: 8px;
+  width: 150px;
+  white-space: nowrap;
+}
+.userListUser tr:nth-child(even) {
+  background: #fafafa;
+}
+.userListUser th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: #f2f2f2;
+  color: black;
+  width: 1200px;
+}
+.userListUser tbody tr:hover {
+  cursor: pointer;
+  background-color: honeydew;
+  box-shadow: 0 0 30px rgb(197, 195, 195);
+  transition: ease-in 0.1s;
+}
+.userListUser i {
+  cursor: pointer;
+}
+
+.userListImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.userListDelete {
+  border: none;
+  color: red;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.userListEdit {
+  border: none;
+  color: black;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+}
+.userlist .pagination-container {
+  margin: 20px 0;
+  text-align: right;
+  position: relative;
+  top: 15px;
+  text-align: center;
+  z-index: 3;
+}
+.userlist_result {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+
+  margin: 0 11px 10px;
+  position: relative;
+  top: -30px;
+  z-index: 2;
+  width: 250px;
+  left: 940px;
+}
+.userList_toolbar_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  margin: 0 0 0px;
+  width: 1230px;
+  background-color: rgb(210, 241, 210);
+  border-radius: 5px;
+}
+
+.userlist_show_result .result {
+  text-align: right;
+}
+.userList_toolbar_wrapper .search_input input {
+  border: none;
+}
+
+.userList_toolbar_wrapper .sort_select,
+.userList_toolbar_wrapper .select_output,
+.userList_toolbar_wrapper .search_input {
+  border-left: 3px solid #ddd;
+}
+.userList_toolbar_wrapper .search_input input,
+.userList_toolbar_wrapper .select_output select,
+.userList_toolbar_wrapper .select_account select,
+.userList_toolbar_wrapper .sort_select select {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px#e8e8e8;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: normal;
+  height: 42px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  position: relative;
+  text-align: left !important;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  width: auto;
+}
+/* -----------------Detail Account---------------- */
+.user {
+  flex: 4;
+  padding: 20px;
+}
+
+.userTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userTitle {
+  margin-bottom: 20px;
+}
+.userTitleIcon {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 50px !important;
+}
+.userAddButton {
+  width: 100px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffff;
+  margin-bottom: 20px;
+}
+.userContainer {
+  display: flex;
+}
+.userShow {
+  flex: 1;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  background-color: honeydew;
+}
+
+.userUpdate {
+  flex: 2;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  margin-left: 20px;
+  background-color: honeydew;
+}
+
+.userShowTop {
+  display: flex;
+  align-items: center;
+}
+
+.userShowImg {
+  font-size: 35px !important;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.userShowTopTitle {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.userShowUsername {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.userShowUserTitle {
+  font-weight: 600;
+}
+
+.userShowBottom {
+  margin-top: 20px;
+}
+.userShowTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: rgb(175, 170, 170);
+}
+.userShowInfo {
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+  color: black;
+  font-weight: 500;
+}
+.userShowIcon {
+  font-size: 25px !important;
+}
+.userShowInfoTitle {
+  margin-left: 10px;
+}
+
+.userUpdateTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+.userUpdateForm {
+  display: flex;
+  justify-content: space-between;
+  background-color: honeydew;
+}
+.userUpdateItem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.userUpdateItem > label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.userUpdateInput {
+  border: none;
+  width: 250px;
+  height: 30px;
+  border-bottom: 1px solid gray;
+  background-color: honeydew;
+}
+
+.userUpdateRight {
+  display: flex;
+  flex-direction: column;
+}
+.userUpdateButton {
+  margin-top: 20px;
+  background-color: teal;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 700;
+  width: 100px;
+  justify-content: center;
+  size: 30px;
+}
+/* -------------------Create Account----------------- */
+.createUser {
+  margin: 30px;
+}
+
+.createUserIcon {
+  margin-right: 10px;
+  font-size: 30px !important;
+  margin-bottom: 5px;
+}
+.createUserForm {
+  padding: 20px 60px;
+
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.createUserForm form {
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  background-color: honeydew;
+  text-align: center;
+  padding: 20px 40px;
+}
+.createUserFormItem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.createUserItem {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+
+.createUserItem > label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(241, 18, 18);
+}
+
+.createUserItem > input {
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid gray;
+  background-color: honeydew;
+  margin-bottom: 20px;
+}
+
+.createUserButton {
+  width: 130px;
+  height: 40px;
+  border: none;
+  background-color: teal;
+  color: white;
+  padding: 5px;
+  margin: auto;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+.createUserButton:hover {
+  color: black;
+  background-color: yellow;
+}

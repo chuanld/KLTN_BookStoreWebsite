@@ -1,0 +1,111 @@
+.orderlist {
+  margin: 20px;
+}
+
+.orderListTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-weight: 800 !important;
+  justify-content: space-between;
+}
+.orderAddButton {
+  height: 35px;
+  width: 100px;
+  color: white;
+  font-weight: 500;
+}
+.orderAddButton:hover {
+  background-color: yellow;
+  color: black;
+}
+.orderlist .ordersList {
+  max-width: 1300px;
+  /* max-height: 600px;
+    height: 500px; */
+  /* overflow: auto; */
+  /* overflow-x: auto; */
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: lightgrey;
+}
+::-webkit-scrollbar-thumb {
+  background-color: grey;
+
+  border-radius: 5px;
+}
+/* .orderListOrder {
+  width: '100%';
+  border-collapse: collapse;
+}
+.orderListOrder td,
+.orderListOrder th {
+  border: 1px solid #f0f0f0;
+  padding: 8px;
+  min-width: 145px;
+  white-space: pre-line;
+  width: 1200px;
+}
+.orderListOrder tr:nth-child(even) {
+  background: #fafafa;
+}
+.orderListOrder th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: #f2f2f2;
+  color: black;
+}
+.orderListOrder tbody tr:hover {
+  cursor: pointer;
+  background-color: honeydew;
+  box-shadow: 0 0 30px rgb(197, 195, 195);
+  transition: ease-in 0.1s;
+}
+.orderListOrder i {
+  cursor: pointer;
+} */
+.orderListOrder .checked_order {
+  background-color: #087b39;
+  color: #fff;
+}
+.orderListOrder .delay_order {
+  background-color: #d8ca0a;
+  color: #fff;
+}
+.orderListOrder .cancel_order {
+  background-color: #ad2806;
+  color: #fff;
+}
+.orderListImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.orderListDelete {
+  border: none;
+  color: red;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.orderListEdit {
+  border: none;
+  color: black;
+  cursor: pointer;
+  align-items: center;
+  font-size: 30px;
+}
+.orderlist .pagination-container {
+  margin: 20px 0;
+  text-align: right;
+  position: relative;
+  top: 5px;
+  text-align: center;
+  z-index: 3;
+}

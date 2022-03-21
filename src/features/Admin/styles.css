@@ -1,0 +1,32 @@
+.admin-page {
+  height: auto;
+}
+.container-ad {
+  display: flex;
+}
+
+.others {
+  max-width: 1400px;
+  flex: 5;
+  background-color: #fff;
+  /* overflow-y: auto; */
+}
+.others .session-heading .breadcrum-container {
+  margin: 15px;
+  width: fit-content;
+  margin-bottom: -10px;
+}
+/* -------------Sidebar------------   */
+@import url('./components/SidebarWidget/styles.css');
+
+/* -------------Account------------   */
+@import url('./components/Accounts/styles.css');
+
+/* -------------Product------------   */
+@import url('./components/Products/styles.css');
+
+/* -------------Category------------   */
+@import url('./components/Categories/styles.css');
+
+/* -------------Order------------   */
+@import url('./components/Orders/styles.css');

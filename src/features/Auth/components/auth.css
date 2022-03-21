@@ -108,7 +108,10 @@
   z-index: 1;
 }
 .sign-up-containerlg .input-field {
-  margin-bottom: 25px !important;
+  margin-bottom: 55px !important;
+}
+.sign-up-containerlg .input-signup {
+  margin: 10px 0px;
 }
 .containerlg.right-panel-activelg .sign-up-containerlg {
   transform: translateX(100%);
@@ -248,9 +251,11 @@
   width: 40px;
 }
 .form-containerlg .input-field {
-  margin-bottom: 40px;
+  margin-bottom: -2px !important;
 }
-
+.form-containerlg .input-login {
+  margin: 20px 0px;
+}
 footer {
   background-color: #222;
   color: #fff;

@@ -61,42 +61,50 @@ function RegisterForm(props) {
           </div>
         </div>
         {/* <span>or use your email for registration</span> */}
-        <InputField
-          name='email'
-          placeholder='Email'
-          form={form}
-          label='Email'
-          className={'input-field'}
-          height={'35px'}
-          width='260px'
-        />
-        <InputField
-          name='name'
-          placeholder='Name'
-          form={form}
-          label='Name'
-          className={'input-field'}
-          height={'35px'}
-          width='260px'
-        />
-        <PasswordField
-          name='password'
-          placeholder='Password'
-          form={form}
-          label='Password'
-          className={'input-field'}
-          height={'35px'}
-          width='260px'
-        />
-        <PasswordField
-          name='confirm'
-          placeholder='Confirm'
-          form={form}
-          label='Confirm'
-          className={'input-field'}
-          height={'35px'}
-          width='260px'
-        />
+        <div className='input-signup'>
+          <InputField
+            name='email'
+            placeholder='Email'
+            form={form}
+            label='Email'
+            className={'input-field'}
+            height={'35px'}
+            width='260px'
+          />
+        </div>
+        <div className='input-signup'>
+          <InputField
+            name='name'
+            placeholder='Name'
+            form={form}
+            label='Name'
+            className={'input-field'}
+            height={'35px'}
+            width='260px'
+          />
+        </div>
+        <div className='input-signup'>
+          <PasswordField
+            name='password'
+            placeholder='Password'
+            form={form}
+            label='Password'
+            className={'input-field'}
+            height={'35px'}
+            width='260px'
+          />
+        </div>
+        <div className='input-signup'>
+          <PasswordField
+            name='confirm'
+            placeholder='Confirm'
+            form={form}
+            label='Confirm'
+            className={'input-field'}
+            height={'35px'}
+            width='260px'
+          />
+        </div>
         <button type='submit'>Sign Up</button>
       </form>
     </div>
