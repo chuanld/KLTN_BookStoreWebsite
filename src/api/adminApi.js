@@ -68,5 +68,9 @@ const adminApi = {
     const url = `/api/order/${id}`
     return axiosClient.patch(url, { status })
   },
+  eventDiscount(formValues) {
+    const url = '/api/products/event_disc'
+    return axiosClient.patch(url, { formValues })
+  },
 }
 export default adminApi

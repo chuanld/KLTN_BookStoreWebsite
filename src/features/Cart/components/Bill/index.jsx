@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteAllItem, paymentShipCOD } from 'features/Auth/userSlice'
 
 import { unwrapResult } from '@reduxjs/toolkit'
+import userApi from 'api/userApi'
 // import HelicopterShip from "../../../utils/HelicopterShip/HelicopterShip";
 
 Modal.setAppElement(document.getElementById('root'))
@@ -34,12 +35,12 @@ const customStyles3 = {
   },
 }
 
-export default function Bill({ orderOwner, infor }) {
+export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.current)
-  console.log(infor, 'INfor props bill')
-  const cart = user?.cart
+  console.log(cart, 'cart')
   const [total, setTotal] = useState(0)
+  const [voucherCode, setVoucherCode] = useState('')
 
   const [orderInfo, setOrderInfo] = useState({})
 
@@ -54,7 +55,11 @@ export default function Bill({ orderOwner, infor }) {
     //total
     const getTotal = () => {
       const total = cart.reduce((prev, item) => {
-        return prev + item.price * item.quantity
+        return item.priceDiscount
+          ? prev + item.priceDiscount * item.quantity
+          : // : item.discount < 100
+            // ? prev + ((item.price * (100 - item.discount)) / 100) * item.quantity
+            prev + ((item.price * item.discount) / 100) * item.quantity
       }, 0)
       setTotal(total)
     }
@@ -106,25 +111,14 @@ export default function Bill({ orderOwner, infor }) {
       const ID = '' + foot
       const strID = ID.replace(/\s+/g, '')
       const orderID = `ShipCOD-${strID}`
-      // await axiosClient.post(
-      //   "/api/order",
-      //   {
-      //     cart,
-      //     orderID,
-      //     address: orderInfo.address ? orderInfo.address : infor.address,
-      //     name: orderInfo.name ? orderInfo.name : infor.name,
-      //     option,
-      //   },
-      //   {
-      //     headers: { Authorization: token },
-      //   }
-      // );
+
       const data = {
         cart,
         orderID,
         address: orderInfo.address ? orderInfo.address : infor.address,
         name: orderInfo.name ? orderInfo.name : infor.name,
         option,
+        voucherCode,
       }
       // await userApi.paymentShipCOD(data)
       const action = paymentShipCOD(data)
@@ -166,6 +160,72 @@ export default function Bill({ orderOwner, infor }) {
     const { name, value } = e.target
     setOrderInfo({ ...orderInfo, [name]: value })
   }
+  const handleCheckVoucher = async () => {
+    if (!voucherCode) return
+    if (!onSubmit) return
+    // try {
+    //   const res = await userApi.checkVoucher(voucherCode)
+    //   setVoucher(res.voucher)
+    // } catch (err) {}
+    onSubmit(voucherCode)
+  }
+
+  // useEffect(() => {
+  //   if (voucher) {
+  //     cart.forEach((product) => {
+  //       if (voucher.voucherProductId.length !== 0) {
+  //         voucher.voucherProductId.forEach((v) => {
+  //           if (product._id === v) {
+  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
+  //             product = { ...product, priceAfter }
+  //             return
+  //           }
+  //         })
+  //       }
+  //       if (voucher.voucherProductCategory.length !== 0) {
+  //         voucher.voucherProductCategory.forEach((v) => {
+  //           if (product.category === v) {
+  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
+  //             // const newCart = [...cart]
+  //             // newCart.forEach((nc) => {
+  //             //   if (nc.category === v) {
+  //             //     nc.price = priceAfter
+  //             //   }
+  //             // })
+  //             // const newCart = [...cart]
+  //             let newCart = JSON.parse(JSON.stringify(cart))
+  //             newCart.forEach((item) => {
+  //               if (item._id === product._id) {
+  //                 // Object.preventExtensions(item)
+  //                 item.priceDiscount = priceAfter
+  //               }
+  //             })
+  //             setCart([...newCart])
+  //             return
+  //           }
+  //         })
+  //       }
+  //       if (voucher.voucherProductAuthor.length !== 0) {
+  //         voucher.voucherProductAuthor.forEach((v) => {
+  //           if (product.author === v) {
+  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
+  //             product = { ...product, priceAfter }
+  //             return
+  //           }
+  //         })
+  //       }
+  //       if (voucher.voucherProductPublisher.length !== 0) {
+  //         voucher.voucherProductPublisher.forEach((v) => {
+  //           if (product.publisher === v) {
+  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
+  //             product = { ...product, priceAfter }
+  //             return
+  //           }
+  //         })
+  //       }
+  //     })
+  //   }
+  // }, [voucher])
 
   return (
     <>
@@ -183,7 +243,34 @@ export default function Bill({ orderOwner, infor }) {
         {cart.map((bill) => (
           <div className='row' key={bill._id}>
             <h6 className='subtotal'>
-              Subtotal: ${bill.price} x {bill.quantity}
+              Subtotal:{' '}
+              <p
+                style={
+                  bill.priceDiscount
+                    ? {
+                        textDecoration: 'line-through',
+                        color: '#ddd',
+                        fontStyle: 'italic',
+                      }
+                    : bill.discount < 100
+                    ? {
+                        textDecoration: 'line-through',
+                        color: '#ddd',
+                        fontStyle: 'italic',
+                      }
+                    : {}
+                }
+              >
+                ${bill.price.toFixed(2)}
+              </p>
+              {bill.priceDiscount ? (
+                <p className='price-discount'>${bill.priceDiscount}</p>
+              ) : bill.discount < 100 ? (
+                <p className='price-discount'>
+                  ${((bill.price * bill.discount) / 100).toFixed(2)}
+                </p>
+              ) : null}
+              x {bill.quantity}
             </h6>
             <h6>{bill.product_id}</h6>
           </div>
@@ -192,10 +279,33 @@ export default function Bill({ orderOwner, infor }) {
         <div style={{ textAlign: 'center' }}>
           ---------------------------------
         </div>
-        <h6>Voucher: $$ </h6>
+        {voucher && (
+          <>
+            <h6>Voucher: {voucher.voucherDiscount}% </h6>
+            <div style={{ textAlign: 'center' }}>
+              ---------------------------------
+            </div>
+          </>
+        )}
+
         <h3 className='total_bill'>Total: ${parseFloat(total).toFixed(2)} </h3>
         <div style={{ textAlign: 'center' }}>
           ---------------------------------
+        </div>
+        <div className='discount-input'>
+          <div className='input-wrapper'>
+            <div className='input-disc'>
+              <input
+                type='text'
+                value={voucherCode}
+                placeholder='Enter your voucher here'
+                onChange={(e) => setVoucherCode(e.target.value)}
+              />
+            </div>
+            <div className='button-check checked'>
+              <button onClick={() => handleCheckVoucher()}>Check</button>
+            </div>
+          </div>
         </div>
         <div className='btn_checkout'>
           <h6>Phương thức thanh toán</h6>

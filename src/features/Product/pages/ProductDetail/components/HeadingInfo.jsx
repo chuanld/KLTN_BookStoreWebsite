@@ -7,6 +7,9 @@ function HeadingInfo(props) {
   const { product, onSubmit } = props
   const [quantityAmount, setQuantityAmount] = useState(1)
   const rate = product.rating / product.countReviews || 0
+  const priceAfterDiscount = ((product.price * product.discount) / 100).toFixed(
+    2
+  )
 
   return (
     <div className='detail'>
@@ -14,17 +17,37 @@ function HeadingInfo(props) {
       <div className='split-detail'></div>
       <div className='box-detail'>
         <div className='row'>
-          <h2>{product.title}</h2>
+          <div className='row'>
+            <h2>{product.title}</h2>
+            <p style={{ color: '#087b39' }}>
+              <i>(Discount {100 - product.discount}%)</i>
+            </p>
+          </div>
 
           <h6>#{product.product_id}</h6>
         </div>
         <div className='box-detail-wrapper'>
-          <span>${product.price}</span>
-
-          <div className='rating'>
-            <Rating precision={0.25} size='small' value={rate} />
+          {product.discount !== 100 ? (
+            <span>${priceAfterDiscount}</span>
+          ) : (
+            <span>${product.price}</span>
+          )}
+          {product.discount !== 100 && (
+            <div className='row origin-price'>
+              <span style={{ textDecoration: 'line-through', color: '#ddd' }}>
+                ${product.price}
+              </span>
+              <p style={{ color: '#ddd' }}>
+                <i>(Giá gốc)</i>
+              </p>
+            </div>
+          )}
+          <div className='row box-detail-wrapper_rating'>
+            <div className='rating'>
+              <Rating precision={0.25} size='small' value={rate} />
+            </div>
+            <p className=''>({product.countReviews}) lượt đánh giá</p>
           </div>
-          <p className=''>({product.countReviews}) lượt đánh giá</p>
         </div>
 
         <p className='title_description_split'>

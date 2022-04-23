@@ -14,6 +14,9 @@ import DetailProduct from './components/Products/pages/DetailProduct'
 import CreateProduct from './components/Products/pages/CreateProduct'
 import Breadcrumb from 'components/Breadcrumbs'
 import Home from 'features/Home'
+import Events from './components/Events'
+import Discount from './components/Events/components/Discount'
+import FlashSale from './components/Events/components/FlashSale'
 
 function Admin() {
   const info = useSelector((state) => state.user.current)
@@ -33,14 +36,14 @@ function Admin() {
   }, [info])
 
   return (
-    <div className='admin-page' id='admin-page'>
-      {isAdmin ? (
-        <Router>
-          <Switch>
-            <div className='container-ad'>
-              <Route path='/admin' component={SideBar} />
-              <div className='others'>
-                <Switch>
+    <>
+      <div className='admin-page' id='admin-page'>
+        {isAdmin ? (
+          <Router>
+            <Switch>
+              <div className='container-ad'>
+                <Route path='/admin' component={SideBar} />
+                <div className='others'>
                   <Route path='/admin/accounts' exact component={Accounts} />
 
                   <Route
@@ -81,21 +84,30 @@ function Admin() {
                     exact
                     component={Categories}
                   />
-                </Switch>
+                  <Route path={'/admin/events-fsale'} component={Events} />
+                  <Route path={'/admin/events-disc'} component={Events} />
+                  <Route path={'/admin/events-procode'} component={Events} />
+                  {/* <Route
+                    path='/admin/events/fsale'
+                    exact
+                    component={FlashSale}
+                  />
+                  <Route path='/admin/events/disc' exact component={Discount} /> */}
+                </div>
               </div>
-            </div>
-            <Route path='/' exact component={Home} />
-          </Switch>
-        </Router>
-      ) : (
-        <div className='container-ad'>
-          <h1>This is Admin system. Please go back, thanks you!</h1>
-          {setTimeout(() => {
-            ;<Redirect to='/' />
-          }, 3000)}
-        </div>
-      )}
-    </div>
+              <Route path='/' exact component={Home} />
+            </Switch>
+          </Router>
+        ) : (
+          <div className='container-ad'>
+            <h1>This is Admin system. Please go back, thanks you!</h1>
+            {setTimeout(() => {
+              ;<Redirect to='/' />
+            }, 3000)}
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

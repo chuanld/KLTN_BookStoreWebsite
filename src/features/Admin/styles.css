@@ -9,6 +9,7 @@
   max-width: 1400px;
   flex: 5;
   background-color: #fff;
+  align-items: stretch;
   /* overflow-y: auto; */
 }
 .others .session-heading .breadcrum-container {
@@ -30,3 +31,6 @@
 
 /* -------------Order------------   */
 @import url('./components/Orders/styles.css');
+
+/* -------------Event------------   */
+@import url('./components/Events/styles.css');

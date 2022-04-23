@@ -50,13 +50,24 @@ const userApi = {
     return axiosClient.patch(url, { password, newPassword })
   },
   paymentShipCOD(data) {
-    const { cart, orderID, address, name, option } = data
+    const { cart, orderID, address, name, option, voucherCode } = data
     const url = '/api/order'
-    return axiosClient.post(url, { cart, orderID, address, name, option })
+    return axiosClient.post(url, {
+      cart,
+      orderID,
+      address,
+      name,
+      option,
+      voucherCode,
+    })
   },
   deleteAllItem() {
     const url = '/user/delete_cart'
     return axiosClient.delete(url)
+  },
+  checkVoucher(voucherCode) {
+    const url = '/api/discount/checkvalid'
+    return axiosClient.post(url, { voucherCode })
   },
 }
 export default userApi

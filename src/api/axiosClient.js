@@ -30,6 +30,7 @@ axiosClient.interceptors.request.use(
       '/api/banners',
       '/api/rating',
       '/user/refresh_token',
+      '/api/discount/checkvalid',
     ]
     const URLSADMIN = [
       '/user/all_infor',
@@ -42,6 +43,8 @@ axiosClient.interceptors.request.use(
       '/api/allproducts',
       '/api/category',
       '/api/order',
+      '/api/products/event_disc',
+      '/api/discount',
     ]
 
     const dynamicURL = [
@@ -55,6 +58,7 @@ axiosClient.interceptors.request.use(
       '/api/order',
       '/user/delete_cart',
       '/api/rating',
+      '/api/discount/checkvalid',
       //Admin
       '/user/all_infor',
       '/user/infor_byId',
@@ -66,6 +70,8 @@ axiosClient.interceptors.request.use(
       '/api/allproducts',
       '/api/category',
       '/api/order',
+      '/api/products/event_disc',
+      '/api/discount',
     ]
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item)

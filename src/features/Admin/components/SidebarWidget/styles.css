@@ -1,10 +1,13 @@
 .sidebarAdmin {
   flex: 1;
-  position: absolute;
-  height: calc(93vh);
+  height: -moz-calc(100vh - 55px);
+  height: -webkit-calc(100vh - 55px );
+  height: calc(100vh - 55px);
   background-color: rgb(210, 241, 210);
-  top: 56px;
+  
   position: sticky;
+  position: -webkit-sticky;
+  top: 55px;
   color: black;
   width: 400px;
 }

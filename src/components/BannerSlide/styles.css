@@ -31,6 +31,7 @@
   outline: none;
   overflow: hidden;
   border-radius: 19px;
+  margin-top:5px;
 }
 .slider .slider__item img {
   width: 100%;
@@ -63,7 +64,7 @@
   width: 230px;
 }
 .banner-slide .sub-banner img {
-  width: 230px;
+  width: 229px;
 }
 .banner-slide .subbanner-footer {
   display: inline-flex;

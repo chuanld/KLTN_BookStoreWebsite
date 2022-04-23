@@ -53,3 +53,40 @@
 .shipcod:hover {
   background-color: rgb(236, 236, 39);
 }
+.total_cart .discount-input{
+  position: relative;
+
+}
+.total_cart .discount-input .input-wrapper .button-check{
+  /* display: flex; */
+  position: absolute;
+  top:0;
+  right: 0;
+
+}
+.total_cart .discount-input .input-wrapper input{
+  border:2px solid #087b39 ;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  padding: 0px 10px;
+}
+.total_cart .discount-input .input-wrapper .button-check button{
+  border: 2px solid #087b39;
+  outline: none;
+  height: 40px;
+  border-radius: 5px;
+  width: 80px;
+}
+.total_cart .subtotal{
+  display: flex;
+  align-items: center;
+}
+.total_cart .subtotal p{
+  color: #000;
+  font-weight: 500;
+  margin: 0px 5px;
+}
+.total_cart .subtotal .price-discount::before{
+  content: '-> ';
+}

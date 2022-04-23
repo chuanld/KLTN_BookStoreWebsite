@@ -89,7 +89,37 @@ function ListCart(props) {
                 <h2>{product.title}</h2>
                 <h6>#{product.product_id}</h6>
               </div>
-              <span>${product.price}</span>
+              <div>
+                <span
+                  style={
+                    product.priceDiscount
+                      ? {
+                          color: '#ddd',
+                          fontStyle: 'italic',
+                          textDecoration: 'line-through',
+                        }
+                      : product.discount < 100
+                      ? {
+                          color: '#ddd',
+                          fontStyle: 'italic',
+                          textDecoration: 'line-through',
+                        }
+                      : {}
+                  }
+                >
+                  ${product.price}
+                </span>
+                {product.priceDiscount ? (
+                  <span className='price-discount'>
+                    {product.priceDiscount}
+                  </span>
+                ) : product.discount < 100 ? (
+                  <span className='price-discount'>
+                    {((product.price * product.discount) / 100).toFixed(2)}
+                  </span>
+                ) : null}
+              </div>
+
               <p>Tác giả: {product.author}</p>
               <p>NXB: {product.publisher}</p>
               <p>Đã mua: {product.sold}</p>

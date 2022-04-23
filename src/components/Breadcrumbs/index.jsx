@@ -139,4 +139,8 @@ const breadcrumbNameMap = {
   '/admin/products': 'List Products',
   '/admin/categories': 'List Categories',
   '/admin/orders': 'List Orders',
+  '/admin/events': 'Events',
+  '/admin/events-fsale': 'Flash Sales',
+  '/admin/events-disc': 'Discount',
+  '/admin/events-procode': 'Promotion Code',
 }

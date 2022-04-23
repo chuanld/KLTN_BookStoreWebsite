@@ -3,11 +3,11 @@ import { configureStore } from '@reduxjs/toolkit'
 import userReducer from '../features/Auth/userSlice'
 
 const rootReducer = {
-    user: userReducer,
+  user: userReducer,
 }
 
 export const store = configureStore({
-    reducer: rootReducer
-});
+  reducer: rootReducer,
+})
 
-export const dispatch = store.dispatch;
+export const dispatch = store.dispatch

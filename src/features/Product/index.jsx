@@ -20,6 +20,7 @@ function Product({ showLoading, hideLoading }) {
   const location = useLocation()
   const history = useHistory()
   const [products, setProducts] = useState([])
+
   const [page, setPage] = useState()
   const [totalPage, setTotalPage] = useState()
   const [result, setResult] = useState()
@@ -40,6 +41,19 @@ function Product({ showLoading, hideLoading }) {
 
   const queryParams = useMemo(() => {
     const params = queryString.parse(location.search)
+    // if (params['title[regex]'] && products.length === 0) {
+    //   const newParams = { ...params }
+    //   const value = params['title[regex]']
+    //   delete newParams['title[regex]']
+    //   const newParams1 = { ...newParams, 'author[regex]': value }
+    //   history.push({
+    //     pathname: history.location.pathname,
+    //     search: queryString.stringify(newParams1),
+    //   })
+
+    //   return { ...newParams1 }
+    // }
+
     console.log(params, 'queryParams')
     return {
       ...params,
@@ -56,7 +70,18 @@ function Product({ showLoading, hideLoading }) {
       setResult(res.result)
       setTotalResult(res.totalResult)
       setTotalPage(Math.ceil(res.totalResult / 9))
-      console.log(res)
+      console.log(res, 'res')
+      if (
+        queryParams['title[regex]'] &&
+        queryParams['title[regex]'] !== ' ' &&
+        res.products.length !== 0
+      ) {
+        const newHisSearch = [...hisSearch]
+        newHisSearch.unshift(queryParams['title[regex]'])
+        const rmMultiSearch = Array.from(new Set(newHisSearch))
+        setHisSearch(rmMultiSearch)
+        localStorage.setItem('hisSearch', JSON.stringify(rmMultiSearch))
+      }
     } catch (err) {}
     hideLoading()
     setLoadingSkt(false)
@@ -65,20 +90,34 @@ function Product({ showLoading, hideLoading }) {
 
   useEffect(() => {
     getProduct()
+    // getMoreProduct()
   }, [queryParams, getProduct])
+
+  // useEffect(() => {
+  //   if (queryParams['title[regex]'] && products.length === 0) {
+  //     const newQueryParams = { ...queryParams }
+  //     const value = queryParams['title[regex]']
+  //     delete newQueryParams['title[regex]']
+  //     queryParams({ ...newQueryParams, 'author[regex]': value })
+  //     return
+  //   }
+  // }, [queryParams])
 
   const handleFilterChanges = (values) => {
     console.log(values, 'filterChange')
     const filters = {
       ...values,
     }
-    if (filters['title[regex]'] && filters['title[regex]'] !== ' ') {
-      const newHisSearch = [...hisSearch]
-      newHisSearch.unshift(filters['title[regex]'])
-      const rmMultiSearch = Array.from(new Set(newHisSearch))
-      setHisSearch(rmMultiSearch)
-      localStorage.setItem('hisSearch', JSON.stringify(rmMultiSearch))
-    } else {
+    // if (filters['title[regex]'] && filters['title[regex]'] !== ' ') {
+    //   const newHisSearch = [...hisSearch]
+    //   newHisSearch.unshift(filters['title[regex]'])
+    //   const rmMultiSearch = Array.from(new Set(newHisSearch))
+    //   setHisSearch(rmMultiSearch)
+    //   localStorage.setItem('hisSearch', JSON.stringify(rmMultiSearch))
+    // } else {
+    //   delete filters['title[regex]']
+    // }
+    if (!filters['title[regex]'] || filters['title[regex]'] === ' ') {
       delete filters['title[regex]']
     }
 

@@ -22,17 +22,22 @@ function FormDataProduct(props) {
     author: yup.string().required('Please enter book author'),
     publisher: yup.string().required('Please enter book publisher'),
     category: yup.string().required('Please enter book category'),
+    discount: yup
+      .number()
+      .required('Please enter discount')
+      .typeError('Discount invalid!'),
   })
 
   const form = useForm({
     defaultValues: {
       title: product.title || '',
-      price: product.price || 0,
+      price: product.price || '',
       description: product.description || '',
       content: product.content || '',
       author: product.author || '',
       publisher: product.publisher || '',
       category: product.category || '',
+      discount: product.discount || '',
     },
     resolver: yupResolver(schema),
   })
@@ -46,13 +51,14 @@ function FormDataProduct(props) {
         author: product.author,
         publisher: product.publisher,
         category: product.category,
+        discount: 100 - product.discount,
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product])
 
   const handleSubmit = (values) => {
     if (!onSubmit) return
-    onSubmit({ ...values, _id: product._id })
+    onSubmit({ ...values, _id: product._id, discount: 100 - values.discount })
     // console.log(values)
   }
   return (
@@ -156,7 +162,8 @@ function FormDataProduct(props) {
           ))}
         </select>
       </div> */}
-      <div className='row update-info-book'>
+
+      <div className='row update-info-book rows__cate-disc'>
         <SelectField
           name='category'
           //   placeholder={product.category}
@@ -164,10 +171,22 @@ function FormDataProduct(props) {
           label='Category'
           height={'55px'}
           width='260px'
+          className={'input-info-update'}
           defaulvalue={product.category}
           options={categories}
         />
+        <InputField
+          name='discount'
+          placeholder={JSON.stringify(product.discount)}
+          form={form}
+          label='% Discount Book'
+          className={'input-info-update'}
+          height={'50px'}
+          width='160px'
+          type='number'
+        />
       </div>
+
       <button type='submit'>Update Product</button>
     </form>
   )

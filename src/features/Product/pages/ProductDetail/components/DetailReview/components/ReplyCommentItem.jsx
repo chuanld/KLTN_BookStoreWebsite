@@ -5,7 +5,7 @@ function ReplyCommentItem({ id, name, onSubmit }) {
   const contentRef = useRef(null)
   useEffect(() => {
     if (name) {
-      contentRef.current.innerHTML = `<a href="#!" style="color: crimson; font-weight: 600; text-transform: capitalize;">${name}: </a>`
+      contentRef.current.innerHTML = `<a href="#!" style="color: crimson; font-weight: 600; text-transform: capitalize;">${name}:&ensp;</a>`
     }
   }, [name])
   const handleSubmitReply = () => {

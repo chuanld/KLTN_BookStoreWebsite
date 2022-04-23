@@ -44,7 +44,7 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .listcart-detail span {
-  color: #111111;
+  color: #087b39;
   font-size: 20px;
   font-style: italic;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -99,4 +99,11 @@
   font-weight: 900;
   cursor: pointer;
   font-size: 30px;
+}
+.listcart-detail .price-discount{
+  margin: 0 10px;
+  color: #087b39
+}
+.listcart-detail .price-discount::before{
+  content: '--> ';
 }

@@ -81,39 +81,36 @@ function SideBar() {
           </ul>
         </div>
         <div className='sidebarMenu'>
+          <h3 className='sidebarTitle'>Marketing</h3>
+          <ul className='sidebarList'>
+            <li className='sidebarListItem'>
+              <Timeline /> Analytics
+            </li>
+
+            <Link to={'/admin/events-fsale'}>
+              <li
+                className={
+                  objParams[2] === 'events-fsale' ||
+                  objParams[2] === 'events-disc' ||
+                  objParams[2] === 'events-procode'
+                    ? 'sidebarListItem active'
+                    : 'sidebarListItem '
+                }
+              >
+                <LineStyle /> Events
+              </li>
+            </Link>
+          </ul>
+        </div>
+        {/* <div className='sidebarMenu'>
           <h3 className='sidebarTitle'>Notification</h3>
           <ul className='sidebarList'>
             <li className='sidebarListItem'>
               <MailOutline className='sidebarIcon' /> Email
             </li>
-            <li className='sidebarListItem'>
-              <FeedbackOutlined className='sidebarIcon' /> Feedback
-            </li>
-            <li className='sidebarListItem'>
-              <QuestionAnswerOutlined className='sidebarIcon' /> Messages
-            </li>
-            <li className='sidebarListItem'>
-              <HourglassEmpty className='sidebarIcon' /> About
-            </li>
+            
           </ul>
-        </div>
-        <div className='sidebarMenu'>
-          <h3 className='sidebarTitle'>Marketing</h3>
-          <ul className='sidebarList'>
-            <li className='sidebarListItem'>
-              <LineStyle /> Analytics
-            </li>
-            <li className='sidebarListItem'>
-              <Timeline /> Products
-            </li>
-            <li className='sidebarListItem'>
-              <TrendingUp /> Orders
-            </li>
-            <li className='sidebarListItem'>
-              <HourglassEmpty /> Logs
-            </li>
-          </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   )

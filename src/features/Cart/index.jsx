@@ -7,6 +7,8 @@ import Modal from 'react-modal'
 import { useSelector } from 'react-redux'
 import userApi from 'api/userApi'
 import Breadcrumb from 'components/Breadcrumbs'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles3 = {
@@ -32,6 +34,7 @@ const customStyles3 = {
 function Cart() {
   //   const state = useContext(GlobalState);
   //   const [infor] = state.userApi.infor;
+
   const [onEdit, setOnEdit] = useState(false)
   const [orderOwner, setOrderOwner] = useState({
     name: '',
@@ -45,7 +48,13 @@ function Cart() {
   console.log(orderOwner)
   const user = useSelector((state) => state.user.current)
   const [info, setInfo] = useState({})
-  const cart = user?.cart || []
+
+  const [cart, setCart] = useState([])
+  useEffect(() => {
+    if (user?.cart) {
+      setCart(user.cart)
+    }
+  }, [user.cart])
 
   const [modalIsOpen, setIsOpen] = useState(false)
 
@@ -75,6 +84,88 @@ function Cart() {
     setOnEdit(true)
     closeModal()
   }
+
+  const [voucher, setVoucher] = useState()
+  //ListBill
+  const handleCheckVoucher = async (voucherCode) => {
+    if (!voucherCode) return
+    try {
+      const res = await userApi.checkVoucher(voucherCode)
+      setVoucher(res.voucher)
+    } catch (err) {
+      toast.error(err.response.data.msg)
+    }
+  }
+  useEffect(() => {
+    if (voucher) {
+      console.log('aaaaaaaa')
+      let newCart = JSON.parse(JSON.stringify(cart))
+      cart.forEach((product) => {
+        if (voucher.voucherProductId.length !== 0) {
+          voucher.voucherProductId.forEach((v) => {
+            if (product._id === v) {
+              const priceAfter = (product.price * voucher.voucherDiscount) / 100
+              newCart.forEach((item) => {
+                if (item._id === product._id) {
+                  // Object.preventExtensions(item)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                }
+              })
+              return
+            }
+          })
+        }
+        if (voucher.voucherProductCategory.length !== 0) {
+          voucher.voucherProductCategory.forEach((v) => {
+            if (product.category === v) {
+              const priceAfter = (product.price * voucher.voucherDiscount) / 100
+
+              newCart.forEach((item) => {
+                if (item._id === product._id) {
+                  // Object.preventExtensions(item)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                  console.log(product._id, 'item đay nè')
+                  console.log(cart, 'cart check')
+                }
+              })
+              return
+            }
+          })
+        }
+        if (voucher.voucherProductAuthor.length !== 0) {
+          voucher.voucherProductAuthor.forEach((v) => {
+            if (product.author === v) {
+              const priceAfter = (product.price * voucher.voucherDiscount) / 100
+              newCart.forEach((item) => {
+                if (item._id === product._id) {
+                  // Object.preventExtensions(item)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                }
+              })
+              return
+            }
+          })
+        }
+        if (voucher.voucherProductPublisher.length !== 0) {
+          voucher.voucherProductPublisher.forEach((v) => {
+            if (product.publisher === v) {
+              const priceAfter = (product.price * voucher.voucherDiscount) / 100
+              newCart.forEach((item) => {
+                if (item._id === product._id) {
+                  // Object.preventExtensions(item)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                  console.log(product._id, 'item đay nè')
+                  console.log(cart, 'cart check')
+                }
+              })
+              return
+            }
+          })
+        }
+      })
+      setCart([...newCart])
+    }
+  }, [voucher])
 
   if (cart.length === 0)
     return (
@@ -130,7 +221,13 @@ function Cart() {
           </div>
 
           <div className='bill_container'>
-            <Bill orderOwner={orderOwner} infor={info} />
+            <Bill
+              orderOwner={orderOwner}
+              infor={info}
+              cart={cart}
+              onSubmit={handleCheckVoucher}
+              voucher={voucher}
+            />
           </div>
         </div>
 

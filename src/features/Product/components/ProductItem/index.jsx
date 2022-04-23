@@ -1,21 +1,30 @@
 import { Rating } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function ProductItem({ product }) {
   //const state = useContext(GlobalState);
   //const addCart = state.userApi.addCart;
-  const [isPromo, setIsPromo] = useState(false)
+  const [perDiscount, setPerDiscount] = useState(100)
+  const isPromo = product.discount !== 100
   const rate = product.rating / product.countReviews || 0
+  const priceAfterDiscount = ((product.price * perDiscount) / 100).toFixed(2)
+  useEffect(() => {
+    if (isPromo) {
+      setPerDiscount(product.discount)
+    }
+  }, [isPromo, product])
 
   return (
     <>
       <div className='product_card'>
-        <img src={product.images.url} alt='' width='10px' />
+        <img src={product?.images?.url} alt='' width='10px' />
         <div className='product_box'>
           <div className='product_box_item'>
             <h4 title={product.title}>{product.title}</h4>
             {/* <div className='discount'>-15%</div> */}
-            {isPromo && <div className='logo-discount'>-15%</div>}
+            {isPromo && (
+              <div className='logo-discount'>{`${100 - perDiscount}%`}</div>
+            )}
           </div>
 
           <div className='product_box_item'>
@@ -36,7 +45,7 @@ function ProductItem({ product }) {
             </div>
             {isPromo && (
               <div className='current-price'>
-                <h6> ${product.price - (product.price * 15) / 100}</h6>
+                <h6> ${priceAfterDiscount}</h6>
               </div>
             )}
           </div>
