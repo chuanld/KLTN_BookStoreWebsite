@@ -1,23 +1,24 @@
 import React from "react";
 
-import AnaChart from "../../../common/AnaChart";
+import AnaChart from "../../../common/AnaChart/AnaChart";
 function UserRegister(props) {
-  const { arrMonth, users } = props;
+  const { users } = props;
   // console.log(users);
+  console.log(users);
   const data = {
     labels: users.map((x) => x.moment),
     datasets: [
       {
-        label: "Doanh thu",
+        label: "Userline",
         data: users.map((x) => x.count),
         //   [9, 7, 5, 4, 3],,
         backgroundColor: CSS_COLOR_NAMES,
-        borderColor: CSS_COLOR_NAMES,
+        borderColor: "rgb(75, 192, 192)",
         showLine: true,
         borderWidth: 1,
         fill: false,
 
-        tension: 0.1,
+        tension: 0.3,
       },
     ],
   };
@@ -27,7 +28,8 @@ function UserRegister(props) {
         // color: "white",
         formatter: function (value, context) {
           // return context.dataset?.labels[context.dataIndex];
-          return context.chart.data.labels[context.dataIndex];
+          return null;
+          // ;
         },
         font: {
           weight: "bold",
@@ -39,7 +41,7 @@ function UserRegister(props) {
       },
       legend: {
         display: true,
-        position: "right",
+        position: "top",
         labels: {
           color: "rgb(255, 99, 132)",
         },

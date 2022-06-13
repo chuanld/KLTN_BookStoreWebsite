@@ -4,6 +4,7 @@ import IncomeCate from "./IncomCate";
 import IncomePayment from "./IncomePayment";
 import OrderSummary from "./OrderSummary";
 import adminApi from "api/adminApi";
+import FormDate from "../../common/FormDate";
 
 function OverviewChart() {
   const today = new Date();
@@ -24,17 +25,18 @@ function OverviewChart() {
     arrDay.unshift(Now.subtract(i, "day").format("dddd"));
   }
 
-  const initialDate = {
-    from: formatDate(
-      today.getDate(),
-      today.getMonth(),
-      today.getFullYear() - 1
-    ),
-    to: formatDate(today.getDate(), today.getMonth() + 1, today.getFullYear()),
-  };
-  const [start, setStart] = useState(initialDate.from);
-  const [end, setEnd] = useState(initialDate.to);
-  const [data, setData] = useState([]);
+  // const initialDate = {
+  //   from: formatDate(
+  //     today.getDate(),
+  //     today.getMonth(),
+  //     today.getFullYear() - 1
+  //   ),
+  //   to: formatDate(today.getDate(), today.getMonth() + 1, today.getFullYear()),
+  // };
+  const [loading, setLoading] = useState(false);
+  const [start, setStart] = useState("2020-10-22");
+  const [end, setEnd] = useState("");
+  const [callbackTime, setCallbackTime] = useState(false);
   const [cate, setCate] = useState([]);
   const [orderSummary, setOrderSummary] = useState([]);
   const [paymentType, setPaymentType] = useState({
@@ -46,13 +48,22 @@ function OverviewChart() {
   const [totalPm, setTotalPm] = useState(0);
 
   const getAnalytics = async () => {
-    const res = await adminApi.getAnalytic(start, end);
+    try {
+      setLoading(true);
+      const res = await adminApi.getAnalytic(start, end);
+      // setStart(new Date(res.date?.from).toLocaleString());
+      // setEnd(res.date?.to);
+      setStart(res.date?.from);
+      setEnd(res.date?.to);
 
-    setData(res);
-    setOrderSummary(statusOrderCalculateTotal(res));
-    // priceCalculateTotalMeMo(res);
-    setCate(priceCalculateTotal(res));
-    paymentCalculateTotal(res);
+      setOrderSummary(statusOrderCalculateTotal(res));
+      // priceCalculateTotalMeMo(res);
+      setCate(priceCalculateTotal(res));
+      paymentCalculateTotal(res);
+    } catch (err) {
+      console.log(err.response.data.msg);
+    }
+    setLoading(false);
   };
   const priceCalculateTotal = (data) => {
     if (data.categories && data.vouchers) {
@@ -155,13 +166,26 @@ function OverviewChart() {
     }
   };
 
+  const handleSubmitTimeFilter = (values) => {
+    console.log(values, "time filter");
+    setStart(values.analyStart);
+    setEnd(values.analyEnd);
+    setCallbackTime(!callbackTime);
+  };
+
   useEffect(() => {
     getAnalytics();
 
     // priceCalculateTotalMeMo(data);
-  }, []);
+  }, [callbackTime]);
   return (
     <div className="analytic-chart-section">
+      <FormDate
+        from={start}
+        to={end}
+        onSubmit={handleSubmitTimeFilter}
+        loading={loading}
+      />
       <div className="chart-container">
         <div className="chart-item">
           <IncomeCate cate={cate} totalPm={totalPm} />

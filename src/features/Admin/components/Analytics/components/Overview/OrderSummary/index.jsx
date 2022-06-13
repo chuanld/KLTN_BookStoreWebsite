@@ -1,5 +1,5 @@
 import React from "react";
-import AnaChart from "../../../common/AnaChart";
+import AnaChart from "../../../common/AnaChart/AnaChart";
 
 function OrderSummary({ orderSummary, totalOrd }) {
   const labelsArr = JSON.parse(JSON.stringify(orderSummary)) ?? [];

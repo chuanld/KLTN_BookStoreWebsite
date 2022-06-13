@@ -1,6 +1,6 @@
 import React from "react";
 
-import AnaChart from "../../../common/AnaChart";
+import AnaChart from "../../../common/AnaChart/AnaChart";
 
 function IncomeCate(props) {
   const { cate, totalPm } = props;

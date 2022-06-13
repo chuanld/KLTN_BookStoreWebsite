@@ -1,5 +1,5 @@
 import React from "react";
-import AnaChart from "../../../common/AnaChart";
+import AnaChart from "../../../common/AnaChart/AnaChart";
 
 function IncomePayment(props) {
   const { paymentType } = props;

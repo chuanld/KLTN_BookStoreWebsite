@@ -39,6 +39,38 @@
   margin-bottom: 20px;
 }
 .analytic .analytic-chart .analytic-chart-section {
+  margin: 20px 0;
+}
+
+.analytic .analytic-chart .analytic-chart-section .form-date-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+.analytic .analytic-chart .analytic-chart-section .form-date-item {
+  margin-right: 20px;
+}
+.analytic .analytic-chart .analytic-chart-section .form-date-item .btn-submit {
+  margin-top: 8px;
+}
+.analytic .analytic-chart .analytic-chart-section .loading-data {
+  display: flex;
+  align-items: center;
+}
+.analytic
+  .analytic-chart
+  .analytic-chart-section
+  .form-date-item
+  .btn-submit
+  button {
+  width: 100px;
+  border: none;
+  padding: 15px 5px;
+  background-color: rgb(170, 43, 20);
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffff;
+  display: block;
 }
 .analytic .chart-container {
   display: flex;
@@ -47,7 +79,7 @@
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
-  padding-bottom: 0px;
+  /* padding-bottom: 0px; */
   /* align-items: center; */
 }
 .analytic .chart-container .chart-item {
@@ -55,6 +87,10 @@
   flex-direction: column;
   align-items: center;
   margin: 0px 10px;
+}
+.analytic .chart-container .chart-line-item {
+  display: block;
+  width: 1000px !important;
 }
 .analytic .chart-container .chart-item .chart-item-title {
   position: relative;

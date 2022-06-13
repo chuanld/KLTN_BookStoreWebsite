@@ -179,22 +179,6 @@ function Analytics() {
         <div className="analytic-chart">
           <OverviewChart />
           <AnalyticUser />
-          <div className="analytic-chart-section">
-            <div className="chart-container">
-              <div className="chart-item">
-                <OrderSummary orderSummary={orderSummary} totalOrd={totalOrd} />
-              </div>
-
-              <div className="chart-item ">
-                <IncomePayment
-                  paymentType={paymentType}
-                  cate={cate}
-                  totalPm={totalPm}
-                />
-              </div>
-            </div>
-            <div className="chart-info-detail">Details</div>
-          </div>
         </div>
       </div>
     </>
