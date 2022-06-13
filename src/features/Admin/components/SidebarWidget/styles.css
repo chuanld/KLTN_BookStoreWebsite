@@ -1,15 +1,15 @@
 .sidebarAdmin {
-  flex: 1;
   height: -moz-calc(100vh - 55px);
-  height: -webkit-calc(100vh - 55px );
+  height: -webkit-calc(100vh - 55px);
   height: calc(100vh - 55px);
   background-color: rgb(210, 241, 210);
-  
+
   position: sticky;
   position: -webkit-sticky;
   top: 55px;
   color: black;
-  width: 400px;
+  width: 500px;
+  flex-basis: 325px;
 }
 
 .sidebarAdmin .sidebarWrapper {
