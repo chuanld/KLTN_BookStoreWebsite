@@ -9,7 +9,8 @@ import Home from './features/Home'
 import Infor from './features/Infor'
 import Product from './features/Product'
 import ProductDetail from './features/Product/pages/ProductDetail'
-import BannerSlide from './components/BannerSlide'
+
+import Activation from 'features/Auth/components/Activation'
 
 function App() {
   return (
@@ -18,7 +19,13 @@ function App() {
         <Header />
         <Switch>
           <Route path='/' exact component={Home} />
+
           <Route path='/account' component={Infor} />
+          <Route
+            path='/account/activate/:activationtoken'
+            exact
+            component={Activation}
+          />
           <Route path='/account/order' exact component={Order} />
           <Route path='/account/order/:id' exact component={OrderDetail} />
           <Route path='/products' exact component={Product} />

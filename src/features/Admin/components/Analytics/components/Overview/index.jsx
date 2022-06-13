@@ -202,7 +202,7 @@ function OverviewChart() {
           <OrderSummary orderSummary={orderSummary} totalOrd={totalOrd} />
         </div>
       </div>
-      <div className="chart-info-detail">Details</div>
+      {/* <div className="chart-info-detail">Details</div> */}
     </div>
   );
 }

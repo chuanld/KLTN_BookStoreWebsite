@@ -11,6 +11,10 @@
     border: none;
     border-radius: 5px;
 }
+.events .events-heading{
+    display: flex;
+    justify-content: space-between;
+}
 .events .events-title{
     margin: 0 20px;
     padding-bottom: 0px;

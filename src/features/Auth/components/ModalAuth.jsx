@@ -17,19 +17,7 @@ const MODE = {
   REGISTER: 'REGISTER',
 }
 function ModalAuth() {
-  const history = useHistory()
   const dispatch = useDispatch()
-  const errorMessage = useSelector((state) => state.errorMessage)
-  const [user, setUser] = useState({
-    email: '',
-    name: '',
-    password: '',
-    confirm: '',
-  })
-  const onChangeInput = (e) => {
-    const { name, value } = e.target
-    setUser({ ...user, [name]: value })
-  }
 
   const [mode, setMode] = useState(MODE.LOGIN)
   const ToogleClass = () => {
@@ -54,10 +42,8 @@ function ModalAuth() {
     toast.error(res)
   }
 
-  const registerSubmit = async (e) => {
-    e.preventDefault()
-
-    if (user.confirm === user.password) {
+  const registerSubmit = async (values) => {
+    if (values.confirm === values.password) {
       //------------Code cũ-----------//
       // const result = await axios.post("/user/register", { ...user });
 
@@ -68,7 +54,7 @@ function ModalAuth() {
       // toast.success(result.data.msg);
       //-------------!-----------//
 
-      const action = register(user)
+      const action = register(values)
       const resultAction = await dispatch(action)
       const res = unwrapResult(resultAction)
       console.log(res)

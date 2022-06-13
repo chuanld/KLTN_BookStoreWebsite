@@ -177,7 +177,7 @@ function AnalyticUser() {
           />
         </div>
       </div>
-      <div className="chart-info-detail">Details</div>
+      {/* <div className="chart-info-detail">Details</div> */}
     </div>
   );
 }

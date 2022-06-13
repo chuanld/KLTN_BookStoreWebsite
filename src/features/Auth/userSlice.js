@@ -19,6 +19,28 @@ export const register = createAsyncThunk('auth/register', async (payload) => {
     return result
   }
 })
+export const activateEmail = createAsyncThunk(
+  'auth/activation',
+  async (payload) => {
+    try {
+      const data = await userApi.activationEmail(payload)
+      console.log(data)
+      const result = {
+        data: data.msg,
+        token: data.accesstoken,
+        user: data.user,
+        status: 1,
+      }
+      return result
+    } catch (err) {
+      const result = {
+        data: err.response.data.msg,
+        status: 0,
+      }
+      return result
+    }
+  }
+)
 export const login = createAsyncThunk('auth/login', async (payload) => {
   //call API Auth
   try {
@@ -290,6 +312,19 @@ export const userSlice = createSlice({
             : false || false,
       }
 
+      state.current = user
+      state.cartCurrent = user.cart || []
+    },
+    [activateEmail.fulfilled]: (state, action) => {
+      if (action.payload.status === 0) return
+      localStorage.setItem(StorageKeys.TOKEN, action.payload.token)
+      const user = {
+        name: action.payload.user.name,
+        _id: action.payload.user._id,
+
+        cart: action.payload.user.cart || [],
+      }
+      localStorage.setItem(StorageKeys.USER, JSON.stringify(user))
       state.current = user
       state.cartCurrent = user.cart || []
     },
