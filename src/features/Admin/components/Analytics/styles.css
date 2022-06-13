@@ -1,0 +1,91 @@
+.analytic {
+  margin: 20px;
+}
+
+.analytic .analytic-navbar {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 15px;
+  /* background-color: #ddd; */
+  border: none;
+  border-radius: 5px;
+}
+.analytic .analytic-navbar-title {
+  margin: 0 20px;
+  padding-bottom: 0px;
+  font-weight: 500;
+  font-size: 19px;
+
+  /* border-bottom: 1px solid #087b39; */
+}
+.analytic .analytic-navbar-title:nth-child(1) {
+  margin-left: -15px;
+  /* margin: 0 0; */
+}
+.analytic .analytic-navbar-title.active {
+  padding-bottom: 8px;
+  color: #087b39;
+  border-bottom: 2px solid #087b39;
+}
+.analytic .analytic-navbar-title:hover {
+  color: #087b39;
+  transition: ease-in 0.2s;
+  cursor: pointer;
+  padding-bottom: 8px;
+
+  border-bottom: 2px solid #087b39;
+}
+.analytic .analytic-chart {
+  margin-bottom: 20px;
+}
+.analytic .analytic-chart .analytic-chart-section {
+}
+.analytic .chart-container {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(236, 245, 236);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  padding-bottom: 0px;
+  /* align-items: center; */
+}
+.analytic .chart-container .chart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 10px;
+}
+.analytic .chart-container .chart-item .chart-item-title {
+  position: relative;
+  top: 50px;
+}
+.analytic .chart-container .chart-item .chart-item-title span {
+  font-size: 20px;
+  font-weight: 500;
+}
+.analytic .chart-container .chart-item-usertype {
+  /* width: 550px !important;
+  height: 550px !important; */
+}
+.analytic .chart-container .chart-item {
+  width: 500px !important;
+  height: 500px !important;
+}
+.analytic .chart-container .chart-item .chart-canvas-payment {
+  display: block;
+  width: 450px !important;
+  height: 450px !important;
+}
+.analytic .chart-container .chart-item .chart-canvas-cate {
+  margin-top: -50px;
+  display: block;
+  width: 540px !important;
+  height: 540px !important;
+}
+.analytic .chart-container .chart-item .chart-canvas-orderstt {
+  margin-top: -15px;
+  display: block;
+  width: 480px !important;
+  height: 480px !important;
+}
