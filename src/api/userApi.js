@@ -3,7 +3,12 @@ const userApi = {
   register(data) {
     const { email, name, password } = data
     const url = '/user/register'
+    console.log('Passwordregis', password)
     return axiosClient.post(url, { name, email, password })
+  },
+  activationEmail(activateToken) {
+    const url = '/user/activation'
+    return axiosClient.post(url, { activationtoken: activateToken })
   },
   login(data) {
     const { email, password } = data

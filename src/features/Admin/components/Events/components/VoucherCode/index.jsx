@@ -2,12 +2,14 @@ import voucherApi from 'api/voucherApi'
 import React, { useEffect, useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import DataTableVoucher from './components/DataTableVoucher'
+import ModalAddVoucher from './components/ModalAddVoucher'
 
 import ModalEditVoucher from './components/ModalEditVoucher'
 
 function VoucherCode() {
   const [vouchers, setVouchers] = useState([])
   const [isOpenModalEdit, setIsOpenModalEdit] = useState(false)
+  const [isOpenModalCreate, setIsOpenModalCreate] = useState(false)
   const [voucherEdit, setVoucherEdit] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [callback, setCallback] = useState(false)
@@ -30,8 +32,14 @@ function VoucherCode() {
     setIsOpenModalEdit(true)
   }, [])
 
+  const addVoucherModal = () => {
+    if (isOpenModalCreate) return
+    setIsOpenModalCreate(true)
+  }
+
   function closeModal() {
     setIsOpenModalEdit(false)
+    setIsOpenModalCreate(false)
   }
   function afterOpenModal() {}
 
@@ -48,10 +56,27 @@ function VoucherCode() {
       toast.error(err.response.data.msg)
     }
   }
+  const handleSubmitCreateVoucher = async (values) => {
+    if (!values) return
+    console.log(values)
+
+    // try {
+    //   const res = await voucherApi.updateVoucher(values)
+    //   toast.success(res.msg)
+    //   setCallback(!callback)
+    //   closeModal()
+    // } catch (err) {
+    //   toast.error(err.response.data.msg)
+    // }
+  }
   return (
     <>
       <div className='voucher'>
-        <div className='voucher-heading'></div>
+        <div className='voucher-heading'>
+          <button className='userAddButton' onClick={() => addVoucherModal()}>
+            + Voucher
+          </button>
+        </div>
         <div className='voucher-container'>
           <div className='voucher-table'>
             <DataTableVoucher
@@ -70,6 +95,12 @@ function VoucherCode() {
         closeModal={closeModal}
         afterOpenModal={afterOpenModal}
         handleSubmitUpdateVoucher={handleSubmitUpdateVoucher}
+      />
+      <ModalAddVoucher
+        isOpenModal={isOpenModalCreate}
+        closeModal={closeModal}
+        afterOpenModal={afterOpenModal}
+        onSubmit={handleSubmitCreateVoucher}
       />
     </>
   )

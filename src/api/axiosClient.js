@@ -14,6 +14,7 @@ axiosClient.interceptors.request.use(
     //Do something before send request
     const URLS = [
       '/user/register',
+      '/user/activation',
       '/user/login',
       '/user/infor',
       '/user/refresh_token',
@@ -59,6 +60,7 @@ axiosClient.interceptors.request.use(
       '/user/delete_cart',
       '/api/rating',
       '/api/discount/checkvalid',
+      '/user/activation',
       //Admin
       '/user/all_infor',
       '/user/infor_byId',

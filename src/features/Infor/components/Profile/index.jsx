@@ -16,7 +16,7 @@ function Profile({ showLoading, hideLoading }) {
   const [user, setUser] = useState({})
   const dispatch = useDispatch()
   const [callback, setCallback] = useState(false)
-
+  console.log('profile')
   useEffect(() => {
     ;(async function () {
       try {
