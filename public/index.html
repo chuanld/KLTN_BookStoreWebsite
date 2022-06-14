@@ -43,6 +43,23 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <!-- ---------------Preview meta-------------- -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://kltn-bookstore-website.vercel.app/"
+    />
+    <meta property="og:title" content="Chuang Bookstore" />
+    <meta property="og:description" content="KLTN_ChuangBookStore_2018/2022" />
+    <meta
+      property="og:image"
+      content="https://res.cloudinary.com/chuanluu/image/upload/v1638703429/test/logo_hlslof.png"
+    />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+
+    <!-- ---------------------------------------------------- -->
     <title>React App</title>
   </head>
 
@@ -61,14 +78,14 @@
     -->
 
     <script language="text/Javascript">
-      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      cleared[0] = cleared[1] = cleared[2] = 0 //set a cleared flag for each field
       function clearField(t) {
         //declaring the array outside of the
         if (!cleared[t.id]) {
           // function makes it static and global
-          cleared[t.id] = 1; // you could use true and false, but that's more typing
-          t.value = ""; // with more chance of typos
-          t.style.color = "#fff";
+          cleared[t.id] = 1 // you could use true and false, but that's more typing
+          t.value = '' // with more chance of typos
+          t.style.color = '#fff'
         }
       }
     </script>

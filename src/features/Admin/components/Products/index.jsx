@@ -168,11 +168,11 @@ function Products({ showLoading, hideLoading }) {
   }
   return (
     <>
-      <div className='session-heading'>
+      <div className="session-heading">
         <Breadcrumb />
       </div>
-      <div className='productListAdmin'>
-        <div className='productListTitle'>
+      <div className="productListAdmin">
+        <div className="productListTitle">
           <h4>List products in Database</h4>
 
           <div>
@@ -187,7 +187,7 @@ function Products({ showLoading, hideLoading }) {
               ) : null} */}
               {selectionRow.length !== 0 && (
                 <button
-                  className='productDelAllButton'
+                  className="productDelAllButton"
                   onClick={submitDeleteSelect}
                 >
                   Delete Books
@@ -199,11 +199,11 @@ function Products({ showLoading, hideLoading }) {
               </button> */}
               {selectionRow.length === 1 ? (
                 <Link to={`${path}/${selectionRow[0].toString()}`}>
-                  <button className='productAddButton'>Edit Product</button>
+                  <button className="productAddButton">Edit Product</button>
                 </Link>
               ) : (
                 <Link to={`${path}/create`}>
-                  <button className='productAddButton'>Create Product</button>
+                  <button className="productAddButton">Create Product</button>
                 </Link>
               )}
               {/* <Link to={`${path}/create`}>
@@ -212,15 +212,15 @@ function Products({ showLoading, hideLoading }) {
             </div>
           </div>
         </div>
-        <div className='productListTitle'>
+        <div className="productListTitle">
           {/* <Link to='/admin/createproduct'>
             <button className='productAddButton'>Create Product</button>
           </Link> */}
           {onCheck ? (
-            <div className='multiselect'>
+            <div className="multiselect">
               <span>Select all</span>
               <input
-                type='checkbox'
+                type="checkbox"
                 checked={isCheck}
                 onChange={handleCheckAll}
               />
@@ -229,10 +229,10 @@ function Products({ showLoading, hideLoading }) {
         </div>
         {/*  */}
 
-        <div className='userList_toolbar_wrapper'>
+        <div className="userList_toolbar_wrapper">
           <FilterTab params={queryParams} onSubmit={handleFilterChange} />
         </div>
-        <div className='productsList'>
+        <div className="productsList">
           <TableProduct
             products={products}
             deleteSubmit={deleteSubmit}
@@ -244,14 +244,14 @@ function Products({ showLoading, hideLoading }) {
           />
         </div>
         {/* {products.length === 0 && <Loading />} */}
-        <div className='pagination-container'>
+        <div className="pagination-container">
           <Paginate
             params={queryParams}
             totalPage={totalPage}
             onSubmit={handleFilterChange}
           />
-          <div className='userlist_result'>
-            <div className='result_account'></div>
+          <div className="userlist_result">
+            <div className="result_account"></div>
             <div></div>
             <div>
               <span>
