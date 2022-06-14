@@ -2,7 +2,7 @@ import axios from "axios";
 import { StorageKeys } from "../constant/storageKey";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://app-bookstore-kltn.herokuapp.com/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,8 +13,21 @@ axiosClient.interceptors.request.use(
   (config) => {
     //Do something before send request
     const URLS = [
-<<<<<<< HEAD
+      // <<<<<<< HEAD
+      //       "/user/register",
+      //       "/user/login",
+      //       "/user/infor",
+      //       "/user/refresh_token",
+      //       "/user/all_infor",
+      //       "/user/addtocart",
+      //       "/user/order_infor",
+      //       "/api/order",
+      //       "/user/delete_cart",
+      //       "/user/update",
+      //       "/user/change",
+      // =======
       "/user/register",
+      "/user/activation",
       "/user/login",
       "/user/infor",
       "/user/refresh_token",
@@ -25,20 +38,7 @@ axiosClient.interceptors.request.use(
       "/user/delete_cart",
       "/user/update",
       "/user/change",
-=======
-      '/user/register',
-      '/user/activation',
-      '/user/login',
-      '/user/infor',
-      '/user/refresh_token',
-      '/user/all_infor',
-      '/user/addtocart',
-      '/user/order_infor',
-      '/api/order',
-      '/user/delete_cart',
-      '/user/update',
-      '/user/change',
->>>>>>> origin/13-06_home_1
+      // >>>>>>> origin/13-06_home_1
       // '/user/order_infor/:id',
       "/api/order",
       "/user/delete_cart",
@@ -65,8 +65,19 @@ axiosClient.interceptors.request.use(
 
     const dynamicURL = [
       "/user/refresh_token",
-      //dynamic URL
-<<<<<<< HEAD
+      //       //dynamic URL
+      // <<<<<<< HEAD
+      //       "/user/addtocart",
+      //       "/user/delete_cart",
+      //       "/user/update",
+      //       "/user/change",
+      //       "/user/order_infor",
+      //       "/api/order",
+      //       "/user/delete_cart",
+      //       "/api/rating",
+      //       "/api/discount/checkvalid",
+      //       "/api/analytic",
+      // =======
       "/user/addtocart",
       "/user/delete_cart",
       "/user/update",
@@ -76,19 +87,9 @@ axiosClient.interceptors.request.use(
       "/user/delete_cart",
       "/api/rating",
       "/api/discount/checkvalid",
+      "/user/activation",
       "/api/analytic",
-=======
-      '/user/addtocart',
-      '/user/delete_cart',
-      '/user/update',
-      '/user/change',
-      '/user/order_infor',
-      '/api/order',
-      '/user/delete_cart',
-      '/api/rating',
-      '/api/discount/checkvalid',
-      '/user/activation',
->>>>>>> origin/13-06_home_1
+      // >>>>>>> origin/13-06_home_1
       //Admin
       "/user/all_infor",
       "/user/infor_byId",

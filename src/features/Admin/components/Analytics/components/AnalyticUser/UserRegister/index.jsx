@@ -2,8 +2,9 @@ import React from "react";
 
 import AnaChart from "../../../common/AnaChart/AnaChart";
 function UserRegister(props) {
-  const { users } = props;
+  const { users, distanceTimeLine } = props;
   // console.log(users);
+  console.log(distanceTimeLine, "months");
   console.log(users);
   const data = {
     labels: users.map((x) => x.moment),
