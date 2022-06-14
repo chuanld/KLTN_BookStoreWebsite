@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
-import { Link, useRouteMatch } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
-import Modal from 'react-modal'
-import ModalEditVoucher from './ModalEditVoucher'
+import React from 'react'
 
 function DataTableVoucher(props) {
-  const { vouchers, onEditVoucher, isLoading } = props
+  const { vouchers, onEditVoucher, isLoading, selectionRow, submitSelectRow } =
+    props
 
   const handleEditVoucher = (voucher) => {
     if (!onEditVoucher) return
     onEditVoucher(voucher)
   }
-
+  const setSelect = (selects) => {
+    if (!submitSelectRow) return
+    submitSelectRow(selects)
+  }
   const columns = [
     {
       field: 'voucherCode',
@@ -48,59 +49,59 @@ function DataTableVoucher(props) {
       renderCell: (params) => {
         return (
           <>
-            <div className='discount-hastag'>
+            <div className="discount-hastag">
               {params.row.voucherProductId.length !== 0 && (
-                <div className='discount-hastag-container'>
+                <div className="discount-hastag-container">
                   {params.row.voucherProductId.map((item) => (
                     <>
-                      <div className='discount-hastag-wrapper __id' key={item}>
-                        <span className='discount-hastag-item'>{item}</span>
-                        <span className='discount-hastag-close'>X</span>
+                      <div className="discount-hastag-wrapper __id" key={item}>
+                        <span className="discount-hastag-item">{item}</span>
+                        <span className="discount-hastag-close">X</span>
                       </div>
                     </>
                   ))}
                 </div>
               )}
               {params.row.voucherProductCategory.length !== 0 && (
-                <div className='discount-hastag-container'>
+                <div className="discount-hastag-container">
                   {params.row.voucherProductCategory.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __category'
+                        className="discount-hastag-wrapper __category"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
-                        <span className='discount-hastag-close'>X</span>
+                        <span className="discount-hastag-item">{item}</span>
+                        <span className="discount-hastag-close">X</span>
                       </div>
                     </>
                   ))}
                 </div>
               )}
               {params.row.voucherProductPublisher.length !== 0 && (
-                <div className='discount-hastag-container'>
+                <div className="discount-hastag-container">
                   {params.row.voucherProductPublisher.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __publisher'
+                        className="discount-hastag-wrapper __publisher"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
-                        <span className='discount-hastag-close'>X</span>
+                        <span className="discount-hastag-item">{item}</span>
+                        <span className="discount-hastag-close">X</span>
                       </div>
                     </>
                   ))}
                 </div>
               )}
               {params.row.voucherProductAuthor.length !== 0 && (
-                <div className='discount-hastag-container'>
+                <div className="discount-hastag-container">
                   {params.row.voucherProductAuthor.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __author'
+                        className="discount-hastag-wrapper __author"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
-                        <span className='discount-hastag-close'>X</span>
+                        <span className="discount-hastag-item">{item}</span>
+                        <span className="discount-hastag-close">X</span>
                       </div>
                     </>
                   ))}
@@ -151,10 +152,10 @@ function DataTableVoucher(props) {
           hideFooterPagination
           disableSelectionOnClick
           loading={isLoading}
-          // onSelectionModelChange={(newSelectionModel) => {
-          //   setSelect(newSelectionModel)
-          // }}
-          // selectionModel={selectionRow}
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelect(newSelectionModel)
+          }}
+          selectionModel={selectionRow}
         />
       </div>
     </>

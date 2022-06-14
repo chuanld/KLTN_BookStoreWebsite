@@ -6,6 +6,7 @@ import Chip from "@mui/material/Chip";
 import HomeIcon from "@mui/icons-material/Home";
 import productApi from "api/productApi";
 import adminApi from "api/adminApi";
+import { useSelector } from "react-redux";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -28,6 +29,8 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
 }); // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
 
 export default function Breadcrumb(props) {
+  const info = useSelector((state) => state.user.current);
+  console.log(info, "info");
   const history = useHistory();
   const location = useLocation();
   const { id } = useParams();
@@ -84,12 +87,14 @@ export default function Breadcrumb(props) {
     <div className="breadcrum-container">
       <div role="presentation">
         <Breadcrumbs aria-label="breadcrumb" separator="›">
-          <Link to="/">
-            <StyledBreadcrumb
-              label="Home"
-              icon={<HomeIcon fontSize="small" />}
-            />
-          </Link>
+          {objParams[0] !== "admin" && (
+            <Link to="/">
+              <StyledBreadcrumb
+                label="Home"
+                icon={<HomeIcon fontSize="small" />}
+              />
+            </Link>
+          )}{" "}
           {objParams.map((pathname, index) => {
             const last = index === objParams.length - 1;
             const to = `/${objParams.slice(0, index + 1).join("/")}`;
@@ -136,6 +141,8 @@ const breadcrumbNameMap = {
   //admin
   "/admin": "Admin Management",
   "/admin/accounts": "List Acccounts",
+  "/admin/accounts/create": "Create Account",
+  "/admin/accounts/*": "Detail Account",
   "/admin/products": "List Products",
   "/admin/categories": "List Categories",
   "/admin/orders": "List Orders",

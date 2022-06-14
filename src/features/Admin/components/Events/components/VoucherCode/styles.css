@@ -1,225 +1,258 @@
-.voucher{
-   
+.voucher {
 }
-.voucher .css-j8v30p-MuiDataGrid-root .MuiDataGrid-cell{
-    white-space: pre-line;
+.voucher .css-j8v30p-MuiDataGrid-root .MuiDataGrid-cell {
+  white-space: pre-line;
 }
-.voucher .voucher-table .discount-hastag{
- padding: 3px;
+.voucher .voucher-table .discount-hastag {
+  padding: 3px;
 }
-.voucher .voucher-table .discount-hastag .discount-hastag-container{
-   
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    
+.voucher .voucher-heading .voucherDelButton {
+  height: 35px;
+  width: 100px;
+  background: rgb(199, 81, 2);
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-right: 10px;
 }
-.voucher .voucher-table .discount-hastag .discount-hastag-wrapper{
-    position: relative;
-    margin: 2px 3px;
+.voucher .voucher-heading .voucherAddButton {
+  height: 35px;
+  width: 100px;
+  background: teal;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.voucher .voucher-table .discount-hastag .discount-hastag-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.voucher .voucher-table .discount-hastag .discount-hastag-wrapper {
+  position: relative;
+  margin: 2px 3px;
 }
 
-.voucher .voucher-table .discount-hastag .discount-hastag-item{
-    padding: 5px 8px;
-    
-    border: none;
-    border-radius: 5px;
-    
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    font-size: 10px;
- 
-}
-.voucher .voucher-table .discount-hastag .discount-hastag-wrapper.__category .discount-hastag-item{
-    background-color: #087b39;
-}
-.voucher .voucher-table .discount-hastag .discount-hastag-wrapper.__publisher .discount-hastag-item{
-    background-color: #e2c627;
-}
-.voucher .voucher-table .discount-hastag .discount-hastag-wrapper.__author .discount-hastag-item{
-    background-color: #efbf48;
-}
-.voucher .voucher-table .discount-hastag .discount-hastag-close{
-    font-size: 7px;
-    position: absolute;
-    background-color: #ddd;
-    padding: 2px 4px;
-    border: none;
-    
-    font-weight: 700;
-    border-radius: 50%;
-    right:-5px;
-    top:-4px;
-}
-.voucher .voucher-table .discount-hastag .discount-hastag-close:hover{
-    cursor: pointer;
-    
-    color: #fff;
-    transform: scale(1.1);
-    transition: ease-in 0.2s;
+.voucher .voucher-table .discount-hastag .discount-hastag-item {
+  padding: 5px 8px;
 
+  border: none;
+  border-radius: 5px;
+
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 10px;
+}
+.voucher
+  .voucher-table
+  .discount-hastag
+  .discount-hastag-wrapper.__category
+  .discount-hastag-item {
+  background-color: #087b39;
+}
+.voucher
+  .voucher-table
+  .discount-hastag
+  .discount-hastag-wrapper.__publisher
+  .discount-hastag-item {
+  background-color: #e2c627;
+}
+.voucher
+  .voucher-table
+  .discount-hastag
+  .discount-hastag-wrapper.__author
+  .discount-hastag-item {
+  background-color: #efbf48;
+}
+.voucher .voucher-table .discount-hastag .discount-hastag-close {
+  font-size: 7px;
+  position: absolute;
+  background-color: #ddd;
+  padding: 2px 4px;
+  border: none;
+
+  font-weight: 700;
+  border-radius: 50%;
+  right: -5px;
+  top: -4px;
+}
+.voucher .voucher-table .discount-hastag .discount-hastag-close:hover {
+  cursor: pointer;
+
+  color: #fff;
+  transform: scale(1.1);
+  transition: ease-in 0.2s;
 }
 
 /* //Modal Edit Voucher */
 .edit-modal-voucher {
-    background-color: rgb(236, 232, 232);
-    padding: 20px;
-    padding-bottom: 30px;
+  background-color: rgb(236, 232, 232);
+  padding: 20px;
+  padding-bottom: 30px;
 }
-.edit-modal-voucher .edit-info-form{
-    display: flex;
-    flex-direction: column;
-
+.edit-modal-voucher .edit-info-form {
+  display: flex;
+  flex-direction: column;
 }
-.edit-modal-voucher .edit-info-heading{
-    display: flex;
-    height: fit-content;
-    justify-content: space-between;
-    width: 800px;
-    
+.edit-modal-voucher .edit-info-heading {
+  display: flex;
+  height: fit-content;
+  justify-content: space-between;
+  width: 800px;
 }
 .edit-modal-voucher .edit-info-heading .col1-info,
 .edit-modal-voucher .edit-info-heading .col2-info,
-.edit-modal-voucher .edit-info-heading .col3-info{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-   
-    flex-basis: 200px;
+.edit-modal-voucher .edit-info-heading .col3-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  flex-basis: 200px;
 }
-.edit-modal-voucher .edit-info-heading .col1-info{
-   align-items: flex-start;
+.edit-modal-voucher .edit-info-heading .col1-info {
+  align-items: flex-start;
 }
-.edit-modal-voucher .edit-info-heading .col2-info{
-    flex-basis: 180px;
- }
-.edit-modal-voucher .edit-info-heading .col3-info{
-    align-items: flex-end;
-    justify-content: end;
- }
-.edit-modal-voucher .update-info-voucher{
-    margin: 20px 0px;
+.edit-modal-voucher .edit-info-heading .col2-info {
+  flex-basis: 180px;
+}
+.edit-modal-voucher .edit-info-heading .col3-info {
+  align-items: flex-end;
+  justify-content: end;
+}
+.edit-modal-voucher .update-info-voucher {
+  margin: 20px 0px;
 }
 /* .edit-modal-voucher .update-info-voucher:first-child,
 .edit-modal-voucher .update-info-voucher:last-child{
     margin: 20px 0px;
 } */
-.edit-modal-voucher .customes-discount{
-    border-top: 1px solid rgb(157, 156, 156);
-    margin-top: 30px;
+.edit-modal-voucher .customes-discount {
+  border-top: 1px solid rgb(157, 156, 156);
+  margin-top: 30px;
 }
 
-.edit-modal-voucher .edit-info-discount .select-discount{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.edit-modal-voucher .edit-info-discount .select-discount {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.edit-modal-voucher .edit-info-discount .add-select{
-    /* margin: 5px 20px; */
-    background-color: #1582b1;
-    padding: 5px 10px;
-    color: var(--white);
-    margin-top: 10px;
+.edit-modal-voucher .edit-info-discount .add-select {
+  /* margin: 5px 20px; */
+  background-color: #1582b1;
+  padding: 5px 10px;
+  color: var(--white);
+  margin-top: 10px;
 }
-.edit-modal-voucher .edit-info-discount .show-discount{
-    border: 1px solid rgb(163, 163, 163);
-    border-radius: 5px;
-    padding: 10px 15px;
-    width: 300px;
-    min-height: 55px;
-    margin-top: 10px;
-    
+.edit-modal-voucher .edit-info-discount .show-discount {
+  border: 1px solid rgb(163, 163, 163);
+  border-radius: 5px;
+  padding: 10px 15px;
+  width: 300px;
+  min-height: 55px;
+  margin-top: 10px;
 }
-.edit-modal-voucher .show-discount .discount-hastag-container{
-   
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    
+.edit-modal-voucher .show-discount .discount-hastag-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
-.edit-modal-voucher  .show-discount .discount-hastag-wrapper{
-    position: relative;
-    margin: 2px 3px;
+.edit-modal-voucher .show-discount .discount-hastag-wrapper {
+  position: relative;
+  margin: 2px 3px;
 }
 
-.edit-modal-voucher  .show-discount .discount-hastag-item{
-    padding: 5px 8px;
-    
-    border: none;
-    border-radius: 5px;
-    
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    font-size: 10px;
- 
-}
-.edit-modal-voucher  .show-discount .discount-hastag-wrapper.__category .discount-hastag-item{
-    background-color: teal;
-}
-.edit-modal-voucher  .show-discount .discount-hastag-wrapper.__publisher .discount-hastag-item{
-    background-color: #e2c627;
-}
-.edit-modal-voucher  .show-discount .discount-hastag-wrapper.__author .discount-hastag-item{
-    background-color: #efbf48;
-}
-.edit-modal-voucher  .show-discount .discount-hastag-close{
-    font-size: 7px;
-    position: absolute;
-    background-color: #ddd;
-    padding: 2px 4px;
-    border: none;
-    
-    font-weight: 700;
-    border-radius: 50%;
-    right:-5px;
-    top:-4px;
-}
-.edit-modal-voucher .show-discount .discount-hastag-close:hover{
-    cursor: pointer;
-    
-    color: #fff;
-    transform: scale(1.1);
-    transition: ease-in 0.2s;
+.edit-modal-voucher .show-discount .discount-hastag-item {
+  padding: 5px 8px;
 
-}
-.edit-modal-voucher form .btn-submit{
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom:-10px;
+  border: none;
+  border-radius: 5px;
 
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 10px;
 }
-.edit-modal-voucher form .btn-submit button{
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-color: #087b39;
-    color:var(--white);
-    padding: 4px 6px;
-    font-size: 16px;
-    font-weight: 500;
+.edit-modal-voucher
+  .show-discount
+  .discount-hastag-wrapper.__category
+  .discount-hastag-item {
+  background-color: teal;
 }
-.edit-modal-voucher .edit-info-discount  .select-item{
-    position: relative;
+.edit-modal-voucher
+  .show-discount
+  .discount-hastag-wrapper.__publisher
+  .discount-hastag-item {
+  background-color: #e2c627;
 }
-.edit-modal-voucher .edit-info-discount .icon-verifyId{
-    position: absolute;
-    top:22px;
-    right: 13px;
-    z-index: 1;
-    border-radius: 50%;
-    border: 1px dashed #fff;
-    padding: 1px 7px;
-    color: #ddd
+.edit-modal-voucher
+  .show-discount
+  .discount-hastag-wrapper.__author
+  .discount-hastag-item {
+  background-color: #efbf48;
 }
-.edit-modal-voucher .edit-info-discount .icon-verifyId.active{
-    border-radius: 50%;
-    border: 1px dashed #087b39;
-    padding: 1px 7px;
-    color: #087b39;
-    
+.edit-modal-voucher .show-discount .discount-hastag-close {
+  font-size: 7px;
+  position: absolute;
+  background-color: #ddd;
+  padding: 2px 4px;
+  border: none;
+
+  font-weight: 700;
+  border-radius: 50%;
+  right: -5px;
+  top: -4px;
 }
-.edit-modal-voucher .edit-info-discount .select-bookid .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-    padding-right: 50px;
+.edit-modal-voucher .show-discount .discount-hastag-close:hover {
+  cursor: pointer;
+
+  color: #fff;
+  transform: scale(1.1);
+  transition: ease-in 0.2s;
+}
+.edit-modal-voucher form .btn-submit {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: -10px;
+}
+.edit-modal-voucher form .btn-submit button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #087b39;
+  color: var(--white);
+  padding: 4px 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.edit-modal-voucher .edit-info-discount .select-item {
+  position: relative;
+}
+.edit-modal-voucher .edit-info-discount .icon-verifyId {
+  position: absolute;
+  top: 22px;
+  right: 13px;
+  z-index: 1;
+  border-radius: 50%;
+  border: 1px dashed #fff;
+  padding: 1px 7px;
+  color: #ddd;
+}
+.edit-modal-voucher .edit-info-discount .icon-verifyId.active {
+  border-radius: 50%;
+  border: 1px dashed #087b39;
+  padding: 1px 7px;
+  color: #087b39;
+}
+.edit-modal-voucher
+  .edit-info-discount
+  .select-bookid
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  padding-right: 50px;
 }

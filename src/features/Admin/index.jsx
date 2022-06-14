@@ -41,10 +41,11 @@ function Admin() {
       <div className="admin-page" id="admin-page">
         {isAdmin ? (
           <Router>
-            <Switch>
-              <div className="container-ad">
-                <Route path="/admin" component={SideBar} />
-                <div className="others">
+            <div className="container-ad">
+              {/* <SideBar /> */}
+              <Route path="/admin" component={SideBar} />
+              <div className="others">
+                <Switch>
                   <Route path="/admin/accounts" exact component={Accounts} />
 
                   <Route
@@ -58,28 +59,15 @@ function Admin() {
                     component={DetailAccount}
                   />
 
-                  {/* <Route
-                  path="/admin/createproduct"
-                  exact
-                  component={CreateProduct}
-                /> */}
                   <Route path="/admin/products" exact component={Products} />
                   <Route
                     path="/admin/products/create"
                     exact
                     component={CreateProduct}
                   />
-                  <Route
-                    path="/admin/products/:id"
-                    exact
-                    component={DetailProduct}
-                  />
+
                   <Route path="/admin/orders" exact component={Orders} />
-                  {/* <Route
-                  path="/admin/orderlistdetail/:id"
-                  exact
-                  component={OrderDetailAdmin}
-                /> */}
+
                   <Route
                     path="/admin/categories"
                     exact
@@ -95,10 +83,10 @@ function Admin() {
                     component={FlashSale}
                   />
                   <Route path='/admin/events/disc' exact component={Discount} /> */}
-                </div>
+                  <Route path="/" exact component={Home} />
+                </Switch>
               </div>
-              <Route path="/" exact component={Home} />
-            </Switch>
+            </div>
           </Router>
         ) : (
           <div className="container-ad">

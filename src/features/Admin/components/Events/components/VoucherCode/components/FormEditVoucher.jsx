@@ -67,7 +67,6 @@ function FormEditVoucher(props) {
 
   const handleSubmit = (values) => {
     if (!onSubmit) return
-    // onSubmit({ ...values })
 
     const newValues = {
       ...values,
@@ -269,194 +268,194 @@ function FormEditVoucher(props) {
   }
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
-      <div className='edit-info-form'>
-        <div className='edit-info-heading'>
-          <div className='col1-info'>
-            <div className='update-info-voucher'>
+      <div className="edit-info-form">
+        <div className="edit-info-heading">
+          <div className="col1-info">
+            <div className="update-info-voucher">
               <InputField
-                name='voucherCode'
+                name="voucherCode"
                 placeholder={voucher.voucherCode}
                 form={form}
-                label='Voucher CODE'
+                label="Voucher CODE"
                 className={'input-info-update'}
                 height={'30px'}
-                width='180px'
+                width="180px"
               />
             </div>
-            <div className='update-info-voucher'>
+            <div className="update-info-voucher">
               <InputField
-                name='voucherDiscount'
+                name="voucherDiscount"
                 placeholder={voucher.voucherCode}
                 form={form}
-                label='Voucher Discount (%)'
+                label="Voucher Discount (%)"
                 className={'input-info-update'}
                 height={'30px'}
-                width='180px'
+                width="180px"
               />
             </div>
-            <div className='update-info-voucher'>
+            <div className="update-info-voucher">
               <InputField
-                name='voucherStock'
+                name="voucherStock"
                 placeholder={voucher.voucherDiscount}
                 form={form}
-                label='Voucher Stock'
+                label="Voucher Stock"
                 className={'input-info-update'}
                 height={'30px'}
-                width='180px'
+                width="180px"
               />
             </div>
           </div>
-          <div className='col2-info'>
-            <div className='update-info-voucher'>
+          <div className="col2-info">
+            <div className="update-info-voucher">
               <DateTimePickerField
-                name='voucherEffect'
-                label='Effect Date'
+                name="voucherEffect"
+                label="Effect Date"
                 form={form}
                 className={'input-info-update'}
                 height={'30px'}
-                width='220px'
+                width="220px"
               />
             </div>
-            <div className='update-info-voucher'>
+            <div className="update-info-voucher">
               <TextField
-                name='createdAt'
+                name="createdAt"
                 // placeholder={voucher.voucherCode}
                 // form={form}
-                label='Created By'
+                label="Created By"
                 className={'input-info-update'}
                 sx={{ height: '30px', width: '180px' }}
                 value={voucher.createdBy}
-                margin='dense'
+                margin="dense"
                 disabled
               />
             </div>
-            <div className='update-info-voucher'>
+            <div className="update-info-voucher">
               <TextField
-                name='modifiedBy'
+                name="modifiedBy"
                 // placeholder={voucher.voucherCode}
                 // form={form}
-                label='Modified By'
+                label="Modified By"
                 className={'input-info-update'}
                 sx={{ height: '30px', width: '180px' }}
                 value={voucher.modifiedBy}
-                margin='dense'
+                margin="dense"
                 disabled
               />
             </div>
           </div>
-          <div className='col3-info'>
-            <div className='update-info-voucher'>
+          <div className="col3-info">
+            <div className="update-info-voucher">
               <DateTimePickerField
-                name='voucherExpire'
-                label='Expire Date'
+                name="voucherExpire"
+                label="Expire Date"
                 form={form}
                 className={'input-info-update'}
                 height={'30px'}
-                width='220px'
+                width="220px"
               />
             </div>
-            <div className='update-info-voucher'>
+            <div className="update-info-voucher">
               <TextField
-                name='createdAt'
+                name="createdAt"
                 // placeholder={voucher.voucherCode}
                 // form={form}
-                label='Created By'
+                label="Created By"
                 className={'input-info-update'}
                 sx={{ height: '30px', width: '260px' }}
                 value={new Date(voucher.createdAt).toUTCString()}
-                margin='dense'
+                margin="dense"
                 disabled
               />
             </div>
-            <div className='update-info-voucher'>
+            <div className="update-info-voucher">
               <TextField
-                name='updatedBy'
+                name="updatedBy"
                 // placeholder={voucher.voucherCode}
                 // form={form}
-                label='Updated At'
+                label="Updated At"
                 className={'input-info-update'}
                 sx={{ height: '30px', width: '260px' }}
                 value={new Date(voucher.updatedAt).toUTCString()}
-                margin='dense'
+                margin="dense"
                 disabled
               />
             </div>
           </div>
         </div>
         <div></div>
-        <div className='customes-discount'>
-          <div className='custome-title'>
+        <div className="customes-discount">
+          <div className="custome-title">
             <i>Select customes discount</i>
           </div>
-          <div className='custome-wrapper'>
+          <div className="custome-wrapper">
             <RadioGroup
               row
-              aria-labelledby='demo-row-radio-buttons-group-label'
-              name='row-radio-buttons-group'
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
               value={optionDisc}
               onChange={handleChangeOption}
             >
               <FormControlLabel
-                value='voucherProductId'
+                value="voucherProductId"
                 control={<Radio />}
-                label='Book ID'
+                label="Book ID"
               />
               <FormControlLabel
-                value='voucherProductCategory'
+                value="voucherProductCategory"
                 control={<Radio />}
-                label='Book Categories'
+                label="Book Categories"
               />
               <FormControlLabel
-                value='voucherProductAuthor'
+                value="voucherProductAuthor"
                 control={<Radio />}
-                label='Book Author'
+                label="Book Author"
               />
               <FormControlLabel
-                value='voucherProductPublisher'
+                value="voucherProductPublisher"
                 // disabled
                 control={<Radio />}
-                label='Book Publishers'
+                label="Book Publishers"
               />
             </RadioGroup>
           </div>
         </div>
-        <div className='edit-info-discount'>
+        <div className="edit-info-discount">
           {optionDisc === 'voucherProductId' && (
-            <div className='select-discount'>
-              <div className='select-bookid select-item'>
+            <div className="select-discount">
+              <div className="select-bookid select-item">
                 <TextField
                   color={'success'}
-                  name='bookIdSelect'
-                  label='Book ID'
+                  name="bookIdSelect"
+                  label="Book ID"
                   placeholder={'Enter ID book'}
                   onChange={onChangeInputID}
                   value={bookIdSelect}
                   // error={invalid}
                   // helperText={error?.message}
                   sx={{ height: '222,4', width: '50' }}
-                  margin='dense'
+                  margin="dense"
                 />
                 <div className={`icon-verifyId ${isVerify && 'active'} `}>
                   <span>✔</span>
                 </div>
               </div>
               <div
-                className='add-select add-category  select-item'
+                className="add-select add-category  select-item"
                 onClick={() => handleAddBookId()}
               >
                 Add
               </div>
-              <div className='show-discount  select-item'>
-                <div className='discount-hastag-container'>
-                  {bookIdsDisc.map((item) => (
+              <div className="show-discount  select-item">
+                <div className="discount-hastag-container">
+                  {bookIdsDisc?.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __category'
+                        className="discount-hastag-wrapper __category"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
+                        <span className="discount-hastag-item">{item}</span>
                         <span
-                          className='discount-hastag-close'
+                          className="discount-hastag-close"
                           onClick={() => handleRemoveItemBookId(item)}
                         >
                           X
@@ -470,15 +469,15 @@ function FormEditVoucher(props) {
           )}
 
           {optionDisc === 'voucherProductCategory' && (
-            <div className='select-discount'>
-              <div className='select-categories select-item'>
+            <div className="select-discount">
+              <div className="select-categories select-item">
                 <FormControl sx={{ m: 0, width: 270, marginTop: 1 }}>
-                  <InputLabel id='option-discount'>Select Category</InputLabel>
+                  <InputLabel id="option-discount">Select Category</InputLabel>
                   <Select
                     color={'success'}
-                    name='category-discount'
-                    labelId='category-discount'
-                    label='category-discount'
+                    name="category-discount"
+                    labelId="category-discount"
+                    label="category-discount"
                     // placeholder={placeholder}
                     //   onBlur={onBlur}
                     onChange={handleSelectDiscount}
@@ -497,22 +496,22 @@ function FormEditVoucher(props) {
                 </FormControl>
               </div>
               <div
-                className='add-select add-category  select-item'
+                className="add-select add-category  select-item"
                 onClick={() => handleAddCategory()}
               >
                 Add
               </div>
-              <div className='show-discount  select-item'>
-                <div className='discount-hastag-container'>
-                  {categoriesDisc.map((item) => (
+              <div className="show-discount  select-item">
+                <div className="discount-hastag-container">
+                  {categoriesDisc?.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __category'
+                        className="discount-hastag-wrapper __category"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
+                        <span className="discount-hastag-item">{item}</span>
                         <span
-                          className='discount-hastag-close'
+                          className="discount-hastag-close"
                           onClick={() => handleRemoveItemCategory(item)}
                         >
                           X
@@ -526,15 +525,15 @@ function FormEditVoucher(props) {
           )}
 
           {optionDisc === 'voucherProductAuthor' && (
-            <div className='select-discount'>
-              <div className='select-authors select-item'>
+            <div className="select-discount">
+              <div className="select-authors select-item">
                 <FormControl sx={{ m: 0, width: 270, marginTop: 1 }}>
-                  <InputLabel id='option-discount'>Select Author</InputLabel>
+                  <InputLabel id="option-discount">Select Author</InputLabel>
                   <Select
                     color={'success'}
-                    name='author-discount'
-                    labelId='author-discount'
-                    label='author-discount'
+                    name="author-discount"
+                    labelId="author-discount"
+                    label="author-discount"
                     // placeholder={placeholder}
                     //   onBlur={onBlur}
                     onChange={handleSelectDiscount}
@@ -544,7 +543,7 @@ function FormEditVoucher(props) {
                     style={{ height: '55px', width: '250px' }}
                   >
                     {/* <MenuItem value=''></MenuItem> */}
-                    {authors.map((author) => (
+                    {authors?.map((author) => (
                       <MenuItem value={author} key={author}>
                         {author}
                       </MenuItem>
@@ -553,22 +552,22 @@ function FormEditVoucher(props) {
                 </FormControl>
               </div>
               <div
-                className='add-select add-author  select-item'
+                className="add-select add-author  select-item"
                 onClick={() => handleAddAuthor()}
               >
                 Add
               </div>
-              <div className='show-discount  select-item'>
-                <div className='discount-hastag-container'>
-                  {authorsDisc.map((item) => (
+              <div className="show-discount  select-item">
+                <div className="discount-hastag-container">
+                  {authorsDisc?.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __author'
+                        className="discount-hastag-wrapper __author"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
+                        <span className="discount-hastag-item">{item}</span>
                         <span
-                          className='discount-hastag-close'
+                          className="discount-hastag-close"
                           onClick={() => handleRemoveItemAuthor(item)}
                         >
                           X
@@ -582,15 +581,15 @@ function FormEditVoucher(props) {
           )}
 
           {optionDisc === 'voucherProductPublisher' && (
-            <div className='select-discount'>
-              <div className='select-publishers select-item'>
+            <div className="select-discount">
+              <div className="select-publishers select-item">
                 <FormControl sx={{ m: 0, width: 270, marginTop: 1 }}>
-                  <InputLabel id='option-discount'>Select Author</InputLabel>
+                  <InputLabel id="option-discount">Select Author</InputLabel>
                   <Select
                     color={'success'}
-                    name='publisher-discount'
-                    labelId='publisher-discount'
-                    label='publisher-discount'
+                    name="publisher-discount"
+                    labelId="publisher-discount"
+                    label="publisher-discount"
                     // placeholder={placeholder}
                     //   onBlur={onBlur}
                     onChange={handleSelectDiscount}
@@ -600,7 +599,7 @@ function FormEditVoucher(props) {
                     style={{ height: '55px', width: '250px' }}
                   >
                     {/* <MenuItem value=''></MenuItem> */}
-                    {publishers.map((publisher) => (
+                    {publishers?.map((publisher) => (
                       <MenuItem value={publisher} key={publisher}>
                         {publisher}
                       </MenuItem>
@@ -609,22 +608,22 @@ function FormEditVoucher(props) {
                 </FormControl>
               </div>
               <div
-                className='add-select add-publisher  select-item'
+                className="add-select add-publisher  select-item"
                 onClick={() => handleAddPublisher()}
               >
                 Add
               </div>
-              <div className='show-discount  select-item'>
-                <div className='discount-hastag-container'>
-                  {publishersDisc.map((item) => (
+              <div className="show-discount  select-item">
+                <div className="discount-hastag-container">
+                  {publishersDisc?.map((item) => (
                     <>
                       <div
-                        className='discount-hastag-wrapper __publisher'
+                        className="discount-hastag-wrapper __publisher"
                         key={item}
                       >
-                        <span className='discount-hastag-item'>{item}</span>
+                        <span className="discount-hastag-item">{item}</span>
                         <span
-                          className='discount-hastag-close'
+                          className="discount-hastag-close"
                           onClick={() => handleRemoveItemPublisher(item)}
                         >
                           X
@@ -638,8 +637,8 @@ function FormEditVoucher(props) {
           )}
         </div>
       </div>
-      <div className='btn-submit'>
-        <button type='submit'>Update Voucher</button>
+      <div className="btn-submit">
+        <button type="submit">Update Voucher</button>
       </div>
     </form>
   )
