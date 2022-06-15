@@ -69,8 +69,8 @@
 }
 .widget_list.widget_categories
   .css-bshv44-MuiButtonBase-root-MuiListItem-root.active.btn-root {
-  background-color: rgb(245, 243, 243);
-  color: #087b39;
+  background-color: rgb(245, 243, 243) !important;
+  color: #087b39 I !important;
 }
 .widget_list.widget_categories
   .css-bshv44-MuiButtonBase-root-MuiListItem-root.active
