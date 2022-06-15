@@ -40,7 +40,10 @@ function DetailProduct() {
 
   //Socket ConfigConnection
   useEffect(() => {
-    const socket = io('http://localhost:5000', { transports: ['websocket'] })
+    // const socket = io('http://localhost:5000', { transports: ['websocket'] })
+    const socket = io('https://app-bookstore-kltn.herokuapp.com', {
+      transports: ['websocket'],
+    })
     setSocket(socket)
 
     return () => socket.close()
@@ -78,17 +81,17 @@ function DetailProduct() {
   return (
     <>
       <Breadcrumb params={params} />
-      <div className='detail-product'>
+      <div className="detail-product">
         <HeadingInfo product={detailProduct} onSubmit={addCart} />
-        <div className='detail-info'>
-          <div className='product_content'>
-            <div className='container'>
-              <h2 className='title_content'>Nội dung</h2>
+        <div className="detail-info">
+          <div className="product_content">
+            <div className="container">
+              <h2 className="title_content">Nội dung</h2>
               <div className={`box_content ${onLoad ? 'cYhiAl' : 'jpFMBi'}`}>
-                <p className='title_content_split'>{detailProduct.content}</p>
-                {onLoad ? null : <div className='gradient'></div>}
+                <p className="title_content_split">{detailProduct.content}</p>
+                {onLoad ? null : <div className="gradient"></div>}
               </div>
-              <button className='btn-more' onClick={() => setOnLoad(!onLoad)}>
+              <button className="btn-more" onClick={() => setOnLoad(!onLoad)}>
                 {onLoad ? 'Rút gọn' : 'Xem thêm'}
               </button>
             </div>
