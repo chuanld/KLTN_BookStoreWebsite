@@ -2,6 +2,7 @@ import { ExpandLess, ExpandMore, SavedSearch } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 
 import './sidebarwidget.css'
+import './styles.css'
 // import QC1 from "./images/QC1.jpg";
 import QC2 from './images/QC2.png'
 import { toast } from 'react-toastify'
