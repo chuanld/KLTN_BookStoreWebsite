@@ -63,18 +63,14 @@
   line-height: 30px;
   padding: 0 20px;
 }
-.widget_list.widget_categories
-  .css-bshv44-MuiButtonBase-root-MuiListItem-root.btn-child {
+.widget_list.widget_categories .css-qs2q9j.btn-child {
   padding-left: 25px !important;
 }
-.widget_list.widget_categories
-  .css-bshv44-MuiButtonBase-root-MuiListItem-root.active.btn-root {
+.widget_list.widget_categories .css-qs2q9j.active.btn-root {
   background-color: rgb(245, 243, 243) !important;
   color: #087b39 I !important;
 }
-.widget_list.widget_categories
-  .css-bshv44-MuiButtonBase-root-MuiListItem-root.active
-  span {
+.widget_list.widget_categories .css-qs2q9j.active span {
   color: #087b39;
   font-weight: 700;
 }
