@@ -27,7 +27,7 @@
   color: black;
 }
 .productsList {
-  max-width: 1300px;
+  min-width: 1300px;
   /* max-height: 600px;
     height: 500px; */
   /* overflow: auto; */
@@ -237,14 +237,17 @@ textarea {
 .create_product form .update-info-book {
   margin: 25px 0;
 }
-.create_product form .rows__cate-disc{
+.create_product form .rows__cate-disc {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.create_product form .rows__cate-disc .css-1hh8pxb-MuiFormControl-root{
+.create_product form .rows__cate-disc .css-1hh8pxb-MuiFormControl-root {
   width: auto !important;
 }
-.create_product form .rows__cate-disc .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+.create_product
+  form
+  .rows__cate-disc
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
   height: 55px !important;
 }

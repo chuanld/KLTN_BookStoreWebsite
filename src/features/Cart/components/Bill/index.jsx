@@ -226,13 +226,21 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
   //     })
   //   }
   // }, [voucher])
-
+  const handleVnpayment = async () => {
+    try {
+      console.log('click')
+      const res = await userApi.paymentVnpay()
+      console.log(res)
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
   return (
     <>
       {/* {onHeli === true && <HelicopterShip />} */}
-      <div className='total_cart'>
+      <div className="total_cart">
         <h3 style={{ textAlign: 'center' }}>Your order</h3>
-        <div className='row'>
+        <div className="row">
           <i>Customer: {infor.name}</i>
           <i>Address: {infor.address}</i>
         </div>
@@ -241,8 +249,8 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
           -------------------------------
         </div>
         {cart.map((bill) => (
-          <div className='row' key={bill._id}>
-            <h6 className='subtotal'>
+          <div className="row" key={bill._id}>
+            <h6 className="subtotal">
               Subtotal:{' '}
               <p
                 style={
@@ -264,9 +272,9 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
                 ${bill.price.toFixed(2)}
               </p>
               {bill.priceDiscount ? (
-                <p className='price-discount'>${bill.priceDiscount}</p>
+                <p className="price-discount">${bill.priceDiscount}</p>
               ) : bill.discount < 100 ? (
-                <p className='price-discount'>
+                <p className="price-discount">
                   ${((bill.price * bill.discount) / 100).toFixed(2)}
                 </p>
               ) : null}
@@ -288,35 +296,35 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
           </>
         )}
 
-        <h3 className='total_bill'>Total: ${parseFloat(total).toFixed(2)} </h3>
+        <h3 className="total_bill">Total: ${parseFloat(total).toFixed(2)} </h3>
         <div style={{ textAlign: 'center' }}>
           ---------------------------------
         </div>
-        <div className='discount-input'>
-          <div className='input-wrapper'>
-            <div className='input-disc'>
+        <div className="discount-input">
+          <div className="input-wrapper">
+            <div className="input-disc">
               <input
-                type='text'
+                type="text"
                 value={voucherCode}
-                placeholder='Enter your voucher here'
+                placeholder="Enter your voucher here"
                 onChange={(e) => setVoucherCode(e.target.value)}
               />
             </div>
-            <div className='button-check checked'>
+            <div className="button-check checked">
               <button onClick={() => handleCheckVoucher()}>Check</button>
             </div>
           </div>
         </div>
-        <div className='btn_checkout'>
+        <div className="btn_checkout">
           <h6>Phương thức thanh toán</h6>
-          <div className='row'>
+          <div className="row">
             <div>
-              <button className='shipcod' onClick={openModal}>
+              <button className="shipcod" onClick={openModal}>
                 ShipCOD
               </button>
             </div>
             ---⫗---
-            <div className='payment'>
+            <div className="payment">
               <PaypalExpressBtn total={total} tranSuccess={tranSuccess} />
               {/* <PaypalButtonV2
               className="paypal-checkout"
@@ -324,96 +332,101 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
               tranSuccess={tranSuccess1}
             /> */}
             </div>
+            {/* <div>
+              <button className="shipcod" onClick={() => handleVnpayment()}>
+                VN-Pay
+              </button>
+            </div> */}
           </div>
         </div>
       </div>
-      <div className='form-orderowner-modal'>
+      <div className="form-orderowner-modal">
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles3}
           //portalClassName="modal"
-          contentLabel='Example Modal'
+          contentLabel="Example Modal"
         >
-          <button className='btnclose-modal' onClick={closeModal}>
+          <button className="btnclose-modal" onClick={closeModal}>
             X
           </button>
-          <div className='verify-infomation-ship'>
-            <div className='verify-title'>
+          <div className="verify-infomation-ship">
+            <div className="verify-title">
               <h2>Verify Information</h2>
             </div>
 
             <form onSubmit={chkShipCOD}>
-              <div className='form-verify'>
-                <div className='form-left'>
-                  <label htmlFor='orderowner'>Reveive Name</label>
+              <div className="form-verify">
+                <div className="form-left">
+                  <label htmlFor="orderowner">Reveive Name</label>
                   <input
-                    type='text'
-                    name='name'
+                    type="text"
+                    name="name"
                     placeholder={orderInfo.name ? orderInfo.name : infor.name}
                     value={orderInfo.name}
                     onChange={onChangeInput}
                   />
-                  <label htmlFor='orderowner'>Reveive Phone</label>
+                  <label htmlFor="orderowner">Reveive Phone</label>
                   <input
-                    type='text'
-                    name='phone'
+                    type="text"
+                    name="phone"
                     placeholder={
                       orderInfo.phone ? orderInfo.phone : infor.phone
                     }
                     value={orderInfo.phone}
                     onChange={onChangeInput}
                   />
-                  <label htmlFor='orderowner'>Reveive Address</label>
+                  <label htmlFor="orderowner">Reveive Address</label>
 
                   <textarea
-                    type='text'
-                    name='address'
+                    type="text"
+                    name="address"
                     placeholder={
                       orderInfo.address ? orderInfo.address : infor.address
                     }
                     value={orderInfo.address}
                     onChange={onChangeInput}
-                    row='3'
+                    row="3"
                   />
                 </div>
-                <div className='form-right'>
-                  <label htmlFor='orderowner'>Account Email</label>
+                <div className="form-right">
+                  <label htmlFor="orderowner">Account Email</label>
                   <input
-                    type='text'
+                    type="text"
                     placeholder={infor.email}
                     value={infor.email}
                     disabled
                   />
-                  <label htmlFor='orderowner'>Account Name</label>
+                  <label htmlFor="orderowner">Account Name</label>
                   <input
-                    type='text'
+                    type="text"
                     placeholder={infor.name}
                     value={infor.name}
                     disabled
                   />
-                  <label htmlFor='orderowner'>Account Phone</label>
+                  <label htmlFor="orderowner">Account Phone</label>
                   <input
-                    type='text'
+                    type="text"
                     placeholder={infor.phone}
                     value={infor.phone}
                     disabled
                   />
-                  <label htmlFor='orderowner'>Account Address</label>
+                  <label htmlFor="orderowner">Account Address</label>
 
                   <textarea
-                    type='text'
+                    type="text"
                     placeholder={infor.address}
                     value={infor.address}
-                    rows='2'
+                    rows="2"
                     disabled
                   />
                 </div>
               </div>
 
-              <div className='submit-change-infor'>
-                <button type='submit'>Payment Proceed</button>
+              <div className="submit-change-infor">
+                <button type="submit">Payment Proceed</button>
               </div>
             </form>
           </div>

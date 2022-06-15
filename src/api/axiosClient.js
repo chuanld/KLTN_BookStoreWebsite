@@ -1,13 +1,14 @@
-import axios from "axios";
-import { StorageKeys } from "../constant/storageKey";
+import axios from 'axios'
+import { StorageKeys } from '../constant/storageKey'
 
 const axiosClient = axios.create({
-  baseURL: "https://app-bookstore-kltn.herokuapp.com/",
+  // baseURL: 'https://app-bookstore-kltn.herokuapp.com/',
+  baseURL: 'http://localhost:5000/',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
   withCredentials: true,
-});
+})
 
 axiosClient.interceptors.request.use(
   (config) => {
@@ -26,45 +27,46 @@ axiosClient.interceptors.request.use(
       //       "/user/update",
       //       "/user/change",
       // =======
-      "/user/register",
-      "/user/activation",
-      "/user/login",
-      "/user/infor",
-      "/user/refresh_token",
-      "/user/all_infor",
-      "/user/addtocart",
-      "/user/order_infor",
-      "/api/order",
-      "/user/delete_cart",
-      "/user/update",
-      "/user/change",
+      '/user/register',
+      '/user/activation',
+      '/user/login',
+      '/user/infor',
+      '/user/refresh_token',
+      '/user/all_infor',
+      '/user/addtocart',
+      '/user/order_infor',
+      '/api/order',
+      '/user/delete_cart',
+      '/user/update',
+      '/user/change',
       // >>>>>>> origin/13-06_home_1
       // '/user/order_infor/:id',
-      "/api/order",
-      "/user/delete_cart",
-      "/api/banners",
-      "/api/rating",
-      "/user/refresh_token",
-      "/api/discount/checkvalid",
-      "/api/analytic",
-    ];
+      '/api/order',
+      '/user/delete_cart',
+      '/api/banners',
+      '/api/rating',
+      '/user/refresh_token',
+      '/api/discount/checkvalid',
+      '/api/analytic',
+      '/api/payment/create_payment_url',
+    ]
     const URLSADMIN = [
-      "/user/all_infor",
-      "/user/infor_byId",
-      "/user/all_update",
-      "/user/create_infor",
-      "/api/upload",
-      "/api/destroy",
-      "/api/products",
-      "/api/allproducts",
-      "/api/category",
-      "/api/order",
-      "/api/products/event_disc",
-      "/api/discount",
-    ];
+      '/user/all_infor',
+      '/user/infor_byId',
+      '/user/all_update',
+      '/user/create_infor',
+      '/api/upload',
+      '/api/destroy',
+      '/api/products',
+      '/api/allproducts',
+      '/api/category',
+      '/api/order',
+      '/api/products/event_disc',
+      '/api/discount',
+    ]
 
     const dynamicURL = [
-      "/user/refresh_token",
+      '/user/refresh_token',
       //       //dynamic URL
       // <<<<<<< HEAD
       //       "/user/addtocart",
@@ -78,86 +80,87 @@ axiosClient.interceptors.request.use(
       //       "/api/discount/checkvalid",
       //       "/api/analytic",
       // =======
-      "/user/addtocart",
-      "/user/delete_cart",
-      "/user/update",
-      "/user/change",
-      "/user/order_infor",
-      "/api/order",
-      "/user/delete_cart",
-      "/api/rating",
-      "/api/discount/checkvalid",
-      "/user/activation",
-      "/api/analytic",
+      '/user/addtocart',
+      '/user/delete_cart',
+      '/user/update',
+      '/user/change',
+      '/user/order_infor',
+      '/api/order',
+      '/user/delete_cart',
+      '/api/rating',
+      '/api/discount/checkvalid',
+      '/user/activation',
+      '/api/analytic',
+      '/api/payment/create_payment_url',
       // >>>>>>> origin/13-06_home_1
       //Admin
-      "/user/all_infor",
-      "/user/infor_byId",
-      "/user/all_update",
-      "/user/create_infor",
-      "/api/upload",
-      "/api/destroy",
-      "/api/products",
-      "/api/allproducts",
-      "/api/category",
-      "/api/order",
-      "/api/products/event_disc",
-      "/api/discount",
-    ];
+      '/user/all_infor',
+      '/user/infor_byId',
+      '/user/all_update',
+      '/user/create_infor',
+      '/api/upload',
+      '/api/destroy',
+      '/api/products',
+      '/api/allproducts',
+      '/api/category',
+      '/api/order',
+      '/api/products/event_disc',
+      '/api/discount',
+    ]
     const dynamicURLNeedToken = dynamicURL.some((item) => {
-      return config.url.includes(item);
-    });
+      return config.url.includes(item)
+    })
 
     if (URLS.includes(config.url) || dynamicURLNeedToken) {
-      const token = localStorage.getItem(StorageKeys.TOKEN);
-      config.headers.Authorization = token ? `${token}` : "";
+      const token = localStorage.getItem(StorageKeys.TOKEN)
+      config.headers.Authorization = token ? `${token}` : ''
     }
 
-    return config;
+    return config
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 axiosClient.interceptors.response.use(
   (response) => {
-    console.log("Reveived response");
-    return response.data;
+    console.log('Reveived response')
+    return response.data
   },
   async (err) => {
-    const originalConfig = err.config;
-    console.warn("Error status: ", err.response.status);
+    const originalConfig = err.config
+    console.warn('Error status: ', err.response.status)
     if (err.response) {
       if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
+        originalConfig._retry = true
         try {
-          console.log("Getting new token ...");
-          await refreshToken();
-          return axiosClient(originalConfig);
+          console.log('Getting new token ...')
+          await refreshToken()
+          return axiosClient(originalConfig)
         } catch (_error) {
           if (_error.response && _error.response.data) {
-            return Promise.reject(_error.response.data);
+            return Promise.reject(_error.response.data)
           }
-          return Promise.reject(_error);
+          return Promise.reject(_error)
         }
       }
-      return Promise.reject(err);
+      return Promise.reject(err)
     }
   }
-);
+)
 
 const refreshToken = async () => {
   try {
-    const USER = localStorage.getItem(StorageKeys.USER);
+    const USER = localStorage.getItem(StorageKeys.USER)
     if (USER) {
-      const res = await axiosClient.get("/user/refresh_token");
-      localStorage.setItem(StorageKeys.TOKEN, res.accesstoken);
-      console.log(res.data.accesstoken);
+      const res = await axiosClient.get('/user/refresh_token')
+      localStorage.setItem(StorageKeys.TOKEN, res.accesstoken)
+      console.log(res.data.accesstoken)
     }
   } catch (err) {
-    console.log(err.response);
+    console.log(err.response)
   }
-};
+}
 
-export default axiosClient;
+export default axiosClient

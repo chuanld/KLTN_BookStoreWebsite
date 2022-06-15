@@ -1,4 +1,4 @@
-import { SavedSearch } from '@mui/icons-material'
+import { ExpandLess, ExpandMore, SavedSearch } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 
 import './sidebarwidget.css'
@@ -10,6 +10,8 @@ import categoryApi from 'api/categoryApi'
 import ProTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
 import FilterPrice from './components/FilterPrice'
+import { Collapse, List, ListItem, ListItemText } from '@mui/material'
+import adminApi from 'api/adminApi'
 
 SidebarWidget.propTypes = {
   onSubmit: ProTypes.func,
@@ -20,27 +22,43 @@ SidebarWidget.defaultProps = {
 
 export default function SidebarWidget(props) {
   const { params, onSubmit, hisSearch, totalResult } = props
-  const history = useHistory()
+
   const location = useLocation()
   const [categories, setCategories] = useState([])
   const [categoryActive, setCategoryActive] = useState('')
+  const [authorActive, setAuthorActive] = useState('')
+  const [publishActive, setPublishActive] = useState('')
 
   //const [result] = state.productsApi.result;
 
   const [startPrice, setStartPrice] = useState()
   const [endPrice, setEndPrice] = useState()
   const [showResult, setShowResult] = useState(false)
-  // const [hisSearch, setHisSearch] = useState(() => {
-  //   const initHisSearch = JSON.parse(localStorage.getItem('hisSearch')) || [
-  //     'Em',
-  //     'Nhà Giả Kim',
-  //     'Tâm Hồn',
-  //     'Tình Yêu',
-  //     'Tuổi Trẻ',
-  //     'Hoá Học',
-  //   ]
-  //   return initHisSearch
-  // })
+
+  const [authors, setAuthors] = useState([])
+  const [publishers, setPublishers] = useState([])
+  const getAuthors = async () => {
+    try {
+      const res = await adminApi.getAllProducts()
+      let authors = []
+      authors = res.allproducts.reduce((unique, item) => {
+        return unique.includes(item.author) ? unique : [...unique, item.author]
+      }, [])
+      setAuthors(authors)
+    } catch (err) {}
+  }
+  const getPublishers = async () => {
+    try {
+      const res = await adminApi.getAllProducts()
+      let publishers = []
+      publishers = res.allproducts.reduce((unique, item) => {
+        return unique.includes(item.publisher)
+          ? unique
+          : [...unique, item.publisher]
+      }, [])
+      setPublishers(publishers)
+    } catch (err) {}
+  }
 
   useEffect(() => {
     const getCate = async () => {
@@ -50,11 +68,17 @@ export default function SidebarWidget(props) {
       } catch (err) {}
     }
     getCate()
+    getAuthors()
+    getPublishers()
   }, [])
   useEffect(() => {
-    const categoryURL = params.category
+    const categoryURL = params?.category
     setCategoryActive(categoryURL)
-  }, [params.category])
+    const authorURL = params?.author
+    setAuthorActive(authorURL)
+    const publishURL = params?.publisher
+    setPublishActive(publishURL)
+  }, [params?.category, params?.author, params?.publisher])
 
   // useEffect(() => {
   //   const newHisSearch = [...hisSearch]
@@ -78,10 +102,10 @@ export default function SidebarWidget(props) {
   }
   const [filterPrice, setFilterPrice] = useState(initialState)
 
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target
-    setFilterPrice({ ...filterPrice, [name]: value })
-  }
+  // const handleChangeInput = (e) => {
+  //   const { name, value } = e.target
+  //   setFilterPrice({ ...filterPrice, [name]: value })
+  // }
 
   const SelectCategory = (name) => {
     // setCategory(name);
@@ -107,23 +131,70 @@ export default function SidebarWidget(props) {
       onSubmit(newParams)
     }
   }
-  const submitPrice = (e) => {
-    e.preventDefault()
-    if (!filterPrice.maxPrice) return toast.warning('Max price must have valid')
-    if (filterPrice.maxPrice < filterPrice.minPrice)
-      return toast.warning('Max price must above Min price')
-    if (filterPrice.maxPrice <= 0 || filterPrice.minPrice < 0)
-      return toast.warning('Value must be positive')
-    setShowResult(true)
-    setStartPrice(filterPrice.minPrice)
-    setEndPrice(filterPrice.maxPrice)
-    const newParams = {
-      ...params,
-      'price[gte]': filterPrice.minPrice,
-      'price[lte]': filterPrice.maxPrice,
+  const SelectAuthor = (name) => {
+    // setCategory(name);
+    // setPage(1)
+    // setSearch('')
+
+    if (location.pathname + location.search == `/product?author=${name}`) return
+    if (!name) {
+      const newParams = { ...params }
+      delete newParams['author']
+      delete newParams['title[regex]']
+      onSubmit(newParams)
+      return
     }
-    onSubmit(newParams)
+    if (!params['author']) {
+      const newParams = { ...params, author: name }
+      onSubmit(newParams)
+    }
+    if (params['author']) {
+      const newParams = { ...params }
+      newParams['author'] = name
+      onSubmit(newParams)
+    }
   }
+  const SelectPublish = (name) => {
+    // setCategory(name);
+    // setPage(1)
+    // setSearch('')
+
+    if (location.pathname + location.search == `/product?publisher=${name}`)
+      return
+    if (!name) {
+      const newParams = { ...params }
+      delete newParams['publisher']
+      delete newParams['title[regex]']
+      onSubmit(newParams)
+      return
+    }
+    if (!params['publisher']) {
+      const newParams = { ...params, publisher: name }
+      onSubmit(newParams)
+    }
+    if (params['publisher']) {
+      const newParams = { ...params }
+      newParams['publisher'] = name
+      onSubmit(newParams)
+    }
+  }
+  // const submitPrice = (e) => {
+  //   e.preventDefault()
+  //   if (!filterPrice.maxPrice) return toast.warning('Max price must have valid')
+  //   if (filterPrice.maxPrice < filterPrice.minPrice)
+  //     return toast.warning('Max price must above Min price')
+  //   if (filterPrice.maxPrice <= 0 || filterPrice.minPrice < 0)
+  //     return toast.warning('Value must be positive')
+  //   setShowResult(true)
+  //   setStartPrice(filterPrice.minPrice)
+  //   setEndPrice(filterPrice.maxPrice)
+  //   const newParams = {
+  //     ...params,
+  //     'price[gte]': filterPrice.minPrice,
+  //     'price[lte]': filterPrice.maxPrice,
+  //   }
+  //   onSubmit(newParams)
+  // }
   const cancelFilter = (e) => {
     if (!params['price[gte]'] || !params['price[lte]']) return
     setShowResult(false)
@@ -197,12 +268,189 @@ export default function SidebarWidget(props) {
     newParams['price[lte]'] = max
     onSubmit({ ...newParams })
   }
+
+  const [openCate, setOpenCate] = useState(false)
+  const [openAuthor, setOpenAuthor] = useState(false)
+  const [openPublish, setOpenPublish] = useState(false)
+
+  const handleClickCate = () => {
+    setOpenCate(!openCate)
+  }
+  const handleClickAuthor = () => {
+    setOpenAuthor(!openAuthor)
+  }
+  const handleClickPublish = () => {
+    setOpenPublish(!openPublish)
+  }
   return (
-    <div className='sidebar_widget'>
-      <div className='widget_inner'>
-        <div className='widget_list widget_categories'>
-          <h3>Categories</h3>
-          <ul>
+    <div className="sidebar_widget">
+      <div className="widget_inner">
+        <div className="widget_list widget_categories">
+          <h3>Sidebar</h3>
+          {/* <Accordion>
+            <AccordionSummary
+              expandIcon=">"
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography
+                className={
+                  !categoryActive
+                    ? 'widget_sub_categories sub_categories1 active'
+                    : 'widget_sub_categories sub_categories1 '
+                }
+                onClick={() => SelectCategory('')}
+              >
+                All Categories
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {categories.map((category) => (
+                <Typography
+                  className={
+                    category.name === categoryActive
+                      ? 'widget_sub_categories sub_categories1 active'
+                      : 'widget_sub_categories sub_categories1'
+                  }
+                  key={category._id}
+                  onClick={() => SelectCategory(category.name)}
+                >
+                  {category.name}
+                </Typography>
+              ))}
+            </AccordionDetails>
+          </Accordion> */}
+          <div>
+            <ListItem
+              button
+              onClick={handleClickCate}
+              className={
+                categoryActive
+                  ? 'widget_sub_categories sub_categories1 btn-root active'
+                  : 'widget_sub_categories sub_categories1 btn-root'
+              }
+            >
+              <ListItemText primary="Categories" />
+              {openCate ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={openCate} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem
+                  button
+                  className={
+                    !categoryActive
+                      ? 'widget_sub_categories sub_categories1 btn-child active'
+                      : 'widget_sub_categories sub_categories1 btn-child '
+                  }
+                  onClick={() => SelectCategory('')}
+                >
+                  <ListItemText primary="All" />
+                </ListItem>
+                {categories.map((category) => (
+                  <ListItem
+                    button
+                    className={
+                      category.name === categoryActive
+                        ? 'widget_sub_categories sub_categories1 btn-child active'
+                        : 'widget_sub_categories sub_categories1 btn-child '
+                    }
+                    key={category._id}
+                    onClick={() => SelectCategory(category.name)}
+                  >
+                    <ListItemText primary={category.name} />
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </div>
+          <div>
+            <ListItem
+              button
+              onClick={handleClickAuthor}
+              className={
+                authorActive
+                  ? 'widget_sub_categories sub_categories1 btn-root active'
+                  : 'widget_sub_categories sub_categories1 btn-root'
+              }
+            >
+              <ListItemText primary="Author" />
+              {openAuthor ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={openAuthor} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem
+                  button
+                  className={
+                    !authorActive
+                      ? 'widget_sub_categories sub_categories1 btn-child active'
+                      : 'widget_sub_categories sub_categories1 btn-child '
+                  }
+                  onClick={() => SelectAuthor('')}
+                >
+                  <ListItemText primary="All" />
+                </ListItem>
+                {authors.map((author, idx) => (
+                  <ListItem
+                    button
+                    className={
+                      author === authorActive
+                        ? 'widget_sub_categories sub_categories1 btn-child active'
+                        : 'widget_sub_categories sub_categories1 btn-child '
+                    }
+                    key={idx}
+                    onClick={() => SelectAuthor(author)}
+                  >
+                    <ListItemText primary={author} />
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </div>
+
+          <div>
+            <ListItem
+              button
+              onClick={handleClickPublish}
+              className={
+                publishActive
+                  ? 'widget_sub_categories sub_categories1 btn-root active'
+                  : 'widget_sub_categories sub_categories1 btn-root'
+              }
+            >
+              <ListItemText primary="Publisher" />
+              {openPublish ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={openPublish} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem
+                  button
+                  className={
+                    !publishActive
+                      ? 'widget_sub_categories sub_categories1 btn-child active'
+                      : 'widget_sub_categories sub_categories1 btn-child '
+                  }
+                  onClick={() => SelectPublish('')}
+                >
+                  <ListItemText primary="All " />
+                </ListItem>
+                {publishers.map((publisher, idx) => (
+                  <ListItem
+                    button
+                    className={
+                      publisher === publishActive
+                        ? 'widget_sub_categories sub_categories1 btn-child active'
+                        : 'widget_sub_categories sub_categories1 btn-child '
+                    }
+                    key={idx}
+                    onClick={() => SelectPublish(publisher)}
+                  >
+                    <ListItemText primary={publisher} />
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </div>
+          {/* <ul>
             <li
               className={
                 !categoryActive
@@ -226,7 +474,7 @@ export default function SidebarWidget(props) {
                 <span>{category.name}</span>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
         {/* <div className='widget_list widget_prices'>
           <h3>Filter</h3>
@@ -304,12 +552,12 @@ export default function SidebarWidget(props) {
             </li>
           </ul>
         </div> */}
-        <div className='widget_list widget_prices'>
+        <div className="widget_list widget_prices">
           <h3>Filter</h3>
           <div>
             <FilterPrice params={params} onSubmit={handleFilterPrice} />
           </div>
-          <div className='filter_result'>
+          <div className="filter_result">
             <div></div>
             {showResult || params['price[gte]'] || params['price[lte]'] ? (
               <div>
@@ -365,19 +613,19 @@ export default function SidebarWidget(props) {
             </li>
           </ul>
         </div>
-        <div className='widget_list widget_trends'>
-          <img src={QC2} alt='' />
+        <div className="widget_list widget_trends">
+          <img src={QC2} alt="" />
         </div>
-        <div className='widget_list widget_tags'>
+        <div className="widget_list widget_tags">
           <h3>
             <SavedSearch />
             Search Tag
           </h3>
-          <div className='hint-search'>
+          <div className="hint-search">
             {hisSearch.map((history) =>
               history ? (
                 <button
-                  className='hint-search-btn'
+                  className="hint-search-btn"
                   onClick={() => setSearchInHis(`${history}`)}
                   key={hisSearch.indexOf(history)}
                 >
@@ -387,7 +635,7 @@ export default function SidebarWidget(props) {
             )}
           </div>
         </div>
-        <div className='widget_list'></div>
+        <div className="widget_list"></div>
       </div>
     </div>
   )

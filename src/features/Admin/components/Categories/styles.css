@@ -119,8 +119,8 @@
 }
 
 .categories-list {
-  max-width: 1300px;
-  max-height: 600px;
+  min-width: 1300px;
+  min-height: 600px;
   height: 500px;
 }
 .categories-listCategories {

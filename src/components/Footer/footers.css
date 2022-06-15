@@ -214,7 +214,13 @@
   color: black;
   margin-bottom: 30px;
 }
-
+.footer .container .row .logo-footer {
+  margin-left: 10px !important;
+  text-align: center;
+  width: 100% !important;
+  display: flex !important;
+  flex-basis: 300px !important;
+}
 .footer__widget {
   margin-bottom: 30px;
 }

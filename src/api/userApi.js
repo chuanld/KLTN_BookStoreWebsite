@@ -74,5 +74,9 @@ const userApi = {
     const url = '/api/discount/checkvalid'
     return axiosClient.post(url, { voucherCode })
   },
+  paymentVnpay() {
+    const url = '/api/payment/create_payment_url'
+    return axiosClient.post(url)
+  },
 }
 export default userApi

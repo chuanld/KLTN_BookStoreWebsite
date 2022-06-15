@@ -22,21 +22,23 @@ function Intro() {
     getNewProducts()
   }, [])
   return (
-    <div className='latest-products'>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-12'>
-            <div className='section-heading'>
+    <div className="latest-products">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="section-heading">
               <h2>Latest Products</h2>
-              <Link to='/products'>
-                view all products <i className='fa fa-angle-right'></i>
+              <Link to="/products">
+                view all products <i className="fa fa-angle-right"></i>
               </Link>
             </div>
           </div>
 
           {newProducts.length !== 0 &&
             newProducts.map((product) => (
-              <ProductItem product={product} key={product._id} />
+              <Link to={`/products/${product._id}`}>
+                <ProductItem product={product} key={product._id} />
+              </Link>
             ))}
         </div>
       </div>

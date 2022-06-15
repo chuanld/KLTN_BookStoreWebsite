@@ -8,7 +8,6 @@ import ListIcon from '@mui/icons-material/List'
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { toast } from 'react-toastify'
-
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom'
@@ -46,7 +45,11 @@ function Header() {
   const location = useLocation()
   const dispatch = useDispatch()
   const history = useHistory()
+
   const [searchInp, setSearchInp] = useState('')
+
+  const [categoryInp, setCategoryInp] = useState('')
+
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen)
   const info = useSelector((state) => state.user.current)
   // const [info, setInfo] = useState()
@@ -75,18 +78,25 @@ function Header() {
       }
     })()
   }, [info])
-  // function openModal() {
-  //     dispatch(openModal());
-  // }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    //subtitle.style.color = "#f000";
+  const onChangeInput = (input) => {
+    setSearchInp(input)
+  }
+  const handleCategory = (e) => {
+    setCategoryInp(e.target.value)
+  }
+  const submitSearch = (e) => {
+    e.preventDefault()
+    const querStrInput = searchInp ? `title[regex]=${searchInp}` : ''
+    const querStrCate = categoryInp ? `category=${categoryInp}` : ''
+    history.push(
+      `/products${querStrInput && '?' + querStrCate + '&' + querStrInput}`
+    )
+    handeleScroll(587)
   }
 
-  // function closeModal() {
-  //     modalIsOpen(false);
-  // }
+  function afterOpenModal() {}
+
   const handeleScroll = (x, y) => {
     window.scroll({
       top: x || 187,
@@ -104,7 +114,7 @@ function Header() {
   const accountAdmin = () => {
     return (
       <>
-        <Link to='/account' className='auth_acc'>
+        <Link to="/account" className="auth_acc">
           <p>Admin</p>
           <p>Hi {info?.name}</p>
         </Link>
@@ -114,7 +124,7 @@ function Header() {
   const accountUser = () => {
     return (
       <>
-        <Link to='/account' className='auth_acc'>
+        <Link to="/account" className="auth_acc">
           <p>Account</p>
           <p>Hi {info?.name}</p>
         </Link>
@@ -145,7 +155,7 @@ function Header() {
 
   return (
     <>
-      <div className='main_header'>
+      <div className="main_header">
         {/* <div class="header_top">
           <div class="container">
             <div class="row align-items-center">
@@ -172,23 +182,27 @@ function Header() {
           </div>
         </div> */}
 
-        <div className='header_middle'>
-          <div className='container'>
-            <div className='row align-items-center'>
-              <div className='col-lg-3 col-md-3 col-4'>
-                <div className='logo'>
-                  <Link to='#'>
-                    <img src={LogoHeader} alt='' />
+        <div className="header_middle">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-lg-3 col-md-3 col-4">
+                <div className="logo">
+                  <Link to="/">
+                    <img src={LogoHeader} alt="" />
                   </Link>
                 </div>
               </div>
-              <div className='col-lg-9 col-md-6 col-6'>
-                <div className='header_right_info'>
-                  <div className='search_container'>
-                    <form className='formsr'>
-                      <div className='hover_category'>
-                        <select className='select_option' name='category'>
-                          <option value=''>All Categories</option>
+              <div className="col-lg-9 col-md-6 col-6">
+                <div className="header_right_info">
+                  <div className="search_container">
+                    <form className="formsr" onSubmit={submitSearch}>
+                      <div className="hover_category">
+                        <select
+                          className="select_option"
+                          name="category"
+                          onChange={handleCategory}
+                        >
+                          <option value="">All Categories</option>
                           {categories.map((category) => (
                             <option value={category.name} key={category._id}>
                               {category.name}
@@ -196,22 +210,23 @@ function Header() {
                           ))}
                         </select>
                       </div>
-                      <div className='search_box'>
+                      <div className="search_box">
                         <input
-                          placeholder='Search product...'
-                          type='text'
-                          // value={search}
-                          className='inp_search'
+                          placeholder="Search product..."
+                          type="text"
+                          // value={searchInp}
+                          className="inp_search"
+                          onChange={(e) => onChangeInput(e.target.value)}
                         />
-                        <button type='submit'>
+                        <button type="submit">
                           <SearchOutlined />
                         </button>
                       </div>
                     </form>
                   </div>
-                  <div className='header_account_area'>
-                    <div className='header_account-list top_links'>
-                      {info && isLogged && cart.length !== 0 ? (
+                  <div className="header_account_area">
+                    <div className="header_account-list top_links">
+                      {/* {info && isLogged && cart.length !== 0 ? (
                         <span className='count'>{cart.length}</span>
                       ) : null}
                       <NotificationImportantOutlined className='icon-users' />
@@ -223,36 +238,36 @@ function Header() {
                             </li>
                           ))}
                         </ul>
-                      ) : null}
+                      ) : null} */}
                     </div>
-                    <div className='header_account-list mini_cart_wrapper top_links'>
+                    <div className="header_account-list mini_cart_wrapper top_links">
                       {info && isLogged && cart.length !== 0 ? (
-                        <span className='count'>{cart.length}</span>
+                        <span className="count">{cart.length}</span>
                       ) : null}
-                      <ShoppingCart className='icon-users' />
+                      <ShoppingCart className="icon-users" />
                       {info && isLogged && cart.length !== 0 ? (
-                        <ul className='dropdown_links dropdown-custome-cart'>
+                        <ul className="dropdown_links dropdown-custome-cart">
                           {cart.map((item) => (
                             <li key={item._id}>
-                              <Link to='#'>{item.title} </Link>
+                              <Link to="/cart">{item.title} </Link>
                             </li>
                           ))}
                         </ul>
                       ) : null}
                     </div>
-                    <div className='header_account-list header_wishlist top_links'>
-                      <div className='row'>
-                        <AccountCircleOutlined className='icon-users' />
+                    <div className="header_account-list header_wishlist top_links">
+                      <div className="row">
+                        <AccountCircleOutlined className="icon-users" />
                         {/* <i class='fas fa-user' style={{ fontSize: '25px' }} /> */}
-                        <div className='col'>
+                        <div className="col">
                           {info && isAdmin ? (
                             accountAdmin()
                           ) : info && isLogged ? (
                             accountUser()
                           ) : (
                             <Link
-                              to='#'
-                              className='auth_acc'
+                              to="#"
+                              className="auth_acc"
                               onClick={() => dispatch(openModal())}
                             >
                               <p>Login/Register</p>
@@ -261,15 +276,15 @@ function Header() {
                           )}
                         </div>
                         {info && isLogged ? (
-                          <ul className='dropdown_links'>
+                          <ul className="dropdown_links">
                             <li>
-                              <Link to='/account/infor'>Information</Link>
+                              <Link to="/account/infor">Information</Link>
                             </li>
                             <li>
-                              <Link to='/cart'>Cart shopping</Link>
+                              <Link to="/cart">Cart shopping</Link>
                             </li>
                             <li>
-                              <Link to='/' onClick={logoutUser}>
+                              <Link to="/" onClick={logoutUser}>
                                 Logout account
                               </Link>
                             </li>
@@ -284,47 +299,49 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className='header_bottom'>
-        <div className='container sticky-header'>
-          <div className='row align-items-center'>
-            <div className='col-lg-3'>
-              <div className='categories_menu '>
-                <div className='categories_title top_links1'>
-                  <ListIcon className='menu_cart_icon' />
-                  <h2 className='categori_toggle'>Categories</h2>
+      <div className="header_bottom">
+        <div className="container sticky-header">
+          <div className="row align-items-center">
+            <div className="col-lg-3">
+              <div className="categories_menu ">
+                <div className="categories_title top_links1">
+                  <ListIcon className="menu_cart_icon" />
+                  <h2 className="categori_toggle">Categories</h2>
 
-                  <ul className='dropdown_links1'>
+                  <ul className="dropdown_links1">
                     {categories.map((category) => (
                       <li key={category._id}>
-                        <Link to='#'>{category.name}</Link>
+                        <Link to={`/products?${'category=' + category.name}`}>
+                          {category.name}
+                        </Link>
                       </li>
                     ))}
                   </ul>
-                  <div className='mega_menu top_links'></div>
+                  <div className="mega_menu top_links"></div>
                 </div>
-                <div className='categories_menu_toggle'></div>
+                <div className="categories_menu_toggle"></div>
               </div>
             </div>
-            <div className='col-lg-6'>
-              <div className='main_menu menu_position'>
+            <div className="col-lg-6">
+              <div className="main_menu menu_position">
                 <nav>
                   <ul>
                     <li>
                       <NavLink
-                        to='/'
-                        className='nav-link'
+                        to="/"
+                        className="nav-link"
                         exact
-                        activeClassName='active'
+                        activeClassName="active"
                         onClick={handeleScrollHome}
                       >
                         home
                       </NavLink>
                     </li>
-                    <li className='mega_items'>
+                    <li className="mega_items">
                       <NavLink
-                        to='/products'
-                        className='nav-link'
-                        activeClassName='active'
+                        to="/products"
+                        className="nav-link"
+                        activeClassName="active"
                         onClick={() => handeleScroll()}
                       >
                         shop
@@ -333,9 +350,9 @@ function Header() {
                     {isLogged ? (
                       <li>
                         <NavLink
-                          to='/cart'
-                          className='nav-link'
-                          activeClassName='active'
+                          to="/cart"
+                          className="nav-link"
+                          activeClassName="active"
                           onClick={() => handeleScroll()}
                         >
                           Cart
@@ -345,10 +362,10 @@ function Header() {
                     {isAdmin ? (
                       <li>
                         <NavLink
-                          to='/admin'
-                          className='nav-link'
-                          activeClassName='active'
-                          href='#admin-page'
+                          to="/admin"
+                          className="nav-link"
+                          activeClassName="active"
+                          href="#admin-page"
                           onClick={() => handeleScroll()}
                         >
                           Admin Panel
@@ -359,22 +376,22 @@ function Header() {
                 </nav>
               </div>
             </div>
-            <div className='col-lg-3'>
-              <div className='call-support'>
+            <div className="col-lg-3">
+              <div className="call-support">
                 <p>Call Support: 0123456789</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className='form-login-modal'>
+      <div className="form-login-modal">
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={() => dispatch(closeModal())}
           style={customStyles1}
           //portalClassName="modal"
-          contentLabel='Example Modal'
+          contentLabel="Example Modal"
         >
           <ModalAuth />
         </Modal>
