@@ -2,8 +2,8 @@ import axios from 'axios'
 import { StorageKeys } from '../constant/storageKey'
 
 const axiosClient = axios.create({
-  baseURL: 'https://app-bookstore-kltn.herokuapp.com/',
-  // baseURL: 'http://localhost:5000/',
+  // baseURL: 'https://app-bookstore-kltn.herokuapp.com/',
+  baseURL: 'http://localhost:5000/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,6 +29,8 @@ axiosClient.interceptors.request.use(
       // =======
       '/user/register',
       '/user/activation',
+      '/user/forgot',
+      '/user/reset',
       '/user/login',
       '/user/infor',
       '/user/refresh_token',
@@ -90,6 +92,8 @@ axiosClient.interceptors.request.use(
       '/api/rating',
       '/api/discount/checkvalid',
       '/user/activation',
+      '/user/forgot',
+      // '/user/reset',
       '/api/analytic',
       '/api/payment/create_payment_url',
       // >>>>>>> origin/13-06_home_1

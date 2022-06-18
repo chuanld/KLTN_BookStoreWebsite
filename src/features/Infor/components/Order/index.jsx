@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import userApi from 'api/userApi'
+import './styles.css'
 
 export default function Order() {
   const history = useHistory()
@@ -34,12 +35,12 @@ export default function Order() {
   }
 
   return (
-    <div className='orderList'>
-      <div className='orderListTitle'>
+    <div className="orderList">
+      <div className="orderListTitle">
         <h4>You have {orderInfo.length} ordered</h4>
       </div>
-      <div className='ordersList'>
-        <table className='orderListOrder'>
+      <div className="ordersList">
+        <table className="orderListOrder">
           <thead>
             <tr>
               <th>OrderID</th>
@@ -79,7 +80,7 @@ export default function Order() {
                         ? 'cancel_order'
                         : null
                     }
-                    name='status'
+                    name="status"
                     value={order.status}
                     // onChange={(e) =>
                     //   handleChangeStatus(order._id, e.target.value)

@@ -1,18 +1,17 @@
-import Admin from "features/Admin";
-import Cart from "features/Cart";
-import Order from "features/Infor/components/Order";
-import OrderDetail from "features/Infor/components/Order/OrderDetail";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./features/Home";
-import Infor from "./features/Infor";
-import Product from "./features/Product";
-import ProductDetail from "./features/Product/pages/ProductDetail";
+import Admin from 'features/Admin'
+import Cart from 'features/Cart'
+import Order from 'features/Infor/components/Order'
+import OrderDetail from 'features/Infor/components/Order/OrderDetail'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Header from './components/Header'
+import Home from './features/Home'
+import Infor from './features/Infor'
+import Product from './features/Product'
+import ProductDetail from './features/Product/pages/ProductDetail'
 
-import Activation from "features/Auth/components/Activation";
-import CreateAccount from "features/Admin/components/Accounts/pages/CreateAccount";
-import DetailAccount from "features/Admin/components/Accounts/pages/DetailAccount";
+import Activation from 'features/Auth/components/Activation'
+import ForgotPass from 'features/Auth/components/ForgotPass'
+import ResetPass from 'features/Auth/components/ResetPass'
 
 function App() {
   return (
@@ -34,10 +33,12 @@ function App() {
           <Route path="/products/:id" exact component={ProductDetail} />
           <Route path="/cart" exact component={Cart} />
           <Route path="/admin" exact component={Admin} />
+          <Route path="/forgot" exact component={ForgotPass} />
+          <Route path="/reset/:token" exact component={ResetPass} />
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -91,3 +91,52 @@
   background-color: #ad2806;
   color: #fff;
 }
+.order-detail {
+  /* background-color: #fff !important; */
+}
+.ReactModal__Content .total_cart {
+  min-height: 650px;
+  display: block;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 10px;
+  width: 500px;
+  /* margin: 20px auto; */
+  background: rgb(245, 245, 231);
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+.order-detail .orderCancelButton {
+  border: none;
+  border-radius: 5px;
+  padding: 6px 8px;
+  background-color: teal;
+  color: #fff;
+  margin-left: 15px;
+  cursor: pointer;
+}
+.order-detail .orderInvoiceButton {
+  border: none;
+  border-radius: 5px;
+  padding: 6px 8px;
+  background-color: rgb(207, 146, 33);
+  color: #fff;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.ReactModal__Content .row-export-bill {
+  display: flex;
+  align-items: center;
+}
+.ReactModal__Content .row-export-bill .btn-export-pdf button {
+  border: none;
+  border-radius: 5px;
+  padding: 6px 8px;
+  background-color: rgb(207, 146, 33);
+  color: #fff;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}

@@ -47,7 +47,7 @@ function Cart() {
   }
   console.log(orderOwner)
   const user = useSelector((state) => state.user.current)
-  const [info, setInfo] = useState({})
+  const [info, setInfo] = useState('')
 
   const [cart, setCart] = useState([])
   useEffect(() => {
@@ -108,7 +108,7 @@ function Cart() {
               newCart.forEach((item) => {
                 if (item._id === product._id) {
                   // Object.preventExtensions(item)
-                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2) * 1
                 }
               })
               return
@@ -123,7 +123,7 @@ function Cart() {
               newCart.forEach((item) => {
                 if (item._id === product._id) {
                   // Object.preventExtensions(item)
-                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2) * 1
                   console.log(product._id, 'item đay nè')
                   console.log(cart, 'cart check')
                 }
@@ -139,7 +139,7 @@ function Cart() {
               newCart.forEach((item) => {
                 if (item._id === product._id) {
                   // Object.preventExtensions(item)
-                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2) * 1
                 }
               })
               return
@@ -153,7 +153,7 @@ function Cart() {
               newCart.forEach((item) => {
                 if (item._id === product._id) {
                   // Object.preventExtensions(item)
-                  item.priceDiscount = (item.price - priceAfter).toFixed(2)
+                  item.priceDiscount = (item.price - priceAfter).toFixed(2) * 1
                   console.log(product._id, 'item đay nè')
                   console.log(cart, 'cart check')
                 }
@@ -169,7 +169,7 @@ function Cart() {
 
   if (cart.length === 0)
     return (
-      <div className='cart_empty'>
+      <div className="cart_empty">
         <h2>
           You don't have any books in your shopping cart yet. Try back select
           it.
@@ -180,26 +180,26 @@ function Cart() {
   return (
     <>
       <Breadcrumb />
-      <div className='cart-shopping'>
-        <h3 className='title-cart'>You have {cart.length} products shopping</h3>
-        <div className='cart_container'>
+      <div className="cart-shopping">
+        <h3 className="title-cart">You have {cart.length} products shopping</h3>
+        <div className="cart_container">
           <div>
-            <div className='info_checkout'>
-              <div className='infcheckout_wrapper'>
-                <p className='address_title'>Shipping Address</p>
-                <p className='address_detail' onClick={openModal}>
+            <div className="info_checkout">
+              <div className="infcheckout_wrapper">
+                <p className="address_title">Shipping Address</p>
+                <p className="address_detail" onClick={openModal}>
                   Edit
                 </p>
               </div>
-              <div className='infcheckout_inner'>
+              <div className="infcheckout_inner">
                 <div>
-                  <div className='address_title_container'>
-                    <span className='email_title'>Customer: {info.email}</span>
-                    <span className='name_title'>
+                  <div className="address_title_container">
+                    <span className="email_title">Customer: {info?.email}</span>
+                    <span className="name_title">
                       Receiver:{' '}
                       {onEdit && orderOwner.name ? orderOwner.name : info.name}
                     </span>
-                    <span className='phone_title'>
+                    <span className="phone_title">
                       Phone:{' '}
                       {onEdit && orderOwner.phone
                         ? orderOwner.phone
@@ -207,7 +207,7 @@ function Cart() {
                     </span>
                   </div>
                 </div>
-                <div className='address_info_item'>
+                <div className="address_info_item">
                   <span>
                     Address:{' '}
                     {onEdit && orderOwner.address
@@ -220,10 +220,10 @@ function Cart() {
             <ListCart cart={cart} />
           </div>
 
-          <div className='bill_container'>
+          <div className="bill_container">
             <Bill
               orderOwner={orderOwner}
-              infor={info}
+              info={info}
               cart={cart}
               onSubmit={handleCheckVoucher}
               voucher={voucher}
@@ -233,92 +233,92 @@ function Cart() {
 
         <Footers />
       </div>
-      <div className='form-orderowner-modal'>
+      <div className="form-orderowner-modal">
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles3}
           //portalClassName="modal"
-          contentLabel='Example Modal'
+          contentLabel="Example Modal"
         >
-          <button className='btnclose-modal' onClick={closeModal}>
+          <button className="btnclose-modal" onClick={closeModal}>
             X
           </button>
-          <div className='verify-infomation-ship'>
-            <div className='verify-title'>
+          <div className="verify-infomation-ship">
+            <div className="verify-title">
               <h2>Change Information</h2>
             </div>
 
             <form onSubmit={changeInfoShip}>
-              <div className='form-verify'>
-                <div className='form-left'>
-                  <label htmlFor='orderowner'>Reveive Name</label>
+              <div className="form-verify">
+                <div className="form-left">
+                  <label htmlFor="orderowner">Reveive Name</label>
                   <input
-                    type='text'
-                    name='name'
+                    type="text"
+                    name="name"
                     placeholder={orderOwner.name ? orderOwner.name : info.name}
                     value={orderOwner.name}
                     onChange={onChangeInput}
                   />
-                  <label htmlFor='orderowner'>Reveive Phone</label>
+                  <label htmlFor="orderowner">Reveive Phone</label>
                   <input
-                    type='text'
-                    name='phone'
+                    type="text"
+                    name="phone"
                     placeholder={
                       orderOwner.phone ? orderOwner.phone : info.phone
                     }
                     value={orderOwner.phone}
                     onChange={onChangeInput}
                   />
-                  <label htmlFor='orderowner'>Reveive Address</label>
+                  <label htmlFor="orderowner">Reveive Address</label>
 
                   <textarea
-                    type='text'
-                    name='address'
+                    type="text"
+                    name="address"
                     placeholder={
                       orderOwner.address ? orderOwner.address : info.address
                     }
                     value={orderOwner.address}
                     onChange={onChangeInput}
-                    row='3'
+                    row="3"
                   />
                 </div>
-                <div className='form-right'>
-                  <label htmlFor='orderowner'>Account Email</label>
+                <div className="form-right">
+                  <label htmlFor="orderowner">Account Email</label>
                   <input
-                    type='text'
+                    type="text"
                     placeholder={info.email}
                     value={info.email}
                     disabled
                   />
-                  <label htmlFor='orderowner'>Account Name</label>
+                  <label htmlFor="orderowner">Account Name</label>
                   <input
-                    type='text'
+                    type="text"
                     placeholder={info.name}
                     value={info.name}
                     disabled
                   />
-                  <label htmlFor='orderowner'>Account Phone</label>
+                  <label htmlFor="orderowner">Account Phone</label>
                   <input
-                    type='text'
+                    type="text"
                     placeholder={info.phone}
                     value={info.phone}
                     disabled
                   />
-                  <label htmlFor='orderowner'>Account Address</label>
+                  <label htmlFor="orderowner">Account Address</label>
 
                   <textarea
-                    type='text'
+                    type="text"
                     placeholder={info.address}
                     value={info.address}
                     disabled
-                    row='2'
+                    row="2"
                   />
                 </div>
               </div>
-              <div className='submit-change-infor'>
-                <button type='submit'>Change information</button>
+              <div className="submit-change-infor">
+                <button type="submit">Change information</button>
               </div>
             </form>
           </div>

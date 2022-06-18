@@ -23,6 +23,8 @@
     "chartjs-plugin-labels": "^1.1.0",
     "dateformat": "^5.0.2",
     "dayjs": "^1.11.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "moment": "^2.29.1",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
@@ -43,6 +45,7 @@
     "slick-carousel": "1.8.1",
     "socket.io-client": "^4.4.1",
     "web-vitals": "^2.1.0",
+    "xlsx": "^0.18.5",
     "yup": "^0.32.11"
   },
   "scripts": {

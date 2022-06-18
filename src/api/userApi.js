@@ -10,6 +10,16 @@ const userApi = {
     const url = '/user/activation'
     return axiosClient.post(url, { activationtoken: activateToken })
   },
+  forgotPassword(data) {
+    console.log(data)
+    const url = '/user/forgot'
+    return axiosClient.post(url, { data })
+  },
+  resetPassword(password) {
+    console.log(password)
+    const url = '/user/reset'
+    return axiosClient.post(url, { password })
+  },
   login(data) {
     const { email, password } = data
     const url = '/user/login'
@@ -74,9 +84,10 @@ const userApi = {
     const url = '/api/discount/checkvalid'
     return axiosClient.post(url, { voucherCode })
   },
-  paymentVnpay() {
+  paymentVnpay(data) {
+    const { amount, voucherCode } = data
     const url = '/api/payment/create_payment_url'
-    return axiosClient.post(url)
+    return axiosClient.post(url, { amount, voucherCode })
   },
 }
 export default userApi

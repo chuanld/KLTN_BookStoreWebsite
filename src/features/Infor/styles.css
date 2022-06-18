@@ -4,7 +4,7 @@
 
 .page_infor {
   flex: 4;
-  background-color: honeydew;
+  /* background-color: honeydew; */
   padding: 20px;
 }
 .page_infor .session-heading .breadcrum-container {
@@ -242,7 +242,8 @@
   color: black;
 }
 .ordersList {
-  max-width: 1200px;
+  /* max-width: 1200px; */
+
   /* max-height: 600px;
   height: 500px;
   overflow: auto; */
@@ -258,7 +259,7 @@
   border-radius: 5px;
 }
 .orderListOrder {
-  width: '100%';
+  width: 100%;
   border-collapse: collapse;
 }
 .orderListOrder td,

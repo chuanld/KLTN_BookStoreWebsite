@@ -12,6 +12,7 @@ import { deleteAllItem, paymentShipCOD } from 'features/Auth/userSlice'
 
 import { unwrapResult } from '@reduxjs/toolkit'
 import userApi from 'api/userApi'
+import { useLocation } from 'react-router-dom'
 // import HelicopterShip from "../../../utils/HelicopterShip/HelicopterShip";
 
 Modal.setAppElement(document.getElementById('root'))
@@ -35,7 +36,8 @@ const customStyles3 = {
   },
 }
 
-export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
+export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
+  console.log(info)
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.current)
   console.log(cart, 'cart')
@@ -67,9 +69,35 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
   }, [cart])
 
   const tranSuccess = async (payment) => {
-    // console.log(payment);
-    // const option = { type: "Paypal payment", paywith: "default" };
-    // const { paymentID, address } = payment;
+    console.log(payment)
+    const option = { type: 'Paypal payment', paywith: 'default' }
+    const { paymentID, address } = payment
+    const data = {
+      cart,
+      orderID: paymentID,
+      address: orderInfo.address ? orderInfo.address : address,
+      name: orderInfo.name ? orderInfo.name : address.recipient_name,
+      option,
+      voucherCode,
+    }
+    const action = paymentShipCOD(data)
+    const resultAction = await dispatch(action)
+    const res = unwrapResult(resultAction)
+    if (res.status === 1) {
+      setTimeout(async () => {
+        const action = deleteAllItem()
+        const resultAction = await dispatch(action)
+        const res = unwrapResult(resultAction)
+        toast.success(res.msg)
+        toast.info('Let check order in infomation')
+        document.body.classList.remove('loading-data')
+      }, 5000)
+      closeModal()
+      return
+    }
+    document.body.classList.remove('loading-data')
+    toast.error(res.msg)
+    return
     // await axiosClient.post(
     //   "/api/order",
     //   {
@@ -78,10 +106,9 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
     //     address: orderInfo.address ? orderInfo.address : address,
     //     name: orderInfo.name ? orderInfo.name : address.recipient_name,
     //     option,
+    // voucherCode
     //   },
-    //   {
-    //     headers: { Authorization: token },
-    //   }
+
     // );
     // cart.splice(0, cart.length);
     // setCart([...cart]);
@@ -94,7 +121,7 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
   const chkShipCOD = async (e) => {
     e.preventDefault()
 
-    if (!infor.address && !orderInfo.address)
+    if (!info.address && !orderInfo.address)
       return alert('Please update infomation address for ShipCOD')
     if (window.confirm(`Hi there. Do you confirm checkout`)) {
       document.body.classList.add('loading-data')
@@ -115,8 +142,8 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
       const data = {
         cart,
         orderID,
-        address: orderInfo.address ? orderInfo.address : infor.address,
-        name: orderInfo.name ? orderInfo.name : infor.name,
+        address: orderInfo.address ? orderInfo.address : info.address,
+        name: orderInfo.name ? orderInfo.name : info.name,
         option,
         voucherCode,
       }
@@ -226,23 +253,101 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
   //     })
   //   }
   // }, [voucher])
-  const handleVnpayment = async () => {
+
+  const search = useLocation().search
+  const vnpcoderes = new URLSearchParams(search).get('vnp_ResponseCode')
+  useEffect(() => {
+    if (vnpcoderes === '00' || vnpcoderes === '97') {
+      vnpayCB()
+    }
+  }, [vnpcoderes])
+  const handleCreateVnpay = async (amount) => {
+    // const voucherCode = discount > 0 ? filterVoucher : null;
     try {
-      console.log('click')
-      const res = await userApi.paymentVnpay()
+      const data = {
+        amount,
+        voucherCode,
+      }
+      const res = await userApi.paymentVnpay(data)
       console.log(res)
+      // window.location.replace(res.vnpUrl)
     } catch (err) {
-      console.log(err.response)
+      console.log(err.response.data)
     }
   }
+
+  const vnpayCB = async () => {
+    const option = { type: 'VnPay payment', paywith: 'default' }
+    var date = new Date()
+    var foot =
+      date.getDate() +
+      '' +
+      (date.getMonth() + 1) +
+      date.getFullYear() +
+      date.getHours() +
+      date.getMinutes() +
+      date.getMilliseconds()
+    const ID = '' + foot
+    const strID = ID.replace(/\s+/g, '')
+    const paymentID = `VnPay-${strID}`
+    const address = {
+      recipient_name: info.name,
+      line: info.address,
+      city: '',
+      state: 'CA',
+      postal_code: '70000',
+      country_code: 'VN',
+    }
+    const data = {
+      cart,
+      orderID: paymentID,
+      address: orderInfo.address ? orderInfo.address : address,
+      name: orderInfo.name ? orderInfo.name : info.name,
+      option,
+      voucherCode,
+    }
+    console.log(data)
+    // const action = paymentShipCOD(data)
+    // const resultAction = await dispatch(action)
+    // const res = unwrapResult(resultAction)
+    // if (res.status === 1) {
+    //   setTimeout(async () => {
+    //     const action = deleteAllItem()
+    //     const resultAction = await dispatch(action)
+    //     const res = unwrapResult(resultAction)
+    //     toast.success(res.msg)
+    //     toast.info('Let check order in infomation')
+    //     document.body.classList.remove('loading-data')
+    //   }, 5000)
+    //   closeModal()
+    //   return
+    // }
+    // document.body.classList.remove('loading-data')
+    // toast.error(res.msg)
+    // return
+
+    // const getU = async () => {
+    //   await axios.post(
+    //     "/api/payment/vnpayreturn",
+    //     { cart: cart, paymentID, address, status:shipmentStatus, voucherCode },
+    //     {
+    //       headers: { Authorization: token },
+    //     }
+    //   );
+    // };
+    // getU();
+
+    toast.success(`Bạn đã đặt hàng thành công`)
+  }
+
   return (
     <>
       {/* {onHeli === true && <HelicopterShip />} */}
       <div className="total_cart">
         <h3 style={{ textAlign: 'center' }}>Your order</h3>
         <div className="row">
-          <i>Customer: {infor.name}</i>
-          <i>Address: {infor.address}</i>
+          <i>Customer: {info.name}</i>
+          <i>Address: {info.address}</i>
         </div>
 
         <div style={{ textAlign: 'center' }}>
@@ -332,11 +437,14 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
               tranSuccess={tranSuccess1}
             /> */}
             </div>
-            {/* <div>
-              <button className="shipcod" onClick={() => handleVnpayment()}>
+            <div>
+              <button
+                className="shipcod"
+                onClick={() => handleCreateVnpay(parseFloat(total).toFixed(2))}
+              >
                 VN-Pay
               </button>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -354,7 +462,7 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
           </button>
           <div className="verify-infomation-ship">
             <div className="verify-title">
-              <h2>Verify Information</h2>
+              <h2>Verify infomation</h2>
             </div>
 
             <form onSubmit={chkShipCOD}>
@@ -364,7 +472,7 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
                   <input
                     type="text"
                     name="name"
-                    placeholder={orderInfo.name ? orderInfo.name : infor.name}
+                    placeholder={orderInfo.name ? orderInfo.name : info.name}
                     value={orderInfo.name}
                     onChange={onChangeInput}
                   />
@@ -372,9 +480,7 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
                   <input
                     type="text"
                     name="phone"
-                    placeholder={
-                      orderInfo.phone ? orderInfo.phone : infor.phone
-                    }
+                    placeholder={orderInfo.phone ? orderInfo.phone : info.phone}
                     value={orderInfo.phone}
                     onChange={onChangeInput}
                   />
@@ -384,7 +490,7 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
                     type="text"
                     name="address"
                     placeholder={
-                      orderInfo.address ? orderInfo.address : infor.address
+                      orderInfo.address ? orderInfo.address : info.address
                     }
                     value={orderInfo.address}
                     onChange={onChangeInput}
@@ -395,37 +501,37 @@ export default function Bill({ orderOwner, infor, cart, voucher, onSubmit }) {
                   <label htmlFor="orderowner">Account Email</label>
                   <input
                     type="text"
-                    placeholder={infor.email}
-                    value={infor.email}
+                    placeholder={info.email}
+                    value={info.email}
                     disabled
                   />
                   <label htmlFor="orderowner">Account Name</label>
                   <input
                     type="text"
-                    placeholder={infor.name}
-                    value={infor.name}
+                    placeholder={info.name}
+                    value={info.name}
                     disabled
                   />
                   <label htmlFor="orderowner">Account Phone</label>
                   <input
                     type="text"
-                    placeholder={infor.phone}
-                    value={infor.phone}
+                    placeholder={info.phone}
+                    value={info.phone}
                     disabled
                   />
                   <label htmlFor="orderowner">Account Address</label>
 
                   <textarea
                     type="text"
-                    placeholder={infor.address}
-                    value={infor.address}
+                    placeholder={info.address}
+                    value={info.address}
                     rows="2"
                     disabled
                   />
                 </div>
               </div>
 
-              <div className="submit-change-infor">
+              <div className="submit-change-info">
                 <button type="submit">Payment Proceed</button>
               </div>
             </form>

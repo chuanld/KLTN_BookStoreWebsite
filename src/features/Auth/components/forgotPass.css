@@ -1,0 +1,32 @@
+.forgot-page {
+  background: #f6f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  height: calc(89vh);
+  margin: 0 0 0;
+  background-color: honeydew;
+}
+
+.formfg-container {
+  position: absolute;
+  top: 4;
+  height: 70%;
+  transition: all 0.6s ease-in-out;
+}
+
+.formfg {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 70px;
+  height: 100%;
+  text-align: center;
+}
+.formfg > h1 {
+  font-weight: 600;
+}
