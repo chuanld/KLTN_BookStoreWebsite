@@ -37,11 +37,12 @@ const customStyles3 = {
 }
 
 export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
-  console.log(info)
+  console.log(info, 'infoooooooô')
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.current)
   console.log(cart, 'cart')
   const [total, setTotal] = useState(0)
+  const [isFirstTime, setIsFirstTime] = useState(true)
   const [voucherCode, setVoucherCode] = useState('')
 
   const [orderInfo, setOrderInfo] = useState({})
@@ -257,10 +258,12 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   const search = useLocation().search
   const vnpcoderes = new URLSearchParams(search).get('vnp_ResponseCode')
   useEffect(() => {
-    if (vnpcoderes === '00' || vnpcoderes === '97') {
-      vnpayCB()
+    if (isFirstTime) {
+      if (vnpcoderes === '00' || vnpcoderes === '97') {
+        if (info || orderInfo) vnpayCB()
+      }
     }
-  }, [vnpcoderes])
+  }, [vnpcoderes, info, orderInfo, isFirstTime])
   const handleCreateVnpay = async (amount) => {
     // const voucherCode = discount > 0 ? filterVoucher : null;
     try {
@@ -290,41 +293,35 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
     const ID = '' + foot
     const strID = ID.replace(/\s+/g, '')
     const paymentID = `VnPay-${strID}`
-    const address = {
-      recipient_name: info.name,
-      line: info.address,
-      city: '',
-      state: 'CA',
-      postal_code: '70000',
-      country_code: 'VN',
-    }
+
     const data = {
       cart,
       orderID: paymentID,
-      address: orderInfo.address ? orderInfo.address : address,
+      address: orderInfo.address ? orderInfo.address : info.address,
       name: orderInfo.name ? orderInfo.name : info.name,
       option,
       voucherCode,
     }
-    console.log(data)
-    // const action = paymentShipCOD(data)
-    // const resultAction = await dispatch(action)
-    // const res = unwrapResult(resultAction)
-    // if (res.status === 1) {
-    //   setTimeout(async () => {
-    //     const action = deleteAllItem()
-    //     const resultAction = await dispatch(action)
-    //     const res = unwrapResult(resultAction)
-    //     toast.success(res.msg)
-    //     toast.info('Let check order in infomation')
-    //     document.body.classList.remove('loading-data')
-    //   }, 5000)
-    //   closeModal()
-    //   return
-    // }
-    // document.body.classList.remove('loading-data')
-    // toast.error(res.msg)
-    // return
+
+    const action = paymentShipCOD(data)
+    const resultAction = await dispatch(action)
+    const res = unwrapResult(resultAction)
+    if (res.status === 1) {
+      setTimeout(async () => {
+        const action = deleteAllItem()
+        const resultAction = await dispatch(action)
+        const res = unwrapResult(resultAction)
+        toast.success(res.msg)
+        toast.info('Let check order in infomation')
+        document.body.classList.remove('loading-data')
+      }, 5000)
+      closeModal()
+      setIsFirstTime(false)
+      return
+    }
+    document.body.classList.remove('loading-data')
+    toast.error(res.msg)
+    return
 
     // const getU = async () => {
     //   await axios.post(
@@ -336,8 +333,6 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
     //   );
     // };
     // getU();
-
-    toast.success(`Bạn đã đặt hàng thành công`)
   }
 
   return (

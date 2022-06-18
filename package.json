@@ -18,7 +18,7 @@
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.24.0",
-    "chart.js": "^3.7.1",
+    "chart.js": "^3.8.0",
     "chartjs-plugin-datalabels": "^2.0.0",
     "chartjs-plugin-labels": "^1.1.0",
     "dateformat": "^5.0.2",
