@@ -22,7 +22,7 @@ function TableOrder(props) {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`${path}/${params.row.name}`}>
+            <Link to={`${path}/${params.row._id}`}>
               <p>{params.row.name}</p>
             </Link>
           </>
@@ -84,7 +84,7 @@ function TableOrder(props) {
                   ? 'cancel_order'
                   : null
               }
-              name='status'
+              name="status"
               value={params.row.status}
               onChange={(e) =>
                 handleChangeStatus(params.row._id, e.target.value)

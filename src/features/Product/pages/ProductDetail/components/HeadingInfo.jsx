@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AddShoppingCart } from '@mui/icons-material'
 import { Rating } from '@mui/material'
+import { formatCurrency } from 'utils/Format'
 
 function HeadingInfo(props) {
   const { product, onSubmit } = props
@@ -12,12 +13,12 @@ function HeadingInfo(props) {
   )
 
   return (
-    <div className='detail'>
-      <img src={product.images.url} alt='' />
-      <div className='split-detail'></div>
-      <div className='box-detail'>
-        <div className='row'>
-          <div className='row'>
+    <div className="detail">
+      <img src={product.images.url} alt="" />
+      <div className="split-detail"></div>
+      <div className="box-detail">
+        <div className="row">
+          <div className="row">
             <h2>{product.title}</h2>
             <p style={{ color: '#087b39' }}>
               <i>(Discount {100 - product.discount}%)</i>
@@ -26,31 +27,31 @@ function HeadingInfo(props) {
 
           <h6>#{product.product_id}</h6>
         </div>
-        <div className='box-detail-wrapper'>
+        <div className="box-detail-wrapper">
           {product.discount !== 100 ? (
-            <span>${priceAfterDiscount}</span>
+            <span>{formatCurrency(priceAfterDiscount)}</span>
           ) : (
-            <span>${product.price}</span>
+            <span>{formatCurrency(product.price)}</span>
           )}
           {product.discount !== 100 && (
-            <div className='row origin-price'>
+            <div className="row origin-price">
               <span style={{ textDecoration: 'line-through', color: '#ddd' }}>
-                ${product.price}
+                {formatCurrency(product.price)}
               </span>
               <p style={{ color: '#ddd' }}>
                 <i>(Giá gốc)</i>
               </p>
             </div>
           )}
-          <div className='row box-detail-wrapper_rating'>
-            <div className='rating'>
-              <Rating precision={0.25} size='small' value={rate} />
+          <div className="row box-detail-wrapper_rating">
+            <div className="rating">
+              <Rating precision={0.25} size="small" value={rate} />
             </div>
-            <p className=''>({product.countReviews}) lượt đánh giá</p>
+            <p className="">({product.countReviews}) lượt đánh giá</p>
           </div>
         </div>
 
-        <p className='title_description_split'>
+        <p className="title_description_split">
           Mô tả: <br />
           {product.description}
         </p>
@@ -64,9 +65,9 @@ function HeadingInfo(props) {
               <span>1 {detailProduct.quantity} </span>
               <button onClick={() => increment(detailProduct._id)}> + </button>
             </div> */}
-        <div className='quantity-box'>
-          <div className='quantity-col1'>
-            <div className='quantity-amount'>
+        <div className="quantity-box">
+          <div className="quantity-col1">
+            <div className="quantity-amount">
               <button
                 onClick={
                   quantityAmount !== 1
@@ -77,7 +78,7 @@ function HeadingInfo(props) {
                 {' '}
                 -{' '}
               </button>
-              <input type='text' value={quantityAmount} readOnly />
+              <input type="text" value={quantityAmount} readOnly />
               <button onClick={() => setQuantityAmount(quantityAmount + 1)}>
                 {' '}
                 +{' '}
@@ -85,8 +86,8 @@ function HeadingInfo(props) {
             </div>
           </div>
           <Link
-            to='#'
-            className='cart'
+            to="#"
+            className="cart"
             onClick={() => onSubmit(product._id, quantityAmount)}
           >
             Add to cart <AddShoppingCart />

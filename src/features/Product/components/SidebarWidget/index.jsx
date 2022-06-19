@@ -13,6 +13,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import FilterPrice from './components/FilterPrice'
 import { Collapse, List, ListItem, ListItemText } from '@mui/material'
 import adminApi from 'api/adminApi'
+import { formatCurrency } from 'utils/Format'
 
 SidebarWidget.propTypes = {
   onSubmit: ProTypes.func,
@@ -566,7 +567,8 @@ export default function SidebarWidget(props) {
                   <i>Result({totalResult}): </i>
                 </span>
                 <span>
-                  ${params['price[gte]']} ~ ${params['price[lte]']}
+                  {formatCurrency(params['price[gte]'])} ~{' '}
+                  {formatCurrency(params['price[lte]'])}
                 </span>
               </div>
             ) : (
@@ -588,9 +590,9 @@ export default function SidebarWidget(props) {
                   ? 'hint-prices active'
                   : 'hint-prices'
               }
-              onClick={() => quickFilter(1, 50)}
+              onClick={() => quickFilter(500, 100000)}
             >
-              $1.00 ~ $50.00
+              500 ~ 100,000
             </li>
             <li
               className={
@@ -598,9 +600,9 @@ export default function SidebarWidget(props) {
                   ? 'hint-prices active'
                   : 'hint-prices'
               }
-              onClick={() => quickFilter(100, 200)}
+              onClick={() => quickFilter(100000, 200000)}
             >
-              $100.00 ~ $200.00
+              100,000 ~ 200,000
             </li>
             <li
               className={
@@ -608,9 +610,9 @@ export default function SidebarWidget(props) {
                   ? 'hint-prices active'
                   : 'hint-prices'
               }
-              onClick={() => quickFilter(200, 500)}
+              onClick={() => quickFilter(200000, 500000)}
             >
-              $200.00 ~ $500.00
+              200,000 ~ 500,000
             </li>
           </ul>
         </div>

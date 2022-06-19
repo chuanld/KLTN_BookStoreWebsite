@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { DeleteForever } from '@mui/icons-material'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
+import { formatCurrency } from 'utils/Format'
 
 function TableProduct(props) {
   const {
@@ -31,7 +32,7 @@ function TableProduct(props) {
     {
       field: 'title',
       headerName: 'Title',
-      width: 330,
+      width: 300,
       editable: false,
       renderCell: (params) => {
         return (
@@ -46,7 +47,14 @@ function TableProduct(props) {
     {
       field: 'price',
       headerName: 'Price',
-      width: 64,
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <>
+            <p>{formatCurrency(params.row.price)}</p>
+          </>
+        )
+      },
       editable: false,
     },
     {
@@ -58,7 +66,7 @@ function TableProduct(props) {
     {
       field: 'category',
       headerName: 'Category',
-      width: 130,
+      width: 230,
       editable: false,
     },
     {
@@ -83,7 +91,7 @@ function TableProduct(props) {
       width: 140,
       editable: false,
       renderCell: (params) => {
-        return <img src={params.row.images.url} alt='' height='120px' />
+        return <img src={params.row.images.url} alt="" height="120px" />
       },
     },
     // {

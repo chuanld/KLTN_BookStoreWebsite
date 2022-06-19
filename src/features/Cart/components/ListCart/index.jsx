@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 import { addToCart, deleteCartItem } from 'features/Auth/userSlice'
+import { formatCurrency } from 'utils/Format'
 
 function ListCart(props) {
   const { cart } = props
@@ -78,14 +79,14 @@ function ListCart(props) {
 
   return (
     <>
-      <div className='list_container'>
+      <div className="list_container">
         {cart.map((product) => (
-          <div className='listcart' key={product._id}>
+          <div className="listcart" key={product._id}>
             <Link to={`products/${product._id}`}>
-              <img src={product.images.url} alt='' className='img_container' />
+              <img src={product.images.url} alt="" className="img_container" />
             </Link>
-            <div className='listcart-detail'>
-              <div className='row'>
+            <div className="listcart-detail">
+              <div className="row">
                 <h2>{product.title}</h2>
                 <h6>#{product.product_id}</h6>
               </div>
@@ -107,15 +108,15 @@ function ListCart(props) {
                       : {}
                   }
                 >
-                  ${product.price}
+                  {formatCurrency(product.price)}
                 </span>
                 {product.priceDiscount ? (
-                  <span className='price-discount'>
+                  <span className="price-discount">
                     {product.priceDiscount}
                   </span>
                 ) : product.discount < 100 ? (
-                  <span className='price-discount'>
-                    {((product.price * product.discount) / 100).toFixed(2)}
+                  <span className="price-discount">
+                    {formatCurrency((product.price * product.discount) / 100)}
                   </span>
                 ) : null}
               </div>
@@ -124,12 +125,12 @@ function ListCart(props) {
               <p>NXB: {product.publisher}</p>
               <p>Đã mua: {product.sold}</p>
             </div>
-            <div className='amount'>
+            <div className="amount">
               <button onClick={() => decrement(product._id)}> - </button>
               <span> {product.quantity} </span>
               <button onClick={() => increment(product._id)}> + </button>
             </div>
-            <div className='delete' onClick={() => removeCartItem(product._id)}>
+            <div className="delete" onClick={() => removeCartItem(product._id)}>
               <Delete />
             </div>
           </div>

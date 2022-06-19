@@ -280,10 +280,18 @@ export default function OrderDetail() {
             <div className="btn_checkout">
               <h6>
                 Phương thức thanh toán:{' '}
-                {orderInfoDetail.option.type.includes('ShipCOD')
-                  ? 'Ship COD'
-                  : 'Paypal'}
+                {orderInfoDetail.option.type.includes('VnPay')
+                  ? 'VNPay payment'
+                  : orderInfoDetail.option.type.includes('PAYID')
+                  ? 'Paypal payment'
+                  : 'ShipCOD payment'}
               </h6>
+              {orderInfoDetail.option.type.includes('VnPay') && (
+                <h6>
+                  Bank: {orderInfoDetail.option.bankCode},{' '}
+                  {orderInfoDetail.option.paywith}
+                </h6>
+              )}
             </div>
           </div>
         </Modal>

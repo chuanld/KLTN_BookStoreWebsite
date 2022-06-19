@@ -3,17 +3,18 @@ import AnaChart from '../../../common/AnaChart/AnaChart'
 
 function IncomePayment(props) {
   const { paymentType, totalPayment } = props
-
-  const total = paymentType.COD + paymentType.Paypal
+  console.log(paymentType)
+  const total = paymentType.COD + paymentType.Paypal + paymentType.VnPay
   const catePaymentPie = {
     labels: [
       'COD ' + '(' + Math.round((paymentType.COD / total) * 100) + '%)',
       'PayPal ' + '(' + Math.round((paymentType.Paypal / total) * 100) + '%)',
+      'VnPay' + '(' + Math.round((paymentType.VnPay / total) * 100) + '%)',
     ],
     datasets: [
       {
         label: 'Doanh thu',
-        data: [paymentType?.COD, paymentType?.Paypal],
+        data: [paymentType?.COD, paymentType?.Paypal, paymentType?.VnPay],
         // backgroundColor: ["rgba(230, 99, 132, 1)", "rgba(180, 99, 132, 1)"],
         // borderColor: ["rgba(230, 99, 132, 1)", "rgba(180, 99, 132, 1)"],
         backgroundColor: CSS_COLOR_NAMES,

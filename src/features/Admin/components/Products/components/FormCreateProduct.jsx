@@ -59,86 +59,86 @@ function FormCreateProduct(props) {
   }
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='product_id'
+          name="product_id"
           placeholder={product.product_id}
           form={form}
-          label='TagID Book'
+          label="TagID Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
 
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='title'
+          name="title"
           placeholder={product.title}
           form={form}
-          label='Title Book'
+          label="Title Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
 
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='price'
+          name="price"
           placeholder={JSON.stringify(product.price)}
           form={form}
-          label='Price Book'
+          label="Price Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
-          type='number'
+          width="560px"
+          type="number"
         />
       </div>
 
-      <div className='row update-info-book'>
-        <label htmlFor='description'>Description</label>
+      <div className="row update-info-book">
+        <label htmlFor="description">Description</label>
         <TextAreaField
-          name='description'
+          name="description"
           placeholder={product.description}
           form={form}
-          label='Description Book'
-          width='560px'
+          label="Description Book"
+          width="560px"
           minRows={5}
         />
       </div>
-      <div className='row update-info-book'>
-        <label htmlFor='content'>Content</label>
+      <div className="row update-info-book">
+        <label htmlFor="content">Content</label>
         <TextAreaField
-          name='content'
+          name="content"
           placeholder={product.content}
           form={form}
-          label='Content Book'
-          width='560px'
+          label="Content Book"
+          width="560px"
           minRows={10}
         />
       </div>
 
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='author'
+          name="author"
           placeholder={product.author}
           form={form}
-          label='Author Book'
+          label="Author Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='publisher'
+          name="publisher"
           placeholder={product.publisher}
           form={form}
-          label='Publisher Book'
+          label="Publisher Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
 
@@ -153,19 +153,19 @@ function FormCreateProduct(props) {
           ))}
         </select>
       </div> */}
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <SelectField
-          name='category'
+          name="category"
           //   placeholder={product.category}
           form={form}
-          label='Category'
+          label="Category"
           height={'55px'}
-          width='260px'
+          width="260px"
           defaulvalue={product.category}
           options={categories}
         />
       </div>
-      <button type='submit'>Update Product</button>
+      <button type="submit">Update Product</button>
     </form>
   )
 }

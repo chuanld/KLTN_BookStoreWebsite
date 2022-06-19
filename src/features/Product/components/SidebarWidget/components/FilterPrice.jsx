@@ -49,12 +49,12 @@ function FilterPrice(props) {
   const { params, onSubmit } = props
   const [value2, setValue2] = useState([
     parseInt(params['price[gte]'] || 0),
-    parseInt(params['price[lte]']) || 500,
+    parseInt(params['price[lte]']) || 500000,
   ])
   useEffect(() => {
     setValue2([
       parseInt(params['price[gte]'] || 0),
-      parseInt(params['price[lte]']) || 500,
+      parseInt(params['price[lte]']) || 500000,
     ])
   }, [params])
   const typingTimeOutRef = useRef(null)
@@ -109,9 +109,9 @@ function FilterPrice(props) {
         onChange={handleChange2}
         // getAriaValueText={valuetext}
         disableSwap
-        max={500}
+        max={500000}
         min={0}
-        step={20}
+        step={50000}
         marks
       />
     </Box>

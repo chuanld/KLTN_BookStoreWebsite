@@ -13,6 +13,7 @@ import { deleteAllItem, paymentShipCOD } from 'features/Auth/userSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import userApi from 'api/userApi'
 import { useLocation } from 'react-router-dom'
+import { formatCurrency } from 'utils/Format'
 // import HelicopterShip from "../../../utils/HelicopterShip/HelicopterShip";
 
 Modal.setAppElement(document.getElementById('root'))
@@ -256,7 +257,12 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   // }, [voucher])
 
   const search = useLocation().search
+  const vnpBankTranNo = new URLSearchParams(search).get('vnp_BankTranNo')
   const vnpcoderes = new URLSearchParams(search).get('vnp_ResponseCode')
+  const vnpBankCode = new URLSearchParams(search).get('vnp_BankCode')
+  const vnpCardType = new URLSearchParams(search).get('vnp_CardType')
+  const vnpVoucherCode = new URLSearchParams(search).get('voucherCode')
+
   useEffect(() => {
     if (isFirstTime) {
       if (vnpcoderes === '00' || vnpcoderes === '97') {
@@ -273,14 +279,19 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
       }
       const res = await userApi.paymentVnpay(data)
       console.log(res)
-      // window.location.replace(res.vnpUrl)
+      window.location.replace(res.vnpUrl)
     } catch (err) {
       console.log(err.response.data)
     }
   }
 
   const vnpayCB = async () => {
-    const option = { type: 'VnPay payment', paywith: 'default' }
+    document.body.classList.add('loading-data')
+    const option = {
+      type: 'VnPay payment',
+      paywith: vnpCardType,
+      bankCode: vnpBankCode,
+    }
     var date = new Date()
     var foot =
       date.getDate() +
@@ -292,7 +303,7 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
       date.getMilliseconds()
     const ID = '' + foot
     const strID = ID.replace(/\s+/g, '')
-    const paymentID = `VnPay-${strID}`
+    const paymentID = `VnPay-${vnpBankTranNo ?? strID}`
 
     const data = {
       cart,
@@ -300,7 +311,7 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
       address: orderInfo.address ? orderInfo.address : info.address,
       name: orderInfo.name ? orderInfo.name : info.name,
       option,
-      voucherCode,
+      voucherCode: vnpVoucherCode,
     }
 
     const action = paymentShipCOD(data)
@@ -319,20 +330,11 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
       setIsFirstTime(false)
       return
     }
+    if (isFirstTime) return
     document.body.classList.remove('loading-data')
+
     toast.error(res.msg)
     return
-
-    // const getU = async () => {
-    //   await axios.post(
-    //     "/api/payment/vnpayreturn",
-    //     { cart: cart, paymentID, address, status:shipmentStatus, voucherCode },
-    //     {
-    //       headers: { Authorization: token },
-    //     }
-    //   );
-    // };
-    // getU();
   }
 
   return (
@@ -369,13 +371,14 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
                     : {}
                 }
               >
-                ${bill.price.toFixed(2)}
+                {formatCurrency(bill.price)}
               </p>
               {bill.priceDiscount ? (
-                <p className="price-discount">${bill.priceDiscount}</p>
+                <p className="price-discount">{bill.priceDiscount}(vnd)</p>
               ) : bill.discount < 100 ? (
                 <p className="price-discount">
-                  ${((bill.price * bill.discount) / 100).toFixed(2)}
+                  {formatCurrency((bill.price * bill.discount) / 100)}
+                  (vnd)
                 </p>
               ) : null}
               x {bill.quantity}
@@ -396,7 +399,9 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
           </>
         )}
 
-        <h3 className="total_bill">Total: ${parseFloat(total).toFixed(2)} </h3>
+        {/* <h3 className="total_bill">Total: {parseFloat(total).toFixed(2)}₫</h3> */}
+        <h3 className="total_bill">Total: {formatCurrency(total)}</h3>
+
         <div style={{ textAlign: 'center' }}>
           ---------------------------------
         </div>
@@ -419,8 +424,14 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
           <h6>Phương thức thanh toán</h6>
           <div className="row">
             <div>
-              <button className="shipcod" onClick={openModal}>
-                ShipCOD
+              <button
+                className="btn-vnpay"
+                onClick={() => handleCreateVnpay(parseFloat(total).toFixed(2))}
+              >
+                <div>VnPay</div>
+                <div className="btn-vnpay-desc">
+                  <i>checkout</i>
+                </div>
               </button>
             </div>
             ---⫗---
@@ -432,12 +443,12 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
               tranSuccess={tranSuccess1}
             /> */}
             </div>
-            <div>
-              <button
-                className="shipcod"
-                onClick={() => handleCreateVnpay(parseFloat(total).toFixed(2))}
-              >
-                VN-Pay
+            <div className="btn-shipcod">
+              <button className="shipcod" onClick={openModal}>
+                <div>ShipCOD</div>
+                <div className="btn-shipcod-desc">
+                  <i>Free Delivery</i>
+                </div>
               </button>
             </div>
           </div>

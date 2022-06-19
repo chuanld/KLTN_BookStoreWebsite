@@ -35,6 +35,7 @@ function OverviewChart() {
   const [paymentType, setPaymentType] = useState({
     COD: 0,
     Paypal: 0,
+    VnPay: 0,
   })
   const [totalOrd, setTotalOrd] = useState(0)
   const [totalPayment, setTotalPayment] = useState(0)
@@ -134,6 +135,7 @@ function OverviewChart() {
     if (data?.orders && data?.vouchers) {
       var totalPaypal = 0
       var totalCOD = 0
+      var totalVnPay = 0
       var totalPayment = 0
       data?.orders.forEach((item, index) => {
         var total = 0
@@ -146,7 +148,9 @@ function OverviewChart() {
         // if (item.voucherCode) {
         //   discount = getVoucher(item.voucherCode,data.data?.vouchers);
         // }
-        if (item.orderID.includes('ShipCOD') && item.status === 5) {
+        if (item.orderID.includes('VnPay') && item.status === 5) {
+          totalVnPay += total - (total * discount) / 100
+        } else if (item.orderID.includes('ShipCOD') && item.status === 5) {
           totalCOD += total - (total * discount) / 100
         } else if (item.orderID.includes('PAYID') && item.status === 5) {
           totalPaypal += total - (total * discount) / 100
@@ -157,7 +161,7 @@ function OverviewChart() {
       setPaymentType({
         COD: totalCOD,
         Paypal: totalPaypal,
-        // Vnpay: 0,
+        VnPay: totalVnPay,
       })
     }
   }

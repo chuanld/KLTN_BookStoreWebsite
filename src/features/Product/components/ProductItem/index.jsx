@@ -1,5 +1,6 @@
 import { Rating } from '@mui/material'
 import React, { useState, useEffect } from 'react'
+import { formatCurrency } from 'utils/Format'
 
 function ProductItem({ product }) {
   //const state = useContext(GlobalState);
@@ -16,19 +17,19 @@ function ProductItem({ product }) {
 
   return (
     <>
-      <div className='product_card'>
-        <img src={product?.images?.url} alt='' width='10px' />
-        <div className='product_box'>
-          <div className='product_box_item'>
+      <div className="product_card">
+        <img src={product?.images?.url} alt="" width="10px" />
+        <div className="product_box">
+          <div className="product_box_item">
             <h4 title={product.title}>{product.title}</h4>
             {/* <div className='discount'>-15%</div> */}
             {isPromo && (
-              <div className='logo-discount'>{`${100 - perDiscount}%`}</div>
+              <div className="logo-discount">{`${100 - perDiscount}%`}</div>
             )}
           </div>
 
-          <div className='product_box_item'>
-            <div className='original'>
+          <div className="product_box_item">
+            <div className="original">
               <h6
                 style={
                   isPromo
@@ -40,23 +41,23 @@ function ProductItem({ product }) {
                     : {}
                 }
               >
-                ${product.price}
+                {formatCurrency(product.price)}
               </h6>
             </div>
             {isPromo && (
-              <div className='current-price'>
-                <h6> ${priceAfterDiscount}</h6>
+              <div className="current-price">
+                <h6> {formatCurrency(priceAfterDiscount)}</h6>
               </div>
             )}
           </div>
-          <div className='product_box_item'>
+          <div className="product_box_item">
             <p>Sold: {product.sold}</p>
 
-            <div className='rating'>
+            <div className="rating">
               {rate >= 3 && (
                 <>
                   <p>({product.countReviews})</p>
-                  <Rating value={rate} size='small' precision={0.25} readOnly />
+                  <Rating value={rate} size="small" precision={0.25} readOnly />
                 </>
               )}
             </div>
