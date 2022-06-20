@@ -42,7 +42,12 @@ function IncomeCate(props) {
         // color: "white",
         formatter: function (value, context) {
           // return context.dataset?.labels[context.dataIndex];
-          return context.chart.data.labels[context.dataIndex]
+          // return context.chart.data.labels[context.dataIndex]
+          if (Math.round((value / totalPm) * 100) < 10) {
+            return null
+          } else {
+            return context.chart.data.labels[context.dataIndex]
+          }
         },
         font: {
           weight: 'bold',
