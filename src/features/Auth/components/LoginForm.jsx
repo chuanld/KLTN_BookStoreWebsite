@@ -10,7 +10,7 @@ import InputField from 'components/form-controls/InputField'
 import PasswordField from 'components/form-controls/PasswordField'
 
 function LoginForm(props) {
-  const { onSubmit } = props
+  const { onSubmit, onSubmitGoogle } = props
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -31,57 +31,61 @@ function LoginForm(props) {
     if (!onSubmit) return
     onSubmit(values)
   }
+  const handleLoginGoogle = (response) => {
+    if (!onSubmitGoogle) return
+    onSubmitGoogle(response)
+  }
 
   return (
-    <div className='form-containerlg sign-in-containerlg '>
-      <form className='formlg' onSubmit={form.handleSubmit(handleSubmit)}>
+    <div className="form-containerlg sign-in-containerlg ">
+      <form className="formlg" onSubmit={form.handleSubmit(handleSubmit)}>
         <h1>Sign in</h1>
-        <div className='social-containerlg'>
-          <div className='social'>
-            <div className='btn-google-signup'>
+        <div className="social-containerlg">
+          <div className="social">
+            <div className="btn-google-signup">
               <GoogleLogin
-                clientId='777528100895-q05tshbqhfjh7goc71g50gea3mnmuotj.apps.googleusercontent.com'
-                buttonText='Login with google'
-                // onSuccess={loginGoogle}
+                clientId="777528100895-q05tshbqhfjh7goc71g50gea3mnmuotj.apps.googleusercontent.com"
+                buttonText="Login with google"
+                onSuccess={handleLoginGoogle}
                 cookiePolicy={'single_host_origin'}
               />
             </div>
 
-            <div className='btn-facebook-signup'>
+            {/* <div className="btn-facebook-signup">
               <FacebookLogin
-                appId='6380483075359895'
+                appId="6380483075359895"
                 autoLoad={false}
-                fields='id,name,email,picture'
-                icon='fa-facebook'
+                fields="id,name,email,picture"
+                icon="fa-facebook"
                 // callback={loginFacebook}
               />
-            </div>
+            </div> */}
           </div>
         </div>
         {/* <span>or use your account</span> */}
-        <div className='input-login'>
+        <div className="input-login">
           <InputField
-            name='email'
-            placeholder='Email'
+            name="email"
+            placeholder="Email"
             form={form}
-            label='Email'
-            className='input-field'
+            label="Email"
+            className="input-field"
             height={'30px'}
-            width='260px'
+            width="260px"
           />
         </div>
-        <div className='input-login'>
+        <div className="input-login">
           <PasswordField
-            name='password'
-            placeholder='Password'
+            name="password"
+            placeholder="Password"
             form={form}
-            label='Pasword'
-            height='70px'
-            width='260px'
+            label="Pasword"
+            height="70px"
+            width="260px"
           />
         </div>
-        <Link to='/forgot'>Forgot your password?</Link>
-        <button type='submit'>Sign In</button>
+        <Link to="/forgot">Forgot your password?</Link>
+        <button type="submit">Sign In</button>
       </form>
     </div>
   )

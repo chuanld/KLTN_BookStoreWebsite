@@ -109,3 +109,7 @@
   text-align: center;
   z-index: 3;
 }
+
+.admin-page .order-detail{
+  margin: 20px;
+}

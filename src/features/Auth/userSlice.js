@@ -67,6 +67,31 @@ export const login = createAsyncThunk('auth/login', async (payload) => {
     return err.response.data.msg
   }
 })
+export const loginGoogle = createAsyncThunk(
+  'auth/loginGoogle',
+  async (payload) => {
+    try {
+      const res = await userApi.loginGoogle(payload)
+      if (!res.accesstoken) {
+        return res
+      }
+      localStorage.setItem(StorageKeys.TOKEN, res.accesstoken)
+      const data = await userApi.getProfile()
+      const user = {
+        name: data.name,
+        _id: data._id,
+        cart: data.cart || [],
+      }
+
+      //save data
+      localStorage.setItem(StorageKeys.USER, JSON.stringify(user))
+      return data
+    } catch (err) {
+      console.log(err.response.data.msg)
+      return err.response.data.msg
+    }
+  }
+)
 
 export const logout = createAsyncThunk('auth/logout', async (payload) => {
   //call Api
@@ -293,6 +318,29 @@ export const userSlice = createSlice({
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
+      const user = {
+        _id: action.payload._id,
+        email: action.payload.email,
+        name: action.payload.name,
+        address: action.payload.address,
+        phone: action.payload.phone,
+        role: action.payload.role,
+        cart: action.payload.cart,
+        token: localStorage.getItem(StorageKeys.TOKEN),
+        createdAt: action.payload.createdAt,
+        updatedAt: action.payload.updatedAt,
+
+        isAdmin: action.payload.role === 1 ? true : false || false,
+        isLogged:
+          action.payload.role === 0 || action.payload.role === 1
+            ? true
+            : false || false,
+      }
+
+      state.current = user
+      state.cartCurrent = user.cart || []
+    },
+    [loginGoogle.fulfilled]: (state, action) => {
       const user = {
         _id: action.payload._id,
         email: action.payload.email,

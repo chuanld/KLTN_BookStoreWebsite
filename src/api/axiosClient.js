@@ -28,6 +28,7 @@ axiosClient.interceptors.request.use(
       //       "/user/change",
       // =======
       '/user/register',
+      '/user/register_google',
       '/user/activation',
       '/user/forgot',
       '/user/reset',

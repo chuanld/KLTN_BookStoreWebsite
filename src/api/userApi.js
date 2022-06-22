@@ -6,6 +6,10 @@ const userApi = {
     console.log('Passwordregis', password)
     return axiosClient.post(url, { name, email, password })
   },
+  registerGoogle(tokenId) {
+    const url = '/user/register_google'
+    return axiosClient.post(url, { tokenId })
+  },
   activationEmail(activateToken) {
     const url = '/user/activation'
     return axiosClient.post(url, { activationtoken: activateToken })
@@ -24,6 +28,10 @@ const userApi = {
     const { email, password } = data
     const url = '/user/login'
     return axiosClient.post(url, { email, password })
+  },
+  loginGoogle(tokenId) {
+    const url = '/user/login_google'
+    return axiosClient.post(url, { tokenId })
   },
   logout() {
     const url = '/user/logout'
