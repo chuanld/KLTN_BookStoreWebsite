@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatCurrency } from 'utils/Format'
 
 import AnaChart from '../../../common/AnaChart/AnaChart'
 
@@ -79,7 +80,7 @@ function IncomeCate(props) {
   return (
     <>
       <div className="chart-item-title">
-        <span>Total Revenue: {totalPm}$</span>
+        <span>Total Revenue: {formatCurrency(totalPm)}</span>
       </div>
       <div className="chart-canvas chart-canvas-cate">
         {/* <Doughnut className="mt-3" data={cateIncomePie} options={options} /> */}

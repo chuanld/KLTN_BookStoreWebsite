@@ -7,7 +7,6 @@ import adminApi from 'api/adminApi'
 import FormDate from '../../common/FormDate'
 
 import * as XLSX from 'xlsx'
-
 function OverviewChart() {
   const today = new Date()
   const formatDate = (date, month, year) => {
@@ -28,7 +27,7 @@ function OverviewChart() {
 
   const [loading, setLoading] = useState(false)
   const [start, setStart] = useState('2020-10-22')
-  const [end, setEnd] = useState('')
+  const [end, setEnd] = useState(dayjs().format('YYYY-MM-DD'))
   const [callbackTime, setCallbackTime] = useState(false)
   const [cate, setCate] = useState([])
   const [orderSummary, setOrderSummary] = useState([])
@@ -46,8 +45,8 @@ function OverviewChart() {
       setLoading(true)
       const res = await adminApi.getAnalytic(start, end)
 
-      setStart(res.date?.from)
-      setEnd(res.date?.to)
+      setStart(dayjs(res.date?.from).format('YYYY-MM-DD'))
+      setEnd(dayjs(res.date?.to).format('YYYY-MM-DD'))
 
       setOrderSummary(statusOrderCalculateTotal(res))
 
@@ -206,10 +205,12 @@ function OverviewChart() {
     XLSX.utils.sheet_add_aoa(sheet, [['Doanh thu tổng']], { origin: 'E1' })
     XLSX.utils.sheet_add_aoa(sheet, [['Tổng thu (COD)']], { origin: 'E2' })
     XLSX.utils.sheet_add_aoa(sheet, [[`Tổng thu (Paypal)`]], { origin: 'E3' })
+    XLSX.utils.sheet_add_aoa(sheet, [[`Tổng thu (VnPay)`]], { origin: 'E4' })
 
     XLSX.utils.sheet_add_aoa(sheet, [[totalPm]], { origin: 'F1' })
     XLSX.utils.sheet_add_aoa(sheet, [[paymentType.COD]], { origin: 'F2' })
     XLSX.utils.sheet_add_aoa(sheet, [[paymentType.Paypal]], { origin: 'F3' })
+    XLSX.utils.sheet_add_aoa(sheet, [[paymentType.VnPay]], { origin: 'F4' })
 
     var sheet1 = XLSX.utils.json_to_sheet(orderSummary)
     XLSX.utils.book_append_sheet(exc, sheet1, 'Đơn hàng')
@@ -247,11 +248,12 @@ function OverviewChart() {
 
     XLSX.writeFile(
       exc,
-      `Doanhthu-tu-${start ? start : '--/--/----'}-den-${
-        end ? end : '--/--/----'
+      `Doanhthu-tu-${start !== '' ? start : '--/--/----'}-den-${
+        end !== '' ? end : '--/--/----'
       }.xlsx`
     )
   }
+  console.log(start, end, 'timemeeeeeeeeeeeeeeeeeeeeeee')
 
   return (
     <div className="analytic-chart-section">

@@ -1,14 +1,14 @@
-import InputField from "components/form-controls/InputField";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState, useRef } from "react";
+import InputField from 'components/form-controls/InputField'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import React, { useEffect, useState, useRef } from 'react'
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import DateTimePickerField from "components/form-controls/DateTimePickerField";
-import dayjs from "dayjs";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import DateTimePickerField from 'components/form-controls/DateTimePickerField'
+import dayjs from 'dayjs'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 function FormDate({
   from,
@@ -20,43 +20,43 @@ function FormDate({
   onSubmitChange,
 }) {
   const schema = yup.object().shape({
-    analyStart: yup.date().required("Please enter expire date"),
+    analyStart: yup.date().required('Please enter expire date'),
     analyEnd: yup.date(),
-  });
-  console.log(options, "options");
+  })
+  console.log(options, 'options')
   const form = useForm({
     defaultValues: {
-      analyStart: from || "",
-      analyEnd: to || new Date(),
+      analyStart: from || '',
+      analyEnd: to || dayjs().format('YYYY-MM-DD'),
     },
     resolver: yupResolver(schema),
-  });
+  })
 
   useEffect(() => {
     from &&
       to &&
       form.reset({
-        analyStart: from || "",
-        analyEnd: to || new Date(),
-      });
+        analyStart: from || '',
+        analyEnd: to || dayjs().format('YYYY-MM-DD'),
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [from, to]);
+  }, [from, to])
   const handleSubmit = (values) => {
-    if (!onSubmit) return;
+    if (!onSubmit) return
     // onSubmit({ ...values })
 
     const newValues = {
-      analyStart: dayjs(values.analyStart).format("YYYY-MM-DD"),
-      analyEnd: dayjs(values.analyEnd).format("YYYY-MM-DD"),
-    };
-    onSubmit(newValues);
-  };
+      analyStart: dayjs(values.analyStart).format('YYYY-MM-DD'),
+      analyEnd: dayjs(values.analyEnd).format('YYYY-MM-DD'),
+    }
+    onSubmit(newValues)
+  }
 
   const onChangeGroupBy = (e) => {
-    if (options?.length === 0 || !distanceType) return;
-    console.log(e.target.value);
-    onSubmitChange(e.target.value);
-  };
+    if (options?.length === 0 || !distanceType) return
+    console.log(e.target.value)
+    onSubmitChange(e.target.value)
+  }
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
       <div className="form-date-container">
@@ -65,7 +65,7 @@ function FormDate({
             <FormControl sx={{ m: 0, width: 220, marginTop: 1 }}>
               <InputLabel id="type-distance">Group By</InputLabel>
               <Select
-                color={"success"}
+                color={'success'}
                 name="typeDistance"
                 labelId="type-distance"
                 label="Group By"
@@ -73,7 +73,7 @@ function FormDate({
 
                 onChange={onChangeGroupBy}
                 value={distanceType}
-                style={{ height: 55, width: 220, textTransform: "uppercase" }}
+                style={{ height: 55, width: 220, textTransform: 'uppercase' }}
               >
                 {options.map((item, idx) => (
                   <MenuItem value={item} key={idx}>
@@ -89,8 +89,8 @@ function FormDate({
             name="analyStart"
             label="From Date"
             form={form}
-            className={"input-info-update"}
-            height={"30px"}
+            className={'input-info-update'}
+            height={'30px'}
             width="220px"
           />
         </div>
@@ -99,8 +99,8 @@ function FormDate({
             name="analyEnd"
             label="To Date"
             form={form}
-            className={"input-info-update"}
-            height={"30px"}
+            className={'input-info-update'}
+            height={'30px'}
             width="220px"
           />
         </div>
@@ -122,7 +122,7 @@ function FormDate({
         )}
       </div>
     </form>
-  );
+  )
 }
 
-export default FormDate;
+export default FormDate
