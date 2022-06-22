@@ -18,6 +18,7 @@ import Events from './components/Events'
 import Discount from './components/Events/components/Discount'
 import FlashSale from './components/Events/components/FlashSale'
 import Analytics from './components/Analytics'
+import OrderDetail from './components/Orders/components/OrderDetail'
 
 function Admin() {
   const info = useSelector((state) => state.user.current)
@@ -72,6 +73,11 @@ function Admin() {
                   />
 
                   <Route path="/admin/orders" exact component={Orders} />
+                  <Route
+                    path="/admin/orders/:id"
+                    exact
+                    component={OrderDetail}
+                  />
 
                   <Route
                     path="/admin/categories"

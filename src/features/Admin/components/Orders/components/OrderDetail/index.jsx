@@ -4,10 +4,12 @@ import { useParams, useHistory } from 'react-router'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Modal from 'react-modal'
-import userApi from 'api/userApi'
+
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+import userApi from 'api/userApi'
 import Breadcrumb from 'components/Breadcrumbs'
+import { formatCurrency } from 'utils/Format'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles3 = {
@@ -31,7 +33,8 @@ const customStyles3 = {
     transition: 'all 0.3s ease-in',
   },
 }
-export default function OrderDetail() {
+
+function OrderDetail() {
   const params = useParams()
   const history = useHistory()
 
@@ -228,13 +231,13 @@ export default function OrderDetail() {
                         : {}
                     }
                   >
-                    ${bill.price.toFixed(2)}
+                    {formatCurrency(bill.price)}
                   </p>
                   {bill.priceDiscount ? (
                     <p className="price-discount">${bill.priceDiscount}</p>
                   ) : bill.discount < 100 ? (
                     <p className="price-discount">
-                      ${((bill.price * bill.discount) / 100).toFixed(2)}
+                      {formatCurrency((bill.price * bill.discount) / 100)}
                     </p>
                   ) : null}
                   x {bill.quantity}
@@ -255,9 +258,7 @@ export default function OrderDetail() {
               </>
             )}
             <div className="row row-export-bill">
-              <h3 className="total_bill">
-                Total: ${parseFloat(total).toFixed(2)}{' '}
-              </h3>
+              <h3 className="total_bill">Total: {formatCurrency(total)} </h3>
               <div className="btn-export-pdf">
                 <button onClick={() => outputPdf()}>Export PDF</button>
               </div>
@@ -303,3 +304,5 @@ export default function OrderDetail() {
     </>
   )
 }
+
+export default OrderDetail
