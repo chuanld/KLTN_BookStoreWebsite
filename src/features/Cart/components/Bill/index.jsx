@@ -374,7 +374,9 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
                 {formatCurrency(bill.price)}
               </p>
               {bill.priceDiscount ? (
-                <p className="price-discount">{bill.priceDiscount}(vnd)</p>
+                <p className="price-discount">
+                  {formatCurrency(bill.priceDiscount)}
+                </p>
               ) : bill.discount < 100 ? (
                 <p className="price-discount">
                   {formatCurrency((bill.price * bill.discount) / 100)}

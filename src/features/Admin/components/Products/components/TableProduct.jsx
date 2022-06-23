@@ -26,7 +26,7 @@ function TableProduct(props) {
     {
       field: 'product_id',
       headerName: 'Tag ID',
-      width: 70,
+      width: 90,
       editable: false,
     },
     {
@@ -60,7 +60,14 @@ function TableProduct(props) {
     {
       field: 'sold',
       headerName: 'Sold',
-      width: 64,
+      width: 80,
+      renderCell: (params) => {
+        return (
+          <>
+            <p>SL:({params.row.sold})</p>
+          </>
+        )
+      },
       editable: false,
     },
     {
@@ -82,13 +89,13 @@ function TableProduct(props) {
     {
       field: 'publisher',
       headerName: 'Publisher',
-      width: 180,
+      width: '180',
       editable: false,
     },
     {
       field: 'images',
       headerName: 'Image',
-      width: 140,
+      minWidth: 140,
       editable: false,
       renderCell: (params) => {
         return <img src={params.row.images.url} alt="" height="120px" />

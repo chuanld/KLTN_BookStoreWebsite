@@ -10,6 +10,7 @@ import withLoading from '../../components/HOC/withLoading'
 import ProductSkeleton from './components/ProductSkeleton'
 import Breadcrumb from 'components/Breadcrumbs'
 import BannerSlide from 'components/BannerSlide'
+import Footer from 'components/Footer'
 
 const queryString = require('query-string')
 /*Note queryString: obj{
@@ -132,10 +133,10 @@ function Product({ showLoading, hideLoading }) {
       <BannerSlide />
       <Breadcrumb />
 
-      <div className='shop_area shop_reverse mt-100 mb-100'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-lg-3 col-md-12'>
+      <div className="shop_area shop_reverse mt-100 mb-100">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-12">
               <SidebarWidget
                 totalResult={totalResult}
                 params={queryParams}
@@ -143,10 +144,10 @@ function Product({ showLoading, hideLoading }) {
                 hisSearch={hisSearch}
               />
             </div>
-            <div className='col-lg-9 col-md-12'>
+            <div className="col-lg-9 col-md-12">
               <Filters params={queryParams} onSubmit={handleFilterChanges} />
               {loadingSkt ? (
-                <div className='products'>
+                <div className="products">
                   {new Array(9).fill(undefined).map((item, index) => (
                     <ProductSkeleton key={index} />
                   ))}
@@ -165,6 +166,7 @@ function Product({ showLoading, hideLoading }) {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }

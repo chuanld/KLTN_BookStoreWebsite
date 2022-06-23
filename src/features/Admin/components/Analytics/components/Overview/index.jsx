@@ -183,17 +183,17 @@ function OverviewChart() {
     var sheet = XLSX.utils.json_to_sheet(cate)
 
     sheet['!cols'] = [
+      { width: 30 },
+      { width: 30 },
+      { width: 30 },
+      { width: 10 },
       { width: 25 },
-      { width: 20 },
-      { width: 30 },
-      { width: 5 },
-      { width: 30 },
       { width: 15 },
       { width: 5 },
       { width: 20 },
     ]
 
-    XLSX.utils.book_append_sheet(exc, sheet, 'DoanhThu')
+    XLSX.utils.book_append_sheet(exc, sheet, 'Doanh Thu')
     XLSX.utils.sheet_add_aoa(sheet, [['Mã']], { origin: 'A1' })
     XLSX.utils.sheet_add_aoa(sheet, [['Tên Danh mục']], { origin: 'B1' })
     XLSX.utils.sheet_add_aoa(sheet, [[`Doanh thu (tổng ${totalPm})`]], {
@@ -213,7 +213,7 @@ function OverviewChart() {
     XLSX.utils.sheet_add_aoa(sheet, [[paymentType.VnPay]], { origin: 'F4' })
 
     var sheet1 = XLSX.utils.json_to_sheet(orderSummary)
-    XLSX.utils.book_append_sheet(exc, sheet1, 'Đơn hàng')
+    XLSX.utils.book_append_sheet(exc, sheet1, 'Doanh số đơn')
     sheet1['!cols'] = [{ width: 25 }, { width: 20 }]
     XLSX.utils.sheet_add_aoa(sheet1, [['Tình trạng đơn hàng']], {
       origin: 'A1',

@@ -17,10 +17,10 @@
   color: black;
 }
 .usersList {
-  max-width: 1200px;
-  max-height: 600px;
+  min-width: 1200px;
+  /* max-height: 600px;
   height: 500px;
-  overflow: auto;
+  overflow: auto; */
 }
 ::-webkit-scrollbar {
   width: 10px;

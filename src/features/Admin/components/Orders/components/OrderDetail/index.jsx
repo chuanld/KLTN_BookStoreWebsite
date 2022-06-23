@@ -234,7 +234,9 @@ function OrderDetail() {
                     {formatCurrency(bill.price)}
                   </p>
                   {bill.priceDiscount ? (
-                    <p className="price-discount">${bill.priceDiscount}</p>
+                    <p className="price-discount">
+                      {formatCurrency(bill.priceDiscount)}
+                    </p>
                   ) : bill.discount < 100 ? (
                     <p className="price-discount">
                       {formatCurrency((bill.price * bill.discount) / 100)}
@@ -284,6 +286,21 @@ function OrderDetail() {
         </div> */}
             <div className="btn_checkout">
               <h6>
+                Status:{' '}
+                {orderInfoDetail.status === 5
+                  ? 'Đã thanh toán đơn hàng'
+                  : orderInfoDetail.status === 4
+                  ? 'Đã giao đơn hàng'
+                  : orderInfoDetail.status === 3
+                  ? 'Tạm hoãn đơn'
+                  : orderInfoDetail.status === 2
+                  ? 'Đã xác nhận đơn'
+                  : orderInfoDetail.status === 1
+                  ? 'Đã hủy đơn'
+                  : 'Chờ xác nhận đơn'}
+              </h6>
+              <br />
+              <h6>
                 Phương thức thanh toán:{' '}
                 {orderInfoDetail.option.type.includes('VnPay')
                   ? 'VNPay payment'
@@ -291,6 +308,7 @@ function OrderDetail() {
                   ? 'Paypal payment'
                   : 'ShipCOD payment'}
               </h6>
+              <br />
               {orderInfoDetail.option.type.includes('VnPay') && (
                 <h6>
                   Bank: {orderInfoDetail.option.bankCode},{' '}

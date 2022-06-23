@@ -97,8 +97,15 @@
   top: 50px;
 }
 .analytic .chart-container .chart-item .chart-item-title span {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 700;
+}
+.analytic .chart-container .chart-line-item {
+  text-align: center;
+}
+.analytic .chart-container .chart-line-item span {
+  font-size: 22px;
+  font-weight: 700;
 }
 .analytic .chart-container .chart-item-usertype {
   /* width: 550px !important;

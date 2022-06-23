@@ -31,13 +31,13 @@ function Events() {
   return (
     <>
       <Router>
-        <div className='session-heading'>
+        <div className="session-heading">
           <Breadcrumb />
         </div>
-        <div className='events'>
-          <div className='events-heading'>
-            <div className='events-navbar'>
-              <div
+        <div className="events">
+          <div className="events-heading">
+            <div className="events-navbar">
+              {/* <div
                 className={
                   objParams[2] === 'events-fsale'
                     ? 'events-title active'
@@ -45,8 +45,8 @@ function Events() {
                 }
                 onClick={() => history.push('/admin/events-fsale')}
               >
-                {/* <Link to='/admin/events/fsale'>Flash sale</Link> */}Flash
-              </div>
+                
+              </div> */}
 
               <div
                 className={
@@ -81,7 +81,7 @@ function Events() {
               )} */}
             </div>
           </div>
-          <div className='event-content'>
+          <div className="event-content">
             {/* <Switch>
               <Route path='/admin/events/disc' exact component={Discount} />
               <Route path='/admin/events/fsale' exact component={FlashSale} />

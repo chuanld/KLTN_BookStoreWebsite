@@ -8,14 +8,16 @@
   position: -webkit-sticky;
   top: 55px;
   color: black;
-  width: 500px;
+  /* min-width: 500px; */
+  width: 325px;
   flex-basis: 325px;
 }
 
 .sidebarAdmin .sidebarWrapper {
   padding: 20px;
   color: #555;
-  margin-left: 10px;
+  /* margin-left: 15px; */
+  padding-left: 35px;
 }
 
 .sidebarMenu {

@@ -34,13 +34,30 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
       headerName: 'Phone',
       width: 117.93,
       editable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <p>{params.row.phone ? params.row.phone : <i>Updating...</i>}</p>
+          </>
+        )
+      },
     },
     {
       field: 'address',
       headerName: 'Address',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
+      editable: false,
       width: 170.8,
+      renderCell: (params) => {
+        return (
+          <>
+            <p>
+              {params.row.address ? params.row.address : <i>Updating...</i>}
+            </p>
+          </>
+        )
+      },
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
@@ -62,7 +79,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
         return (
           <>
             <DeleteForever
-              className='userListDelete'
+              className="userListDelete"
               onClick={() => deleteSubmit(params.user._id, params.user.email)}
             />
           </>

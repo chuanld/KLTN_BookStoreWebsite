@@ -17,8 +17,9 @@ import { logout } from 'features/Auth/userSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { LogoHeader } from 'template/assets/images/index'
 import categoryApi from 'api/categoryApi'
-import { StorageKeys } from '../../constant/storageKey'
+
 import userApi from 'api/userApi'
+import { set } from 'react-hook-form'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles1 = {
@@ -42,7 +43,7 @@ const customStyles1 = {
 }
 function Header() {
   const [categories, setCategories] = useState([])
-  const location = useLocation()
+
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -71,6 +72,7 @@ function Header() {
 
         if (data.role === 0) {
           setIsLogged(true)
+          setIsAdmin(false)
           return
         }
         setIsLogged(true)
@@ -347,7 +349,7 @@ function Header() {
                         shop
                       </NavLink>
                     </li>
-                    {isLogged ? (
+                    {info && isLogged ? (
                       <li>
                         <NavLink
                           to="/cart"
@@ -359,7 +361,7 @@ function Header() {
                         </NavLink>
                       </li>
                     ) : null}
-                    {isAdmin ? (
+                    {info && isLogged && isAdmin ? (
                       <li>
                         <NavLink
                           to="/admin"

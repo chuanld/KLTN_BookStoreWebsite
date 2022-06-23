@@ -8,6 +8,7 @@ import userApi from 'api/userApi'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import Breadcrumb from 'components/Breadcrumbs'
+import { formatCurrency } from 'utils/Format'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles3 = {
@@ -125,9 +126,9 @@ export default function OrderDetail() {
   if (!orderInfoDetail) return null
   return (
     <>
-      <div className="session-heading">
+      {/* <div className="session-heading">
         <Breadcrumb />
-      </div>
+      </div> */}
       <div className="order-detail">
         <div className="orderListTitle">
           <h4>
@@ -228,13 +229,15 @@ export default function OrderDetail() {
                         : {}
                     }
                   >
-                    ${bill.price.toFixed(2)}
+                    {formatCurrency(bill.price)}
                   </p>
                   {bill.priceDiscount ? (
-                    <p className="price-discount">${bill.priceDiscount}</p>
+                    <p className="price-discount">
+                      {formatCurrency(bill.priceDiscount)}
+                    </p>
                   ) : bill.discount < 100 ? (
                     <p className="price-discount">
-                      ${((bill.price * bill.discount) / 100).toFixed(2)}
+                      {formatCurrency((bill.price * bill.discount) / 100)}
                     </p>
                   ) : null}
                   x {bill.quantity}
@@ -255,9 +258,7 @@ export default function OrderDetail() {
               </>
             )}
             <div className="row row-export-bill">
-              <h3 className="total_bill">
-                Total: ${parseFloat(total).toFixed(2)}{' '}
-              </h3>
+              <h3 className="total_bill">Total: {formatCurrency(total)} </h3>
               <div className="btn-export-pdf">
                 <button onClick={() => outputPdf()}>Export PDF</button>
               </div>
@@ -283,6 +284,21 @@ export default function OrderDetail() {
         </div> */}
             <div className="btn_checkout">
               <h6>
+                Status:{' '}
+                {orderInfoDetail.status === 5
+                  ? 'Đã thanh toán đơn hàng'
+                  : orderInfoDetail.status === 4
+                  ? 'Đã giao đơn hàng'
+                  : orderInfoDetail.status === 3
+                  ? 'Tạm hoãn đơn'
+                  : orderInfoDetail.status === 2
+                  ? 'Đã xác nhận đơn'
+                  : orderInfoDetail.status === 1
+                  ? 'Đã hủy đơn'
+                  : 'Chờ xác nhận đơn'}
+              </h6>
+              <br />
+              <h6>
                 Phương thức thanh toán:{' '}
                 {orderInfoDetail.option.type.includes('VnPay')
                   ? 'VNPay payment'
@@ -290,6 +306,7 @@ export default function OrderDetail() {
                   ? 'Paypal payment'
                   : 'ShipCOD payment'}
               </h6>
+              <br />
               {orderInfoDetail.option.type.includes('VnPay') && (
                 <h6>
                   Bank: {orderInfoDetail.option.bankCode},{' '}

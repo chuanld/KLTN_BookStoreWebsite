@@ -79,7 +79,7 @@ function UserRegister(props) {
   return (
     <>
       <div className="chart-item-title">
-        <span>Top categories</span>
+        <span>Statistics Over Time</span>
       </div>
       <div className="chart-canvas chart-canvas-cate">
         {/* <Doughnut className="mt-3" data={cateIncomePie} options={options} /> */}
