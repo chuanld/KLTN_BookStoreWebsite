@@ -112,7 +112,7 @@ function ListCart(props) {
                 </span>
                 {product.priceDiscount ? (
                   <span className="price-discount">
-                    {product.priceDiscount}
+                    {formatCurrency(product.priceDiscount)}
                   </span>
                 ) : product.discount < 100 ? (
                   <span className="price-discount">

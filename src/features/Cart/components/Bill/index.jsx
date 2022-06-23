@@ -71,7 +71,8 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   }, [cart])
 
   const tranSuccess = async (payment) => {
-    console.log(payment)
+    if (!info.address && !orderInfo.address)
+      return alert('Please update infomation address for ShipCOD')
     const option = { type: 'Paypal payment', paywith: 'default' }
     const { paymentID, address } = payment
     const data = {
@@ -273,6 +274,8 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   const handleCreateVnpay = async (amount) => {
     // const voucherCode = discount > 0 ? filterVoucher : null;
     try {
+      if (!info.address && !orderInfo.address)
+        return alert('Please update infomation address for ShipCOD')
       const data = {
         amount,
         voucherCode,
