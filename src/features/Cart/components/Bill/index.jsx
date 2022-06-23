@@ -40,7 +40,7 @@ const customStyles3 = {
 export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   console.log(info, 'infoooooooô')
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user.current)
+
   console.log(cart, 'cart')
   const [total, setTotal] = useState(0)
   const [isFirstTime, setIsFirstTime] = useState(true)
@@ -71,8 +71,7 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   }, [cart])
 
   const tranSuccess = async (payment) => {
-    if (!info.address && !orderInfo.address)
-      return alert('Please update infomation address for ShipCOD')
+    console.log(orderInfo, 'sssssssssssssssss')
     const option = { type: 'Paypal payment', paywith: 'default' }
     const { paymentID, address } = payment
     const data = {
@@ -83,6 +82,7 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
       option,
       voucherCode,
     }
+    document.body.classList.add('loading-data')
     const action = paymentShipCOD(data)
     const resultAction = await dispatch(action)
     const res = unwrapResult(resultAction)
@@ -200,77 +200,23 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
     onSubmit(voucherCode)
   }
 
-  // useEffect(() => {
-  //   if (voucher) {
-  //     cart.forEach((product) => {
-  //       if (voucher.voucherProductId.length !== 0) {
-  //         voucher.voucherProductId.forEach((v) => {
-  //           if (product._id === v) {
-  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
-  //             product = { ...product, priceAfter }
-  //             return
-  //           }
-  //         })
-  //       }
-  //       if (voucher.voucherProductCategory.length !== 0) {
-  //         voucher.voucherProductCategory.forEach((v) => {
-  //           if (product.category === v) {
-  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
-  //             // const newCart = [...cart]
-  //             // newCart.forEach((nc) => {
-  //             //   if (nc.category === v) {
-  //             //     nc.price = priceAfter
-  //             //   }
-  //             // })
-  //             // const newCart = [...cart]
-  //             let newCart = JSON.parse(JSON.stringify(cart))
-  //             newCart.forEach((item) => {
-  //               if (item._id === product._id) {
-  //                 // Object.preventExtensions(item)
-  //                 item.priceDiscount = priceAfter
-  //               }
-  //             })
-  //             setCart([...newCart])
-  //             return
-  //           }
-  //         })
-  //       }
-  //       if (voucher.voucherProductAuthor.length !== 0) {
-  //         voucher.voucherProductAuthor.forEach((v) => {
-  //           if (product.author === v) {
-  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
-  //             product = { ...product, priceAfter }
-  //             return
-  //           }
-  //         })
-  //       }
-  //       if (voucher.voucherProductPublisher.length !== 0) {
-  //         voucher.voucherProductPublisher.forEach((v) => {
-  //           if (product.publisher === v) {
-  //             const priceAfter = (product.price * voucher.voucherDiscount) / 100
-  //             product = { ...product, priceAfter }
-  //             return
-  //           }
-  //         })
-  //       }
-  //     })
-  //   }
-  // }, [voucher])
-
   const search = useLocation().search
   const vnpBankTranNo = new URLSearchParams(search).get('vnp_BankTranNo')
   const vnpcoderes = new URLSearchParams(search).get('vnp_ResponseCode')
   const vnpBankCode = new URLSearchParams(search).get('vnp_BankCode')
   const vnpCardType = new URLSearchParams(search).get('vnp_CardType')
+  const vnpReceiveName = new URLSearchParams(search).get('receiveName')
+  const vnpReceiveAddress = new URLSearchParams(search).get('receiveAddress')
+
   const vnpVoucherCode = new URLSearchParams(search).get('voucherCode')
 
   useEffect(() => {
     if (isFirstTime) {
       if (vnpcoderes === '00' || vnpcoderes === '97') {
-        if (info || orderInfo) vnpayCB()
+        if (vnpReceiveName && vnpReceiveAddress) vnpayCB()
       }
     }
-  }, [vnpcoderes, info, orderInfo, isFirstTime])
+  }, [isFirstTime, vnpcoderes, vnpReceiveName, vnpReceiveAddress])
   const handleCreateVnpay = async (amount) => {
     // const voucherCode = discount > 0 ? filterVoucher : null;
     try {
@@ -279,9 +225,11 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
       const data = {
         amount,
         voucherCode,
+        address: orderInfo.address ? orderInfo.address : info.address,
+        name: orderInfo.name ? orderInfo.name : info.name,
       }
       const res = await userApi.paymentVnpay(data)
-      console.log(res)
+
       window.location.replace(res.vnpUrl)
     } catch (err) {
       console.log(err.response.data)
@@ -289,6 +237,8 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   }
 
   const vnpayCB = async () => {
+    if (!isFirstTime) return
+
     document.body.classList.add('loading-data')
     const option = {
       type: 'VnPay payment',
@@ -311,8 +261,8 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
     const data = {
       cart,
       orderID: paymentID,
-      address: orderInfo.address ? orderInfo.address : info.address,
-      name: orderInfo.name ? orderInfo.name : info.name,
+      address: vnpReceiveAddress,
+      name: vnpReceiveName,
       option,
       voucherCode: vnpVoucherCode,
     }
@@ -329,7 +279,7 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
         toast.info('Let check order in infomation')
         document.body.classList.remove('loading-data')
       }, 5000)
-      closeModal()
+
       setIsFirstTime(false)
       return
     }

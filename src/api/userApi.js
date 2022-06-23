@@ -93,9 +93,9 @@ const userApi = {
     return axiosClient.post(url, { voucherCode })
   },
   paymentVnpay(data) {
-    const { amount, voucherCode } = data
+    const { amount, voucherCode, name, address } = data
     const url = '/api/payment/create_payment_url'
-    return axiosClient.post(url, { amount, voucherCode })
+    return axiosClient.post(url, { amount, voucherCode, name, address })
   },
 }
 export default userApi
