@@ -11,7 +11,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
     {
       field: 'name',
       headerName: 'Name',
-      width: 165,
+      minWidth: 165,
       editable: false,
       renderCell: (params) => {
         return (
@@ -22,11 +22,12 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 275.84,
+      minWidth: 275.84,
       renderCell: (params) => {
         return (
           <>
@@ -37,11 +38,12 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
         )
       },
       editable: false,
+      flex: 1,
     },
     {
       field: 'phone',
       headerName: 'Phone',
-      width: 117.93,
+      minWidth: 117.93,
       editable: false,
       renderCell: (params) => {
         return (
@@ -54,6 +56,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'address',
@@ -61,7 +64,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       editable: false,
-      width: 170.8,
+      minWidth: 170.8,
       renderCell: (params) => {
         return (
           <>
@@ -74,13 +77,14 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
           </>
         )
       },
+      flex: 1,
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
       field: 'role',
       headerName: 'Type',
-      width: 120.14,
+      minWidth: 90,
       editable: false,
       renderCell: (params) => {
         return (
@@ -91,11 +95,12 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'action',
       headerName: 'Action',
-      width: 90,
+      minWidth: 90,
       editable: false,
       renderCell: (params) => {
         return (
@@ -107,6 +112,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
           </>
         )
       },
+      flex: 1,
     },
   ]
   return (
@@ -118,7 +124,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
         pageSize={9}
         sx={{ height: 570, bgcolor: 'background.paper' }}
         // loading={true}
-        checkboxSelection
+        // checkboxSelection
         hideFooterPagination
         disableSelectionOnClick
         loading={loadingTable}

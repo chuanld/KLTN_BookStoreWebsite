@@ -40,6 +40,7 @@
 }
 .analytic .analytic-chart .analytic-chart-section {
   margin: 20px 0;
+  min-width: 1229px;
 }
 
 .analytic .analytic-chart .analytic-chart-section .form-date-container {
@@ -74,7 +75,8 @@
 }
 .analytic .chart-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
   background-color: rgb(236, 245, 236);
   border: none;
   border-radius: 5px;

@@ -15,13 +15,14 @@ function DataTableDiscount(props) {
     {
       field: 'product_id',
       headerName: 'Tag ID',
-      width: 70,
+      minWidth: 70,
       editable: false,
+      flex: 1,
     },
     {
       field: 'title',
       headerName: 'Title',
-      width: 280,
+      minWidth: 280,
       editable: false,
       renderCell: (params) => {
         return (
@@ -32,27 +33,31 @@ function DataTableDiscount(props) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'price',
       headerName: 'Price',
-      width: 80,
+      minWidth: 80,
       editable: false,
+      flex: 1,
     },
     {
       field: 'discount',
       headerName: 'Discount',
-      width: 100,
+      minWidth: 100,
       editable: false,
       renderCell: (params) => {
         return `${100 - params.row.discount}%`
       },
+      flex: 1,
     },
     {
       field: 'category',
       headerName: 'Category',
-      width: 130,
+      minWidth: 130,
       editable: false,
+      flex: 1,
     },
     {
       field: 'author',
@@ -60,24 +65,27 @@ function DataTableDiscount(props) {
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       editable: false,
-      width: 180,
+      minWidth: 180,
+      flex: 1,
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
       field: 'publisher',
       headerName: 'Publisher',
-      width: 180,
+      minWidth: 180,
       editable: false,
+      flex: 1,
     },
     {
       field: 'images',
       headerName: 'Image',
-      width: 140,
+      minWidth: 140,
       editable: false,
       renderCell: (params) => {
-        return <img src={params.row.images.url} alt='' height='120px' />
+        return <img src={params.row.images.url} alt="" height="120px" />
       },
+      flex: 1,
     },
   ]
   return (

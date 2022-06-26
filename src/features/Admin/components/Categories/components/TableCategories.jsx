@@ -28,14 +28,16 @@ function TableCategories(props) {
     {
       field: '_id',
       headerName: 'ID',
-      width: 270,
+      minWidth: 270,
       editable: false,
+      flex: 1,
     },
     {
       field: 'name',
       headerName: 'Name',
-      width: 320,
+      minWidth: 280,
       editable: false,
+      flex: 1,
     },
     // {
     //   field: 'price',
@@ -46,7 +48,7 @@ function TableCategories(props) {
     {
       field: 'include',
       headerName: 'Includes',
-      width: 140,
+      minWidth: 140,
       editable: false,
       renderCell: (params) => {
         return (
@@ -60,24 +62,27 @@ function TableCategories(props) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'createdAt',
       headerName: 'Create At',
-      width: 220,
+      minWidth: 220,
       editable: false,
       renderCell: (params) => {
         return <>{dateFormat(params.row.createdAt)}</>
       },
+      flex: 1,
     },
     {
       field: 'updatedAt',
       headerName: 'Update At',
-      width: 220,
+      minWidth: 220,
       editable: false,
       renderCell: (params) => {
         return <>{dateFormat(params.row.updatedAt)}</>
       },
+      flex: 1,
     },
   ]
   return (

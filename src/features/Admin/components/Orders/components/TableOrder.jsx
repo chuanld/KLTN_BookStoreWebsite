@@ -13,11 +13,17 @@ function TableOrder(props) {
     onSubmit(id, value)
   }
   const columns = [
-    { field: '_id', headerName: 'Order ID', width: 220, editable: false },
+    {
+      field: '_id',
+      headerName: 'Order ID',
+      width: 220,
+      editable: false,
+      flex: 1,
+    },
     {
       field: 'name',
       headerName: 'Name',
-      width: 155,
+      minWidth: 155,
       editable: false,
       renderCell: (params) => {
         return (
@@ -28,48 +34,53 @@ function TableOrder(props) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 260,
+      minWidth: 260,
       editable: false,
+      flex: 1,
     },
     {
       field: 'address',
       headerName: 'Address',
-      width: 150.93,
+      minWidth: 150.93,
       editable: false,
 
       renderCell: (params) => {
         return <>{Object.values(params.row.address)}</>
       },
+      flex: 1,
     },
     {
       field: 'option',
       headerName: 'Option',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 160,
+      minWidth: 160,
       renderCell: (params) => {
         return <>{params.row.option.type}</>
       },
+      flex: 1,
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
       field: 'createdAt',
       headerName: 'Date',
-      width: 95,
+      minWidth: 95,
       editable: false,
       renderCell: (params) => {
         return <>{new Date(params.row.createdAt).toLocaleDateString()}</>
       },
+      flex: 1,
     },
     {
       field: 'status',
       headerName: 'Status',
-      width: 130,
+      minWidth: 130,
       editable: false,
       renderCell: (params) => {
         return (
@@ -101,6 +112,7 @@ function TableOrder(props) {
           </>
         )
       },
+      flex: 1,
     },
   ]
 

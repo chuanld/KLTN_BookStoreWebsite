@@ -84,7 +84,13 @@ function SideBar() {
           <h3 className="sidebarTitle">Marketing</h3>
           <ul className="sidebarList">
             <Link to={'/admin/analytics'}>
-              <li className="sidebarListItem">
+              <li
+                className={
+                  objParams[2] === 'analytics'
+                    ? 'sidebarListItem active'
+                    : 'sidebarListItem '
+                }
+              >
                 <Timeline /> Analytics
               </li>
             </Link>

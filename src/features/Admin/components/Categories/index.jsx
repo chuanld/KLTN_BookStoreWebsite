@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import TableCategories from './components/TableCategories'
 import ModalCategory from './components/ModalCategory'
+import Breadcrumb from 'components/Breadcrumbs'
 
 function Categories() {
   const [categories, setCategories] = useState([])
@@ -100,6 +101,9 @@ function Categories() {
   }
   return (
     <>
+      <div className="session-heading">
+        <Breadcrumb />
+      </div>
       <div className="categoriesList">
         <div className="categoriesListTitle">
           <h4>System have {categories.length} categories</h4>

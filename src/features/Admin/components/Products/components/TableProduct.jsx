@@ -26,13 +26,14 @@ function TableProduct(props) {
     {
       field: 'product_id',
       headerName: 'Tag ID',
-      width: 90,
+      minWidth: 100,
       editable: false,
+      flex: 1,
     },
     {
       field: 'title',
       headerName: 'Title',
-      width: 300,
+      minWidth: 250,
       editable: false,
       renderCell: (params) => {
         return (
@@ -43,11 +44,12 @@ function TableProduct(props) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'price',
       headerName: 'Price',
-      width: 100,
+      minWidth: 90,
       renderCell: (params) => {
         return (
           <>
@@ -58,11 +60,12 @@ function TableProduct(props) {
         )
       },
       editable: false,
+      flex: 1,
     },
     {
       field: 'sold',
       headerName: 'Sold',
-      width: 80,
+      minWidth: 80,
       renderCell: (params) => {
         return (
           <>
@@ -74,11 +77,12 @@ function TableProduct(props) {
         )
       },
       editable: false,
+      flex: 1,
     },
     {
       field: 'category',
       headerName: 'Category',
-      width: 230,
+      minWidth: 210,
       renderCell: (params) => {
         return (
           <>
@@ -89,6 +93,7 @@ function TableProduct(props) {
         )
       },
       editable: false,
+      flex: 1,
     },
     {
       field: 'author',
@@ -96,7 +101,7 @@ function TableProduct(props) {
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       editable: false,
-      width: 180,
+      minWidth: 170,
       renderCell: (params) => {
         return (
           <>
@@ -106,13 +111,14 @@ function TableProduct(props) {
           </>
         )
       },
+      flex: 1,
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
       field: 'publisher',
       headerName: 'Publisher',
-      width: '180',
+      minWidth: 10,
       renderCell: (params) => {
         return (
           <>
@@ -123,6 +129,7 @@ function TableProduct(props) {
         )
       },
       editable: false,
+      flex: 1,
     },
     {
       field: 'images',
@@ -138,6 +145,7 @@ function TableProduct(props) {
           </>
         )
       },
+      flex: 1,
     },
     // {
     //   field: 'action',
@@ -173,7 +181,7 @@ function TableProduct(props) {
   ]
   return (
     <>
-      <div style={{ height: 500, width: '100%' }}>
+      <div style={{ minHeight: 500, width: '100%' }}>
         <DataGrid
           rows={products}
           getRowId={(row) => row._id}
@@ -182,7 +190,7 @@ function TableProduct(props) {
           pageSize={9}
           sx={{ height: 570, bgcolor: 'background.paper' }}
           // loading={true}
-          checkboxSelection={true}
+          // checkboxSelection={true}
           hideFooterPagination
           disableSelectionOnClick
           loading={loadingTable}
