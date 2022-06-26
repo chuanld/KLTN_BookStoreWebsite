@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { StorageKeys } from '../constant/storageKey'
+import { DOMAIN_SERVER, StorageKeys } from '../constant/storageKey'
 
 const axiosClient = axios.create({
-  baseURL: 'https://app-bookstore-kltn.herokuapp.com/',
-  // baseURL: 'http://localhost:5000/',
+  baseURL: DOMAIN_SERVER.PROD,
+  // baseURL: DOMAIN_SERVER.TEST,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -52,6 +52,7 @@ axiosClient.interceptors.request.use(
       '/api/discount/checkvalid',
       '/api/analytic',
       '/api/payment/create_payment_url',
+      '/api/log',
     ]
     const URLSADMIN = [
       '/user/all_infor',
@@ -111,6 +112,7 @@ axiosClient.interceptors.request.use(
       '/api/order',
       '/api/products/event_disc',
       '/api/discount',
+      '/api/log',
     ]
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item)

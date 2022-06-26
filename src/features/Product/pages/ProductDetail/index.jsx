@@ -14,20 +14,21 @@ import QuickReview from './components/QuickReview'
 import HeadingInfo from './components/HeadingInfo'
 import RelateProducts from './components/RelateProducts'
 import DetailReview from './components/DetailReview'
+import categoryApi from 'api/categoryApi'
 
-const { io } = require('socket.io-client')
-
-function DetailProduct() {
+function DetailProduct(props) {
+  const { socket } = props
   const params = useParams()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.current)
 
   const [detailProduct, setDetailProduct] = useState([])
+  const [category, setCategory] = useState()
 
   const [onLoad, setOnLoad] = useState(false)
   const [showComments, setShowComment] = useState(false)
 
-  const [socket, setSocket] = useState(null)
+  // const [socket, setSocket] = useState(null)
 
   useEffect(() => {
     ;(async function () {
@@ -39,15 +40,15 @@ function DetailProduct() {
   }, [params])
 
   //Socket ConfigConnection
-  useEffect(() => {
-    // const socket = io('http://localhost:5000', { transports: ['websocket'] })
-    const socket = io('https://app-bookstore-kltn.herokuapp.com', {
-      transports: ['websocket'],
-    })
-    setSocket(socket)
+  // useEffect(() => {
+  //   // const socket = io('http://localhost:5000', { transports: ['websocket'] })
+  //   const socket = io(DOMAIN_SERVER.TEST, {
+  //     transports: ['websocket'],
+  //   })
+  //   setSocket(socket)
 
-    return () => socket.close()
-  }, [])
+  //   return () => socket.close()
+  // }, [])
 
   //Realtime + joinRoom
   useEffect(() => {
@@ -55,6 +56,22 @@ function DetailProduct() {
       socket.emit('johnBookDetail', params.id)
     }
   }, [socket, params.id])
+
+  console.log(category, 'categoryyyyyy')
+
+  useEffect(() => {
+    if (params && detailProduct.category) {
+      getFCategoryById(detailProduct.category)
+    }
+  }, [params, detailProduct])
+  const getFCategoryById = async (id) => {
+    try {
+      const res = await categoryApi.getCategoryById(id)
+      setCategory(res.category)
+    } catch (err) {
+      toast.error(err.response.data.msg)
+    }
+  }
 
   const addCart = async (productId, qtyAmount) => {
     if (user) {
@@ -82,7 +99,11 @@ function DetailProduct() {
     <>
       <Breadcrumb params={params} />
       <div className="detail-product">
-        <HeadingInfo product={detailProduct} onSubmit={addCart} />
+        <HeadingInfo
+          product={detailProduct}
+          onSubmit={addCart}
+          category={category}
+        />
         <div className="detail-info">
           <div className="product_content">
             <div className="container">

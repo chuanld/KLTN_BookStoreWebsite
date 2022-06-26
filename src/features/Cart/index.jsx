@@ -54,7 +54,7 @@ function Cart() {
     if (user?.cart) {
       setCart(user.cart)
     }
-  }, [user.cart])
+  }, [user?.cart])
 
   const [modalIsOpen, setIsOpen] = useState(false)
 

@@ -28,6 +28,7 @@ function Products({ showLoading, hideLoading }) {
   const [isCheck, setIsCheck] = useState(false)
   const [enableDel, setEnableDel] = useState(false)
   const [callback, setCallback] = useState(false)
+  const [isDisplay, setIsDisplay] = useState(false)
 
   const [selectionRow, setSelectionRow] = useState([])
   const submitSelectRow = (selects) => {
@@ -185,7 +186,7 @@ function Products({ showLoading, hideLoading }) {
                   Delete
                 </button>
               ) : null} */}
-              {selectionRow.length !== 0 && (
+              {selectionRow.length !== 0 && isDisplay && (
                 <button
                   className="productDelAllButton"
                   onClick={submitDeleteSelect}

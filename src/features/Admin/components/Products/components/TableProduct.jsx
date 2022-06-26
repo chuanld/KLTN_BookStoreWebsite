@@ -51,7 +51,9 @@ function TableProduct(props) {
       renderCell: (params) => {
         return (
           <>
-            <p>{formatCurrency(params.row.price)}</p>
+            <Link to={`${path}/${params.row._id}`}>
+              <p>{formatCurrency(params.row.price)}</p>
+            </Link>
           </>
         )
       },
@@ -64,7 +66,10 @@ function TableProduct(props) {
       renderCell: (params) => {
         return (
           <>
-            <p>SL:({params.row.sold})</p>
+            <Link to={`${path}/${params.row._id}`}>
+              {' '}
+              <p>SL:({params.row.sold})</p>
+            </Link>
           </>
         )
       },
@@ -74,6 +79,15 @@ function TableProduct(props) {
       field: 'category',
       headerName: 'Category',
       width: 230,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`${path}/${params.row._id}`}>
+              <p>{params.row.category}</p>
+            </Link>
+          </>
+        )
+      },
       editable: false,
     },
     {
@@ -83,6 +97,15 @@ function TableProduct(props) {
       sortable: false,
       editable: false,
       width: 180,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`${path}/${params.row._id}`}>
+              <p>{params.row.author}</p>
+            </Link>
+          </>
+        )
+      },
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
@@ -90,6 +113,15 @@ function TableProduct(props) {
       field: 'publisher',
       headerName: 'Publisher',
       width: '180',
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`${path}/${params.row._id}`}>
+              <p>{params.row.publisher}</p>
+            </Link>
+          </>
+        )
+      },
       editable: false,
     },
     {
@@ -98,7 +130,13 @@ function TableProduct(props) {
       minWidth: 140,
       editable: false,
       renderCell: (params) => {
-        return <img src={params.row.images.url} alt="" height="120px" />
+        return (
+          <>
+            <Link to={`${path}/${params.row._id}`}>
+              <img src={params.row.images.url} alt="" height="120px" />
+            </Link>
+          </>
+        )
       },
     },
     // {

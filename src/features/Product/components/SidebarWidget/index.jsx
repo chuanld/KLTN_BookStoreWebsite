@@ -357,7 +357,7 @@ export default function SidebarWidget(props) {
                         : 'widget_sub_categories sub_categories1 btn-child '
                     }
                     key={category._id}
-                    onClick={() => SelectCategory(category.name)}
+                    onClick={() => SelectCategory(category._id)}
                   >
                     <ListItemText primary={category.name} />
                   </ListItem>

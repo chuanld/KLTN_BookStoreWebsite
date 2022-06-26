@@ -129,7 +129,7 @@ function Comments(props) {
       })
 
       // const res = await commentApi.updateRating(product._id, values.rate)
-      //toast.success(res.msg)
+      // toast.success(res.msg)
     } catch (err) {
       console.log(err)
     }

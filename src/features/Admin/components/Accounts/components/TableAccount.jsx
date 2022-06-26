@@ -27,6 +27,15 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
       field: 'email',
       headerName: 'Email',
       width: 275.84,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`${path}/${params.row._id}`}>
+              <p>{params.row.email}</p>
+            </Link>
+          </>
+        )
+      },
       editable: false,
     },
     {
@@ -37,7 +46,11 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
       renderCell: (params) => {
         return (
           <>
-            <p>{params.row.phone ? params.row.phone : <i>Updating...</i>}</p>
+            {' '}
+            <Link to={`${path}/${params.row._id}`}>
+              {' '}
+              <p>{params.row.phone ? params.row.phone : <i>Updating...</i>}</p>
+            </Link>
           </>
         )
       },
@@ -52,9 +65,12 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
       renderCell: (params) => {
         return (
           <>
-            <p>
-              {params.row.address ? params.row.address : <i>Updating...</i>}
-            </p>
+            <Link to={`${path}/${params.row._id}`}>
+              {' '}
+              <p>
+                {params.row.address ? params.row.address : <i>Updating...</i>}
+              </p>
+            </Link>
           </>
         )
       },
@@ -67,7 +83,13 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
       width: 120.14,
       editable: false,
       renderCell: (params) => {
-        return <>{params.row.role === 1 ? 'Admin' : 'User'}</>
+        return (
+          <>
+            <Link to={`${path}/${params.row._id}`}>
+              <p>{params.row.role === 1 ? 'Admin' : 'User'}</p>
+            </Link>
+          </>
+        )
       },
     },
     {
@@ -80,7 +102,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
           <>
             <DeleteForever
               className="userListDelete"
-              onClick={() => deleteSubmit(params.user._id, params.user.email)}
+              onClick={() => deleteSubmit(params.row._id)}
             />
           </>
         )
@@ -98,7 +120,7 @@ function TableAccount({ accounts, deleteSubmit, loadingTable }) {
         // loading={true}
         checkboxSelection
         hideFooterPagination
-        // disableSelectionOnClick
+        disableSelectionOnClick
         loading={loadingTable}
       />
     </div>

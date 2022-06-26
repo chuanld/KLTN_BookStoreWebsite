@@ -142,21 +142,9 @@ function FormCreateProduct(props) {
         />
       </div>
 
-      {/* <div className='row'>
-        <label htmlFor='categories'>Categories: </label>
-        <select name='category' value={product.category}>
-          <option value=''>Select a category</option>
-          {categories.map((category) => (
-            <option key={category._id} value={category.name}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div> */}
       <div className="row update-info-book">
         <SelectField
           name="category"
-          //   placeholder={product.category}
           form={form}
           label="Category"
           height={'55px'}

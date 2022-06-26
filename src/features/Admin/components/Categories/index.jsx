@@ -81,7 +81,7 @@ function Categories() {
       setCategory('')
       setCallback(!callback)
     } catch (err) {
-      toast.error(err.response.msg)
+      toast.error(err.response.data.msg)
     }
   }
   const handleDeleteListItem = () => {
@@ -100,13 +100,13 @@ function Categories() {
   }
   return (
     <>
-      <div className='categoriesList'>
-        <div className='categoriesListTitle'>
+      <div className="categoriesList">
+        <div className="categoriesListTitle">
           <h4>System have {categories.length} categories</h4>
-          <div className='create-category'>
+          <div className="create-category">
             {selectionRow.length !== 0 && (
               <button
-                className='productDelAllButton'
+                className="productDelAllButton"
                 onClick={handleDeleteListItem}
               >
                 Delete ({selectionRow.length})
@@ -114,14 +114,14 @@ function Categories() {
             )}
             {selectionRow.length === 1 ? (
               <button
-                className='btn-create-category'
+                className="btn-create-category"
                 onClick={() => handleOpenEditCate(selectionRow[0].toString())}
               >
                 Edit item
               </button>
             ) : (
               <button
-                className='btn-create-category'
+                className="btn-create-category"
                 onClick={handleOpenCreateCate}
               >
                 Create Cate
@@ -129,7 +129,7 @@ function Categories() {
             )}
           </div>
         </div>
-        <div className='categories-list'>
+        <div className="categories-list">
           <TableCategories
             categories={categories}
             onSubmit={handleFilterChange}
@@ -138,7 +138,7 @@ function Categories() {
           />
         </div>
       </div>
-      <div className='form-category-modal'>
+      <div className="form-category-modal">
         {/* <Modal
       isOpen={modalIsOpen}
       onAfterOpen={afterOpenModal}

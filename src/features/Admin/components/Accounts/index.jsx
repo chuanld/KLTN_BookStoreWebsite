@@ -7,6 +7,7 @@ import Paginate from './components/Paginate'
 import FilterTab from './components/FilterTab'
 import withLoading from 'components/HOC/withLoading'
 import Breadcrumb from 'components/Breadcrumbs'
+import { toast } from 'react-toastify'
 
 const queryString = require('query-string')
 
@@ -70,8 +71,8 @@ function Accounts({ showLoading, hideLoading }) {
     })
   }
 
-  const deleteSubmit = async (id, email) => {
-    console.log(email, 'Account will be remove ?')
+  const deleteSubmit = async (id) => {
+    toast.error('Cannot delete', id)
   }
 
   // const mapListAccout = accounts.map((user)=>{
@@ -81,28 +82,28 @@ function Accounts({ showLoading, hideLoading }) {
   // })
   return (
     <>
-      <div className='session-heading'>
+      <div className="session-heading">
         <Breadcrumb />
       </div>
-      <div className='userlist'>
-        <div className='userListTitle'>
+      <div className="userlist">
+        <div className="userListTitle">
           <h4>List user in Database</h4>
-          <Link to='/admin/accounts/create'>
-            <button className='userAddButton'>Create User</button>
+          <Link to="/admin/accounts/create">
+            <button className="userAddButton">Create User</button>
           </Link>
         </div>
-        <div className='userList_toolbar_wrapper'>
+        <div className="userList_toolbar_wrapper">
           <FilterTab params={queryParams} onSubmit={handleFilterChanges} />
         </div>
-        <div className='usersList'>
+        <div className="usersList">
           <TableAccount
             accounts={accounts}
-            onSubmit={deleteSubmit}
+            deleteSubmit={deleteSubmit}
             loadingTable={loadingTable}
           />
         </div>
         {/* {accounts.length === 0 && <Loading />} */}
-        <div className='pagination-container'>
+        <div className="pagination-container">
           <Paginate
             params={queryParams}
             totalPage={totalPage}

@@ -8,6 +8,7 @@ import commentApi from 'api/commentApi'
 import userApi from 'api/userApi'
 import Comments from './components/Comments'
 import FilterTab from './components/FilterTab'
+import dayjs from 'dayjs'
 
 const initialState = {
   comment: '',
@@ -61,6 +62,25 @@ function DetailReview(props) {
         rating: values.rate,
       })
       const res = await commentApi.updateRating(product._id, values.rate)
+      const userSendNotify = {
+        name: user.name,
+        id: user._id,
+      }
+      const userSendProduct = {
+        id: product._id,
+        title: product.title,
+      }
+
+      socket.emit('sendNotificationRating', {
+        senderType: 'rating-book',
+        senderUser: userSendNotify,
+        senderData: {
+          rate: values.rate,
+          content: values.comment,
+        },
+        senderTime: dayjs().toISOString(),
+        senderObj: userSendProduct,
+      })
       toast.success(res.msg)
       setValues(initialState)
       setCallback(!callback)
@@ -69,69 +89,69 @@ function DetailReview(props) {
 
   const rate = product.rating / product.countReviews || 0
   return (
-    <div className='detail-comment'>
-      <div className='customer-review-heading'>
+    <div className="detail-comment">
+      <div className="customer-review-heading">
         Đánh Giá - Nhận Xét Từ Khách Hàng
       </div>
-      <div className='customer-review-container'>
-        <div className='customer-review-top'>
-          <div className='review-rating'>
-            <div className='review-rating-summary'>
-              <div className='review-rating-point'>{rate.toFixed(2)}</div>
-              <div className='review-rating-starts'>
-                <div className='count-starts'>
+      <div className="customer-review-container">
+        <div className="customer-review-top">
+          <div className="review-rating">
+            <div className="review-rating-summary">
+              <div className="review-rating-point">{rate.toFixed(2)}</div>
+              <div className="review-rating-starts">
+                <div className="count-starts">
                   <Rating precision={0.25} value={rate} readOnly />
                 </div>
-                <div className='review-rating-total'>
+                <div className="review-rating-total">
                   {product.countReviews} nhận xét
                 </div>
               </div>
             </div>
-            <div className='review-rating-detail'>
-              <div className='review-rating-level'>
-                <Rating name='size-small' value={5} size='small' readOnly />
+            <div className="review-rating-detail">
+              <div className="review-rating-level">
+                <Rating name="size-small" value={5} size="small" readOnly />
 
-                <div className='count-comments'>
-                  <div className='counts' style={{ width: '80%' }}></div>
+                <div className="count-comments">
+                  <div className="counts" style={{ width: '80%' }}></div>
                 </div>
-                <div className='review-rating__number'>57</div>
+                <div className="review-rating__number">57</div>
               </div>
-              <div className='review-rating-level'>
-                <Rating name='size-small' value={4} size='small' readOnly />
+              <div className="review-rating-level">
+                <Rating name="size-small" value={4} size="small" readOnly />
 
-                <div className='count-comments'>
-                  <div className='counts' style={{ width: '70%' }}></div>
+                <div className="count-comments">
+                  <div className="counts" style={{ width: '70%' }}></div>
                 </div>
-                <div className='review-rating__number'>57</div>
+                <div className="review-rating__number">57</div>
               </div>
-              <div className='review-rating-level'>
-                <Rating value={3} size='small' readOnly />
+              <div className="review-rating-level">
+                <Rating value={3} size="small" readOnly />
 
-                <div className='count-comments'>
-                  <div className='counts' style={{ width: '60%' }}></div>
+                <div className="count-comments">
+                  <div className="counts" style={{ width: '60%' }}></div>
                 </div>
-                <div className='review-rating__number'>57</div>
+                <div className="review-rating__number">57</div>
               </div>
-              <div className='review-rating-level'>
-                <Rating value={2} size='small' readOnly />
+              <div className="review-rating-level">
+                <Rating value={2} size="small" readOnly />
 
-                <div className='count-comments'>
-                  <div className='counts' style={{ width: '20%' }}></div>
+                <div className="count-comments">
+                  <div className="counts" style={{ width: '20%' }}></div>
                 </div>
-                <div className='review-rating__number'>57</div>
+                <div className="review-rating__number">57</div>
               </div>
-              <div className='review-rating-level'>
-                <Rating value={1} size='small' readOnly />
+              <div className="review-rating-level">
+                <Rating value={1} size="small" readOnly />
 
-                <div className='count-comments'>
-                  <div className='counts' style={{ width: '5%' }}></div>
+                <div className="count-comments">
+                  <div className="counts" style={{ width: '5%' }}></div>
                 </div>
-                <div className='review-rating__number'>57</div>
+                <div className="review-rating__number">57</div>
               </div>
             </div>
           </div>
           <div>
-            <div className='comment-username-display'>
+            <div className="comment-username-display">
               <div>
                 <span>Commentator: {info.name}</span>
               </div>
@@ -140,51 +160,51 @@ function DetailReview(props) {
               </div>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className='review-rating-display'>
+              <div className="review-rating-display">
                 <div>
                   <span>Rating: </span>
                 </div>
-                <div className='star-display'>
+                <div className="star-display">
                   <Rating
                     value={values.rate}
                     precision={0.5}
-                    size='small'
+                    size="small"
                     onChange={(event, newValue) => {
                       setValues({ ...values, rate: newValue })
                     }}
                   />
                 </div>
               </div>
-              <div className='review-txt-comment'>
-                <div className='qna-ask-box-container'>
-                  <div className='qna-ask-box unfolded'>
-                    <span className='next-input next-input-multiple qna-ask-input'>
+              <div className="review-txt-comment">
+                <div className="qna-ask-box-container">
+                  <div className="qna-ask-box unfolded">
+                    <span className="next-input next-input-multiple qna-ask-input">
                       <textarea
-                        name='comment'
-                        placeholder='Enter your question(s) here'
-                        rows='5'
-                        maxLength='300'
-                        type='text'
-                        height='100%'
+                        name="comment"
+                        placeholder="Enter your question(s) here"
+                        rows="5"
+                        maxLength="300"
+                        type="text"
+                        height="100%"
                         value={values.comment}
-                        data-spm-anchor-id='a2o4n.pdp_revamp.0.i2.22e92d9ezvLKzn'
+                        data-spm-anchor-id="a2o4n.pdp_revamp.0.i2.22e92d9ezvLKzn"
                         onChange={onChangeInput}
                       ></textarea>
-                      <span className='next-input-control'>
-                        <span className='next-input-len'>
+                      <span className="next-input-control">
+                        <span className="next-input-len">
                           {values.comment.length}/300
                         </span>
                       </span>
                     </span>
-                    <div className='qna-box-footer'>
-                      <div className='qna-ask-box-tips'>
+                    <div className="qna-box-footer">
+                      <div className="qna-ask-box-tips">
                         Your question should not contain contact information
                         such as email, phone or external web links. Visit " " if
                         you have questions about your previous order.
                       </div>
                       <button
-                        type='submit'
-                        className='next-btn next-btn-primary next-btn-medium qna-ask-btn'
+                        type="submit"
+                        className="next-btn next-btn-primary next-btn-medium qna-ask-btn"
                       >
                         ASK QUESTIONS
                       </button>

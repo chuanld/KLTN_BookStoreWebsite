@@ -4,6 +4,10 @@ const categoryApi = {
     const url = '/api/category'
     return axiosClient.get(url)
   },
+  getCategoryById(id) {
+    const url = `/api/category/${id}`
+    return axiosClient.get(url)
+  },
   createCategories(name) {
     const url = '/api/category'
     return axiosClient.post(url, { name })

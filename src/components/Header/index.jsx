@@ -1,25 +1,22 @@
-import {
-  AccountCircleOutlined,
-  NotificationImportantOutlined,
-  SearchOutlined,
-  ShoppingCart,
-} from '@mui/icons-material'
+import { SearchOutlined } from '@mui/icons-material'
 import ListIcon from '@mui/icons-material/List'
-import React, { useEffect, useState } from 'react'
+import { unwrapResult } from '@reduxjs/toolkit'
+import categoryApi from 'api/categoryApi'
+import { logout } from 'features/Auth/userSlice'
+import { useEffect, useState } from 'react'
 import Modal from 'react-modal'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink, useHistory, useLocation } from 'react-router-dom'
-import ModalAuth from '../../features/Auth/components/ModalAuth'
-import { closeModal, openModal } from '../../features/Auth/userSlice'
-import { logout } from 'features/Auth/userSlice'
-import { unwrapResult } from '@reduxjs/toolkit'
 import { LogoHeader } from 'template/assets/images/index'
-import categoryApi from 'api/categoryApi'
+import ModalAuth from '../../features/Auth/components/ModalAuth'
+import { closeModal } from '../../features/Auth/userSlice'
 
 import userApi from 'api/userApi'
-import { set } from 'react-hook-form'
+import HeaderCart from './components/Cart'
+import Notification from './components/Notification'
+import HeaderProfile from './components/Profile'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles1 = {
@@ -41,27 +38,20 @@ const customStyles1 = {
     transform: 'translate(-50%, -50%)',
   },
 }
-function Header() {
+function Header(props) {
+  const { socket } = props
   const [categories, setCategories] = useState([])
 
   const dispatch = useDispatch()
   const history = useHistory()
 
   const [searchInp, setSearchInp] = useState('')
-
   const [categoryInp, setCategoryInp] = useState('')
 
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen)
   const info = useSelector((state) => state.user.current)
-  // const [info, setInfo] = useState()
-  // useEffect(() => {
-  //   setInfo(JSON.parse(localStorage.getItem(StorageKeys.USER)))
-  // }, [])
-
   const cart = useSelector((state) => state.user.cartCurrent) || []
 
-  // const isLogged = info?.role === 0 || info?.role === 1 ? true : false || false
-  // const isAdmin = info?.role === 1 ? true : false || false
   const [isLogged, setIsLogged] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
 
@@ -113,26 +103,6 @@ function Header() {
       behavior: 'smooth',
     })
   }
-  const accountAdmin = () => {
-    return (
-      <>
-        <Link to="/account" className="auth_acc">
-          <p>Admin</p>
-          <p>Hi {info?.name}</p>
-        </Link>
-      </>
-    )
-  }
-  const accountUser = () => {
-    return (
-      <>
-        <Link to="/account" className="auth_acc">
-          <p>Account</p>
-          <p>Hi {info?.name}</p>
-        </Link>
-      </>
-    )
-  }
 
   const logoutUser = async () => {
     const action = logout()
@@ -141,6 +111,8 @@ function Header() {
     if (res.status === 0) {
       return toast.error(res.data.msg)
     }
+    history.push('/')
+    socket.disconnect()
     toast.success('See you again ^^')
   }
 
@@ -158,32 +130,6 @@ function Header() {
   return (
     <>
       <div className="main_header">
-        {/* <div class="header_top">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-lg-7 col-md-7">
-                <div class="welcome-text">
-                  <p>Free Delivery: </p>
-                </div>
-              </div>
-              <div class="col-lg-5 col-md-5">
-                <div class="language_currency text-right">
-                  <ul>
-                    <li class="language">
-                      English <i class="fa fa-angle-down"></i>
-                      <ul class="dropdown_language">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         <div className="header_middle">
           <div className="container">
             <div className="row align-items-center">
@@ -227,41 +173,29 @@ function Header() {
                     </form>
                   </div>
                   <div className="header_account_area">
-                    <div className="header_account-list top_links">
-                      {/* {info && isLogged && cart.length !== 0 ? (
-                        <span className='count'>{cart.length}</span>
-                      ) : null}
-                      <NotificationImportantOutlined className='icon-users' />
-                      {info && isLogged && cart.length !== 0 ? (
-                        <ul className='dropdown_links'>
-                          {cart.map((item) => (
-                            <li key={item._id}>
-                              <Link to='#'>{item.product_id} </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null} */}
-                    </div>
+                    {info && isAdmin && (
+                      <div className="header_account-list mini_cart_wrapper top_links">
+                        <Notification
+                          socket={socket}
+                          info={info}
+                          isAdmin={isAdmin}
+                        />
+                      </div>
+                    )}
                     <div className="header_account-list mini_cart_wrapper top_links">
-                      {info && isLogged && cart.length !== 0 ? (
-                        <span className="count">{cart.length}</span>
-                      ) : null}
-                      <ShoppingCart className="icon-users" />
-                      {info && isLogged && cart.length !== 0 ? (
-                        <ul className="dropdown_links dropdown-custome-cart">
-                          {cart.map((item) => (
-                            <li key={item._id}>
-                              <Link to="/cart">{item.title} </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
+                      <div className="header-mmini-cart">
+                        <HeaderCart
+                          isLogged={isLogged}
+                          info={info}
+                          cart={cart}
+                        />
+                      </div>
                     </div>
                     <div className="header_account-list header_wishlist top_links">
                       <div className="row">
-                        <AccountCircleOutlined className="icon-users" />
+                        {/* <AccountCircleOutlined className="icon-users" /> */}
                         {/* <i class='fas fa-user' style={{ fontSize: '25px' }} /> */}
-                        <div className="col">
+                        {/* <div className="col">
                           {info && isAdmin ? (
                             accountAdmin()
                           ) : info && isLogged ? (
@@ -276,8 +210,14 @@ function Header() {
                               <p>Account</p>
                             </Link>
                           )}
-                        </div>
-                        {info && isLogged ? (
+                        </div> */}
+                        <HeaderProfile
+                          info={info}
+                          isLogged={isLogged}
+                          isAdmin={isAdmin}
+                          logoutUser={logoutUser}
+                        />
+                        {/* {info && isLogged ? (
                           <ul className="dropdown_links">
                             <li>
                               <Link to="/account/infor">Information</Link>
@@ -291,7 +231,7 @@ function Header() {
                               </Link>
                             </li>
                           </ul>
-                        ) : null}
+                        ) : null} */}
                       </div>
                     </div>
                   </div>

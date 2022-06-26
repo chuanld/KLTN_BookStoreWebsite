@@ -5,7 +5,7 @@ import { Rating } from '@mui/material'
 import { formatCurrency } from 'utils/Format'
 
 function HeadingInfo(props) {
-  const { product, onSubmit } = props
+  const { product, category, onSubmit } = props
   const [quantityAmount, setQuantityAmount] = useState(1)
   const rate = product.rating / product.countReviews || 0
   const priceAfterDiscount = ((product.price * product.discount) / 100).toFixed(
@@ -45,7 +45,7 @@ function HeadingInfo(props) {
           )}
           <div className="row box-detail-wrapper_rating">
             <div className="rating">
-              <Rating precision={0.25} size="small" value={rate} />
+              <Rating precision={0.25} size="small" value={rate} readOnly />
             </div>
             <p className="">({product.countReviews}) lượt đánh giá</p>
           </div>
@@ -56,7 +56,7 @@ function HeadingInfo(props) {
           {product.description}
         </p>
 
-        <p>Thể loại: {product.category}</p>
+        <p>Thể loại: {category?.name}</p>
         <p>Tác giả: {product.author}</p>
         <p>NXB: {product.publisher}</p>
         <p>Sold: {product.sold}</p>

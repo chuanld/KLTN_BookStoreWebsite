@@ -46,7 +46,7 @@ function SelectField(props) {
               style={{ height: height, width: width }}
             >
               {options.map((item) => (
-                <MenuItem value={item.name} key={item._id}>
+                <MenuItem value={item._id} key={item._id}>
                   {item.name}
                 </MenuItem>
               ))}
