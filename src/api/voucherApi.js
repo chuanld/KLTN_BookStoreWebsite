@@ -19,7 +19,10 @@ const voucherApi = {
       voucherProductCategory,
       voucherProductAuthor,
       createdBy,
+      voucherExpire,
+      voucherEffect,
     } = values
+    console.log(voucherExpire, voucherEffect)
     const url = `/api/discount`
     return axiosClient.post(url, {
       voucherCode,
@@ -31,6 +34,8 @@ const voucherApi = {
       voucherProductCategory,
       voucherProductAuthor,
       createdBy,
+      voucherExpire,
+      voucherEffect,
     })
   },
   updateVoucher(values) {

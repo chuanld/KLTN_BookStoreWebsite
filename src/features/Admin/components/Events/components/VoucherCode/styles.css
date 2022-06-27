@@ -53,6 +53,13 @@
 .voucher
   .voucher-table
   .discount-hastag
+  .discount-hastag-wrapper.__id
+  .discount-hastag-item {
+  background-color: #1192b3;
+}
+.voucher
+  .voucher-table
+  .discount-hastag
   .discount-hastag-wrapper.__category
   .discount-hastag-item {
   background-color: #087b39;

@@ -3,6 +3,7 @@ import { DeleteForever } from '@mui/icons-material'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
 import { formatCurrency } from 'utils/Format'
+import categoryApi from 'api/categoryApi'
 
 function TableProduct(props) {
   const {
@@ -16,6 +17,19 @@ function TableProduct(props) {
   } = props
 
   const { path } = useRouteMatch()
+  const [categories, setCategories] = useState([])
+
+  const getCategoriesData = async () => {
+    try {
+      const res = await categoryApi.getCategories()
+      setCategories(res)
+    } catch (err) {}
+  }
+  useEffect(() => {
+    if (products.length > 0) {
+      getCategoriesData()
+    }
+  }, [products])
 
   const setSelect = (selects) => {
     if (!submitSelectRow) return
@@ -87,7 +101,13 @@ function TableProduct(props) {
         return (
           <>
             <Link to={`${path}/${params.row._id}`}>
-              <p>{params.row.category}</p>
+              {categories.length > 0 &&
+                categories.map((item) => {
+                  if (item._id === params.row.category) {
+                    return <p>{item.name}</p>
+                  }
+                  return undefined
+                })}
             </Link>
           </>
         )
@@ -118,7 +138,7 @@ function TableProduct(props) {
     {
       field: 'publisher',
       headerName: 'Publisher',
-      minWidth: 10,
+      minWidth: 100,
       renderCell: (params) => {
         return (
           <>
@@ -134,7 +154,7 @@ function TableProduct(props) {
     {
       field: 'images',
       headerName: 'Image',
-      minWidth: 140,
+      minWidth: 100,
       editable: false,
       renderCell: (params) => {
         return (

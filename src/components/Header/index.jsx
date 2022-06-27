@@ -152,7 +152,7 @@ function Header(props) {
                         >
                           <option value="">All Categories</option>
                           {categories.map((category) => (
-                            <option value={category.name} key={category._id}>
+                            <option value={category._id} key={category._id}>
                               {category.name}
                             </option>
                           ))}
@@ -253,7 +253,7 @@ function Header(props) {
                   <ul className="dropdown_links1">
                     {categories.map((category) => (
                       <li key={category._id}>
-                        <Link to={`/products?${'category=' + category.name}`}>
+                        <Link to={`/products?${'category=' + category._id}`}>
                           {category.name}
                         </Link>
                       </li>

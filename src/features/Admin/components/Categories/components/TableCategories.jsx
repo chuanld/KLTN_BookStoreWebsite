@@ -55,7 +55,7 @@ function TableCategories(props) {
           <>
             (
             {
-              products.filter((product) => product.category === params.row.name)
+              products.filter((product) => product.category === params.row._id)
                 .length
             }
             ) Books

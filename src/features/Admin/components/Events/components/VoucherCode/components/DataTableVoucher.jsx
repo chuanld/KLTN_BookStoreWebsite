@@ -1,9 +1,34 @@
 import { DataGrid } from '@mui/x-data-grid'
-import React from 'react'
+import adminApi from 'api/adminApi'
+import categoryApi from 'api/categoryApi'
+import productApi from 'api/productApi'
+import React, { useEffect, useState } from 'react'
 
 function DataTableVoucher(props) {
   const { vouchers, onEditVoucher, isLoading, selectionRow, submitSelectRow } =
     props
+
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+
+  const getProductsData = async () => {
+    try {
+      const res = await adminApi.getAllProducts()
+      setProducts(res.allproducts)
+    } catch (err) {}
+  }
+  const getCategoriesData = async () => {
+    try {
+      const res = await categoryApi.getCategories()
+      setCategories(res)
+    } catch (err) {}
+  }
+  useEffect(() => {
+    if (vouchers.length > 0) {
+      getCategoriesData()
+      getProductsData()
+    }
+  }, [vouchers])
 
   const handleEditVoucher = (voucher) => {
     if (!onEditVoucher) return
@@ -17,13 +42,14 @@ function DataTableVoucher(props) {
     {
       field: 'voucherCode',
       headerName: 'Voucher Code',
-      width: 170,
+      minWidth: 170,
       editable: false,
+      flex: 1,
     },
     {
       field: 'voucherDiscount',
       headerName: '% Discount Voucher',
-      width: 200,
+      minWidth: 200,
       editable: false,
       renderCell: (params) => {
         return (
@@ -34,49 +60,72 @@ function DataTableVoucher(props) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'voucherStock',
       headerName: 'Stock',
-      width: 80,
+      minWidth: 80,
       editable: false,
     },
     {
       field: '_id',
       headerName: 'Discount On',
-      width: 220,
+      minWidth: 220,
       editable: false,
       renderCell: (params) => {
         return (
           <>
             <div className="discount-hastag">
-              {params.row.voucherProductId.length !== 0 && (
+              {params.row.voucherProductId.length !== 0 && products.length > 0 && (
                 <div className="discount-hastag-container">
-                  {params.row.voucherProductId.map((item) => (
-                    <>
-                      <div className="discount-hastag-wrapper __id" key={item}>
-                        <span className="discount-hastag-item">{item}</span>
-                        <span className="discount-hastag-close">X</span>
-                      </div>
-                    </>
-                  ))}
+                  {params.row.voucherProductId.map((item) => {
+                    return products.map((prod) => {
+                      if (item === prod._id) {
+                        return (
+                          <>
+                            <div
+                              className="discount-hastag-wrapper __id"
+                              key={item}
+                            >
+                              <span className="discount-hastag-item">
+                                {prod.title}
+                              </span>
+                              <span className="discount-hastag-close">X</span>
+                            </div>
+                          </>
+                        )
+                      }
+                      return undefined
+                    })
+                  })}
                 </div>
               )}
-              {params.row.voucherProductCategory.length !== 0 && (
-                <div className="discount-hastag-container">
-                  {params.row.voucherProductCategory.map((item) => (
-                    <>
-                      <div
-                        className="discount-hastag-wrapper __category"
-                        key={item}
-                      >
-                        <span className="discount-hastag-item">{item}</span>
-                        <span className="discount-hastag-close">X</span>
-                      </div>
-                    </>
-                  ))}
-                </div>
-              )}
+              {params.row.voucherProductCategory.length !== 0 &&
+                categories.length > 0 && (
+                  <div className="discount-hastag-container">
+                    {params.row.voucherProductCategory.map((item) => {
+                      return categories.map((cate) => {
+                        if (item === cate._id) {
+                          return (
+                            <>
+                              <div
+                                className="discount-hastag-wrapper __category"
+                                key={cate._id}
+                              >
+                                <span className="discount-hastag-item">
+                                  {cate.name}
+                                </span>
+                                <span className="discount-hastag-close">X</span>
+                              </div>
+                            </>
+                          )
+                        }
+                        return null
+                      })
+                    })}
+                  </div>
+                )}
               {params.row.voucherProductPublisher.length !== 0 && (
                 <div className="discount-hastag-container">
                   {params.row.voucherProductPublisher.map((item) => (
@@ -111,6 +160,7 @@ function DataTableVoucher(props) {
           </>
         )
       },
+      flex: 1,
     },
     {
       field: 'createdBy',
@@ -118,22 +168,25 @@ function DataTableVoucher(props) {
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       editable: false,
-      width: 180,
+      minWidth: 180,
+      flex: 1,
     },
     {
       field: 'modifiedBy',
       headerName: 'Modified By',
-      width: 180,
+      minWidth: 180,
       editable: false,
+      flex: 1,
     },
     {
       field: 'updatedAt',
       headerName: 'Updated At',
-      width: 140,
+      minWidth: 140,
       editable: false,
       renderCell: (params) => {
         return <p>{new Date(params.row.updatedAt).toDateString()}</p>
       },
+      flex: 1,
     },
   ]
 
@@ -143,7 +196,7 @@ function DataTableVoucher(props) {
         <DataGrid
           rows={vouchers}
           getRowId={(row) => row._id}
-          rowHeight={100}
+          rowHeight={150}
           columns={columns}
           pageSize={9}
           sx={{ height: 650, bgcolor: 'background.paper' }}

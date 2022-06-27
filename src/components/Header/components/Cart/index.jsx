@@ -140,7 +140,7 @@ function HeaderCart(props) {
                         >
                           {item.title}
 
-                          <Rating value={item.rating} size="small" />
+                          <Rating value={item.rating} size="small" readOnly />
                         </Box>
                       </>
                     }

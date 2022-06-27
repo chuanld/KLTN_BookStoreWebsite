@@ -488,7 +488,7 @@ function FormEditVoucher(props) {
                   >
                     {/* <MenuItem value=''></MenuItem> */}
                     {categories.map((category) => (
-                      <MenuItem value={category.name} key={category._id}>
+                      <MenuItem value={category._id} key={category._id}>
                         {category.name}
                       </MenuItem>
                     ))}

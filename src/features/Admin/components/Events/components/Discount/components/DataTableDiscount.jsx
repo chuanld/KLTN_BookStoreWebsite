@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
+import { formatCurrency } from 'utils/Format'
 
 function DataTableDiscount(props) {
   const { products, submitSelectRow, selectionRow, loadingTable } = props
@@ -39,6 +40,9 @@ function DataTableDiscount(props) {
       field: 'price',
       headerName: 'Price',
       minWidth: 80,
+      renderCell: (params) => {
+        return <p>{formatCurrency(params.row.price)}</p>
+      },
       editable: false,
       flex: 1,
     },

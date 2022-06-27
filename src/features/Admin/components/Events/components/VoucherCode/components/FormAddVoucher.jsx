@@ -61,11 +61,11 @@ function FormAddVoucher({ onSubmit }) {
 
   const handleSubmit = (values) => {
     if (!onSubmit) return
-
+    console.log(values)
     const newValues = {
       ...values,
       voucherExpire: values.voucherExpire.toISOString(),
-      voucherEffect: values.voucherEffect.toISOString(),
+      voucherEffect: values.voucherEffect?.toISOString(),
       //   voucherId: voucher._id,
       voucherProductId: bookIdsDisc,
       voucherProductCategory: categoriesDisc,
@@ -483,7 +483,7 @@ function FormAddVoucher({ onSubmit }) {
                   >
                     {/* <MenuItem value=''></MenuItem> */}
                     {categories.map((category) => (
-                      <MenuItem value={category.name} key={category._id}>
+                      <MenuItem value={category._id} key={category._id}>
                         {category.name}
                       </MenuItem>
                     ))}
