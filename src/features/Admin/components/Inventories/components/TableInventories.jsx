@@ -30,7 +30,7 @@ function TableInventories(props) {
     {
       field: 'productId',
       headerName: 'Product',
-      minWidth: 100,
+      minWidth: 250,
       editable: false,
       flex: 1,
       renderCell: (params) => {
@@ -50,7 +50,7 @@ function TableInventories(props) {
     {
       field: 'productStock',
       headerName: 'Stock',
-      minWidth: 250,
+      minWidth: 100,
       editable: false,
       flex: 1,
       renderCell: (params) => {

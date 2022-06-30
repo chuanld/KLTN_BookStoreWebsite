@@ -14,6 +14,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import userApi from 'api/userApi'
 import { useLocation } from 'react-router-dom'
 import { formatCurrency } from 'utils/Format'
+import dayjs from 'dayjs'
 // import HelicopterShip from "../../../utils/HelicopterShip/HelicopterShip";
 
 Modal.setAppElement(document.getElementById('root'))
@@ -37,7 +38,14 @@ const customStyles3 = {
   },
 }
 
-export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
+export default function Bill({
+  orderOwner,
+  info,
+  cart,
+  voucher,
+  onSubmit,
+  socket,
+}) {
   console.log(info, 'infoooooooô')
   const dispatch = useDispatch()
 
@@ -94,6 +102,24 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
         toast.info('Let check order in infomation')
         document.body.classList.remove('loading-data')
       }, 5000)
+      const userSendNotify = {
+        name: orderInfo.name ? orderInfo.name : info.name,
+        id: info._id,
+      }
+      const userSendProduct = {
+        orderID: paymentID,
+        option: option,
+      }
+      socket.emit('sendNotificationRating', {
+        senderType: 'payment-book',
+        senderUser: userSendNotify,
+        senderData: {
+          cart: cart,
+          voucherCode: voucherCode,
+        },
+        senderTime: dayjs().toISOString(),
+        senderObj: userSendProduct,
+      })
       closeModal()
       return
     }
@@ -162,6 +188,25 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
           toast.info('Let check order in infomation')
           document.body.classList.remove('loading-data')
         }, 5000)
+
+        const userSendNotify = {
+          name: orderInfo.name ? orderInfo.name : info.name,
+          id: info._id,
+        }
+        const userSendProduct = {
+          orderID: orderID,
+          option: option,
+        }
+        socket.emit('sendNotificationRating', {
+          senderType: 'payment-book',
+          senderUser: userSendNotify,
+          senderData: {
+            cart: cart,
+            voucherCode: voucherCode,
+          },
+          senderTime: dayjs().toISOString(),
+          senderObj: userSendProduct,
+        })
         closeModal()
         return
       }
@@ -278,7 +323,24 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
         toast.info('Let check order in infomation')
         document.body.classList.remove('loading-data')
       }, 5000)
-
+      const userSendNotify = {
+        name: orderInfo.name ? orderInfo.name : info.name,
+        id: info._id,
+      }
+      const userSendProduct = {
+        orderID: paymentID,
+        option: option,
+      }
+      socket.emit('sendNotificationRating', {
+        senderType: 'payment-book',
+        senderUser: userSendNotify,
+        senderData: {
+          cart: cart,
+          voucherCode: voucherCode,
+        },
+        senderTime: dayjs().toISOString(),
+        senderObj: userSendProduct,
+      })
       setIsFirstTime(false)
       return
     }

@@ -31,7 +31,7 @@ const customStyles3 = {
   },
 }
 
-function Cart() {
+function Cart({ socket }) {
   //   const state = useContext(GlobalState);
   //   const [infor] = state.userApi.infor;
 
@@ -98,7 +98,6 @@ function Cart() {
   }
   useEffect(() => {
     if (voucher) {
-      console.log('aaaaaaaa')
       let newCart = JSON.parse(JSON.stringify(cart))
       cart.forEach((product) => {
         if (voucher.voucherProductId.length !== 0) {
@@ -227,6 +226,7 @@ function Cart() {
               cart={cart}
               onSubmit={handleCheckVoucher}
               voucher={voucher}
+              socket={socket}
             />
           </div>
         </div>

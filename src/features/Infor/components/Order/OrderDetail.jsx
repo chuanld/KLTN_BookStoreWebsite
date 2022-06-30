@@ -7,8 +7,8 @@ import Modal from 'react-modal'
 import userApi from 'api/userApi'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import Breadcrumb from 'components/Breadcrumbs'
 import { formatCurrency } from 'utils/Format'
+import categoryApi from 'api/categoryApi'
 
 Modal.setAppElement(document.getElementById('root'))
 const customStyles3 = {
@@ -37,8 +37,21 @@ export default function OrderDetail() {
   const history = useHistory()
 
   const [orderInfoDetail, setOrderInfoDetail] = useState()
+  const [categories, setCategories] = useState([])
   const [total, setTotal] = useState(0)
   const [isOpenBill, setIsOpenBill] = useState(false)
+
+  const getCate = async () => {
+    try {
+      const res = await categoryApi.getCategories()
+      setCategories(res)
+    } catch (err) {}
+  }
+  useEffect(() => {
+    if (orderInfoDetail?.cart.length > 0) {
+      getCate()
+    }
+  }, [orderInfoDetail])
 
   const getTotal = () => {
     const total = orderInfoDetail.cart.reduce((prev, item) => {
@@ -123,12 +136,10 @@ export default function OrderDetail() {
   function closeModal() {
     setIsOpenBill(false)
   }
+  console.log(categories)
   if (!orderInfoDetail) return null
   return (
     <>
-      {/* <div className="session-heading">
-        <Breadcrumb />
-      </div> */}
       <div className="order-detail">
         <div className="orderListTitle">
           <h4>
@@ -176,7 +187,16 @@ export default function OrderDetail() {
                   <td>{item.publisher}</td>
                   <td>{item.quantity}</td>
                   <td>{item.price}</td>
-                  <td>{item.category}</td>
+                  <td>
+                    {categories.length > 0 &&
+                      categories.map((cate) => {
+                        if (cate._id === item.category) {
+                          return <>{cate.name}</>
+                        }
+                        return undefined
+                      })}
+                  </td>
+
                   <td>
                     <img src={item.images.url} alt="" height="140px" />
                   </td>
@@ -232,9 +252,7 @@ export default function OrderDetail() {
                     {formatCurrency(bill.price)}
                   </p>
                   {bill.priceDiscount ? (
-                    <p className="price-discount">
-                      {formatCurrency(bill.priceDiscount)}
-                    </p>
+                    <p className="price-discount">${bill.priceDiscount}</p>
                   ) : bill.discount < 100 ? (
                     <p className="price-discount">
                       {formatCurrency((bill.price * bill.discount) / 100)}
@@ -258,7 +276,7 @@ export default function OrderDetail() {
               </>
             )}
             <div className="row row-export-bill">
-              <h3 className="total_bill">Total: {formatCurrency(total)} </h3>
+              <h3 className="total_bill">Total: {formatCurrency(total)}</h3>
               <div className="btn-export-pdf">
                 <button onClick={() => outputPdf()}>Export PDF</button>
               </div>
@@ -284,23 +302,6 @@ export default function OrderDetail() {
         </div> */}
             <div className="btn_checkout">
               <h6>
-                Status:{' '}
-                {orderInfoDetail.status === 6
-                  ? 'Đã nhận đơn hàng'
-                  : orderInfoDetail.status === 5
-                  ? 'Đã thanh toán đơn hàng'
-                  : orderInfoDetail.status === 4
-                  ? 'Đang giao đơn hàng'
-                  : orderInfoDetail.status === 3
-                  ? 'Tạm hoãn đơn hàng'
-                  : orderInfoDetail.status === 2
-                  ? 'Đã xác nhận đơn hàng'
-                  : orderInfoDetail.status === 1
-                  ? 'Đã hủy đơn hàng'
-                  : 'Chờ xác nhận đơn hàng'}
-              </h6>
-              <br />
-              <h6>
                 Phương thức thanh toán:{' '}
                 {orderInfoDetail.option.type.includes('VnPay')
                   ? 'VNPay payment'
@@ -308,7 +309,6 @@ export default function OrderDetail() {
                   ? 'Paypal payment'
                   : 'ShipCOD payment'}
               </h6>
-              <br />
               {orderInfoDetail.option.type.includes('VnPay') && (
                 <h6>
                   Bank: {orderInfoDetail.option.bankCode},{' '}

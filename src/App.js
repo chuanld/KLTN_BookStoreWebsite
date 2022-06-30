@@ -66,7 +66,9 @@ function App() {
           <Route path="/products/:id" exact>
             <ProductDetail socket={socket} />
           </Route>
-          <Route path="/cart" exact component={Cart} />
+          <Route path="/cart" exact>
+            <Cart socket={socket} />
+          </Route>
           <Route path="/admin" exact component={Admin} />
           <Route path="/forgot" exact component={ForgotPass} />
           <Route path="/reset/:token" exact component={ResetPass} />
