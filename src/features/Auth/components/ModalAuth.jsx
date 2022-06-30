@@ -34,7 +34,7 @@ function ModalAuth() {
     const action = login(value)
     const resultAction = await dispatch(action)
     const res = unwrapResult(resultAction)
-    console.log(res)
+
     if (res._id) {
       dispatch(closeModal())
       toast.success('Đăng nhập thành công!')
@@ -58,7 +58,7 @@ function ModalAuth() {
       const action = register(values)
       const resultAction = await dispatch(action)
       const res = unwrapResult(resultAction)
-      console.log(res)
+
       if (res.status === 0) {
         return toast.error(res.data)
       }
@@ -71,7 +71,6 @@ function ModalAuth() {
 
   //registerGoogle
   const registerGoogle = async (response) => {
-    console.log(response.tokenId)
     try {
       const res = await userApi.registerGoogle(response.tokenId)
       toast.success(res.msg)
@@ -81,7 +80,6 @@ function ModalAuth() {
   }
   //login google
   const loginWithGoogle = async (response) => {
-    console.log(response.tokenId)
     const action = loginGoogle(response.tokenId)
     const resultAction = await dispatch(action)
     const res = unwrapResult(resultAction)

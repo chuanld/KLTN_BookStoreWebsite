@@ -65,7 +65,8 @@ function Analytics() {
       data.categories?.forEach((cta, id) => {
         var elem = {}
         const orders = data.orders?.filter((x) => {
-          if (x.status === 5)
+          if (x.status === 6)
+            // status: received order
             return x.cart?.filter((y) => y.category === cta.name).length > 0
         })
         var totals = 0
@@ -116,7 +117,7 @@ function Analytics() {
         if (cta.status === 1) {
           objCancel.status = 'Cancel'
           objCancel.count = countCancel += 1
-        } else if (cta.status === 5) {
+        } else if (cta.status === 6) {
           objCompl.status = 'Complete'
           objCompl.count = countComplete += 1
         } else {
@@ -136,19 +137,21 @@ function Analytics() {
       var totalPaypal = 0
       var totalCOD = 0
       data?.orders.forEach((item, index) => {
-        var total = 0
-        var discount = 0
-        total = item.cart?.reduce((prev, item) => {
-          return prev + item.price * item.quantity
-        }, 0)
+        if (item.status === 6) {
+          var total = 0
+          var discount = 0
+          total = item.cart?.reduce((prev, item) => {
+            return prev + item.price * item.quantity
+          }, 0)
 
-        // if (item.voucherCode) {
-        //   discount = getVoucher(item.voucherCode,data.data?.vouchers);
-        // }
-        if (item.orderID.includes('ShipCOD')) {
-          totalCOD += total - (total * discount) / 100
-        } else if (item.orderID.includes('PAYID')) {
-          totalPaypal += total - (total * discount) / 100
+          // if (item.voucherCode) {
+          //   discount = getVoucher(item.voucherCode,data.data?.vouchers);
+          // }
+          if (item.orderID.includes('ShipCOD')) {
+            totalCOD += total - (total * discount) / 100
+          } else if (item.orderID.includes('PAYID')) {
+            totalPaypal += total - (total * discount) / 100
+          }
         }
       })
       setPaymentType({

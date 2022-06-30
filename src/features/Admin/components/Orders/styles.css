@@ -67,7 +67,11 @@
 .orderListOrder i {
   cursor: pointer;
 } */
-.orderListOrder .checked_order {
+.orderListOrder .received_order {
+  background-color: rgb(0, 104, 223);
+  color: #fff;
+}
+.orderListOrder .paid_order {
   background-color: #087b39;
   color: #fff;
 }
@@ -110,6 +114,6 @@
   z-index: 3;
 }
 
-.admin-page .order-detail{
+.admin-page .order-detail {
   margin: 20px;
 }

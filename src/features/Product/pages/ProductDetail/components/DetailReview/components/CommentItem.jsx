@@ -8,7 +8,7 @@ import userApi from 'api/userApi'
 const perPage = 3
 let showComments = []
 function CommentItem(props) {
-  const { comment, info, onSubmit } = props
+  const { comment, info, onSubmit, key } = props
   // const [userComment, setUserComment] = useState('')
   const [onReply, setOnReply] = useState(false)
   const [isHide, setIsHide] = useState(true)
@@ -73,34 +73,34 @@ function CommentItem(props) {
 
   return (
     <>
-      <div className='review-comment' key={comment._id}>
-        <div className='review-comment-user'>
-          <div className='user_name'>
-            <div className='user-avt'>
+      <div className="review-comment" key={key}>
+        <div className="review-comment-user">
+          <div className="user_name">
+            <div className="user-avt">
               <AccountCircle />
             </div>
             <div>
-              <div className='comment_username'>{comment.username}</div>
-              <div className='comment_date'>
+              <div className="comment_username">{comment.username}</div>
+              <div className="comment_date">
                 Joined {moment(info.createdAt).fromNow()}
               </div>
             </div>
           </div>
-          <div className='user_info'>
+          <div className="user_info">
             Đã viết
             <span>11 đánh giá</span>
           </div>
-          <div className='user_info'>
+          <div className="user_info">
             Đã nhận
             <span>3 lượt cảm ơn</span>
           </div>
         </div>
-        <div className='review-comment-container'>
-          <div className='rating-title'>
-            <div className='review-rating-level'>
-              <Rating value={comment.rating} size='small' readOnly />
+        <div className="review-comment-container">
+          <div className="rating-title">
+            <div className="review-rating-level">
+              <Rating value={comment.rating} size="small" readOnly />
             </div>
-            <div className='comment'>
+            <div className="comment">
               {comment.rating <= 1
                 ? 'Rất tệ'
                 : comment.rating <= 2
@@ -114,31 +114,31 @@ function CommentItem(props) {
                 : ''}
             </div>
           </div>
-          <div className='atribute'>
-            <div className='review-comment__seller-name'>
-              <span className='review-comment__check-icon'></span>Đã mua hàng
+          <div className="atribute">
+            <div className="review-comment__seller-name">
+              <span className="review-comment__check-icon"></span>Đã mua hàng
             </div>
           </div>
-          <div className='comment-content'>{comment.content}</div>
-          <div className='comment-created_at'>
+          <div className="comment-content">{comment.content}</div>
+          <div className="comment-created_at">
             <span>{moment(comment.createdAt).fromNow()}</span>
           </div>
-          <span className='btn-like'>Like</span>
-          <span className='btn-reply' onClick={handleReply}>
+          <span className="btn-like">Like</span>
+          <span className="btn-reply" onClick={handleReply}>
             Reply
           </span>
-          <span className='btn-reply' onClick={handleHideComment}>
+          <span className="btn-reply" onClick={handleHideComment}>
             Hide all reply
           </span>
           {hideReplyComment > 0 && (
-            <span className='btn-reply' onClick={handleLoadMoreComment}>
+            <span className="btn-reply" onClick={handleLoadMoreComment}>
               Load more ({hideReplyComment}) comments
             </span>
           )}
 
           {/* ---Reply comment--- */}
           {onReply && (
-            <div className='review-reply-comment'>
+            <div className="review-reply-comment">
               <ReplyCommentItem
                 id={comment._id}
                 name={comment.username}
@@ -148,23 +148,23 @@ function CommentItem(props) {
             </div>
           )}
           {isHide && (
-            <div className='review-sub_comment'>
+            <div className="review-sub_comment">
               {replyComment.map((comment) => (
-                <div className='sub-comment'>
-                  <div className='sub-comment-avt'>
+                <div className="sub-comment" key={comment._id}>
+                  <div className="sub-comment-avt">
                     <AccountCircle />
                   </div>
-                  <div className='sub-comment-inner'>
-                    <div className='sub-comment-info'>
-                      <div className='sub-comment-info_name'>
+                  <div className="sub-comment-inner">
+                    <div className="sub-comment-info">
+                      <div className="sub-comment-info_name">
                         {comment.username}
                       </div>
-                      <div className='sub-comment-info_date'>
+                      <div className="sub-comment-info_date">
                         {moment(comment.createdAt).fromNow()}
                       </div>
                     </div>
                     <div
-                      className='sub-comment-content'
+                      className="sub-comment-content"
                       dangerouslySetInnerHTML={{ __html: comment.content }}
                     >
                       {/* nói chung tiền nào

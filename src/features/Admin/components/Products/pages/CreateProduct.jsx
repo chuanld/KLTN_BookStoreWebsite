@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { useParams, useHistory } from 'react-router-dom'
-import withLoading from 'components/HOC/withLoading'
 import adminApi from 'api/adminApi'
 import categoryApi from 'api/categoryApi'
+import withLoading from 'components/HOC/withLoading'
 import Loading from 'components/loading/Loading'
+import { useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import FormCreateProduct from '../components/FormCreateProduct'
 
 function CreateProduct({ showLoading, hideLoading }) {
   const param = useParams()
   const history = useHistory()
+
   const [product, setProduct] = useState({})
   const [categories, setCategories] = useState([])
   const [images, setImages] = useState(false)
@@ -81,16 +82,16 @@ function CreateProduct({ showLoading, hideLoading }) {
     hideLoading()
   }
   return (
-    <div className='create_product'>
-      <div className='uploadimg'>
-        <input type='file' name='file' id='file_up' onChange={handleUpload} />
+    <div className="create_product">
+      <div className="uploadimg">
+        <input type="file" name="file" id="file_up" onChange={handleUpload} />
         {loading ? (
-          <div id='file_img'>
+          <div id="file_img">
             <Loading />
           </div>
         ) : (
-          <div id='file_img' style={styleUpload}>
-            <img src={images ? images.url : ''} alt='' />
+          <div id="file_img" style={styleUpload}>
+            <img src={images ? images.url : ''} alt="" />
             <span onClick={handleDestroy}>X</span>
           </div>
         )}

@@ -45,7 +45,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.box-detail .box-detail-wrapper_rating{
+.box-detail .box-detail-wrapper_rating {
   margin-left: -50px;
 }
 .box-detail .box-detail-wrapper .origin-price {
@@ -91,9 +91,16 @@
   padding: 6px;
   font-weight: 600;
 }
+
 .box-detail .cart:hover {
   background-color: rgb(248, 103, 112);
 }
+.box-detail .cart.product-out-of-stock {
+  background-color: #ddd;
+  cursor: unset;
+  pointer-events: none;
+}
+
 .box-detail .title_description_split {
   white-space: pre-line;
 }
@@ -613,7 +620,7 @@
   border: none;
   border-radius: 5px;
 }
-.related_products .btn-more{
+.related_products .btn-more {
   cursor: pointer;
   display: block;
   width: 229px;

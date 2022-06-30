@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import IncomeCate from './IncomCate'
 import IncomePayment from './IncomePayment'
@@ -64,7 +64,7 @@ function OverviewChart() {
       data.categories?.forEach((cta, id) => {
         var elem = {}
         const orders = data.orders?.filter((x) => {
-          if (x.status === 5)
+          if (x.status === 6)
             return x.cart?.filter((y) => y.category === cta.name).length > 0
         })
         var totals = 0
@@ -91,7 +91,7 @@ function OverviewChart() {
         elem.cateID = cta._id
         elem.cateName = cta.name
         elem.income = totals
-        elem.discount = discou
+        // elem.discount = discou
         totalPayment += totals
         categoryList.push(elem)
       })
@@ -115,7 +115,7 @@ function OverviewChart() {
         if (cta.status === 1) {
           objCancel.status = 'Cancel'
           objCancel.count = countCancel += 1
-        } else if (cta.status === 5) {
+        } else if (cta.status === 6) {
           objCompl.status = 'Complete'
           objCompl.count = countComplete += 1
         } else {
@@ -136,7 +136,8 @@ function OverviewChart() {
       var totalCOD = 0
       var totalVnPay = 0
       var totalPayment = 0
-      data?.orders.forEach((item, index) => {
+      const dataOrders = data?.orders.filter((ord) => ord.status === 6)
+      dataOrders.forEach((item, index) => {
         var total = 0
         var discount = 0
 
@@ -147,11 +148,11 @@ function OverviewChart() {
         // if (item.voucherCode) {
         //   discount = getVoucher(item.voucherCode,data.data?.vouchers);
         // }
-        if (item.orderID.includes('VnPay') && item.status === 5) {
+        if (item.orderID.includes('VnPay') && item.status === 6) {
           totalVnPay += total - (total * discount) / 100
-        } else if (item.orderID.includes('ShipCOD') && item.status === 5) {
+        } else if (item.orderID.includes('ShipCOD') && item.status === 6) {
           totalCOD += total - (total * discount) / 100
-        } else if (item.orderID.includes('PAYID') && item.status === 5) {
+        } else if (item.orderID.includes('PAYID') && item.status === 6) {
           totalPaypal += total - (total * discount) / 100
         }
         totalPayment += 1
@@ -253,7 +254,6 @@ function OverviewChart() {
       }.xlsx`
     )
   }
-  console.log(start, end, 'timemeeeeeeeeeeeeeeeeeeeeeee')
 
   return (
     <div className="analytic-chart-section">
@@ -262,10 +262,11 @@ function OverviewChart() {
         to={end}
         onSubmit={handleSubmitTimeFilter}
         loading={loading}
+        handleExport={handleExport}
       />
-      <div>
+      {/* <div>
         <button onClick={() => handleExport()}>Export report</button>
-      </div>
+      </div> */}
       <div className="chart-container">
         <div className="chart-item">
           <IncomeCate cate={cate} totalPm={totalPm} />

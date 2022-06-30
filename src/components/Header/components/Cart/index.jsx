@@ -138,8 +138,8 @@ function HeaderCart(props) {
                             justifyContent: 'space-between',
                           }}
                         >
-                          {item.title}
-
+                          {item.title}{' '}
+                          {item.quantity > 1 && `(${item.quantity})`}
                           <Rating value={item.rating} size="small" readOnly />
                         </Box>
                       </>

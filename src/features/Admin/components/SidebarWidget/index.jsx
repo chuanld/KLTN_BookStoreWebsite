@@ -11,6 +11,7 @@ import {
   QuestionAnswerOutlined,
   Timeline,
   TrendingUp,
+  Inventory,
 } from '@mui/icons-material'
 import { Link, useParams } from 'react-router-dom'
 import { useLocation, useRouteMatch } from 'react-router-dom'
@@ -53,17 +54,6 @@ function SideBar() {
                 Products
               </li>
             </Link>
-            <Link to="/admin/categories">
-              <li
-                className={
-                  objParams[2] === 'categories'
-                    ? 'sidebarListItem active'
-                    : 'sidebarListItem '
-                }
-              >
-                <CalendarToday className="sidebarIcon" /> Categories
-              </li>
-            </Link>
             <Link to="/admin/orders">
               <li
                 className={
@@ -75,6 +65,29 @@ function SideBar() {
                 <BorderColor className="sidebarIcon" /> Orders
               </li>
             </Link>
+            <Link to="/admin/categories">
+              <li
+                className={
+                  objParams[2] === 'categories'
+                    ? 'sidebarListItem active'
+                    : 'sidebarListItem '
+                }
+              >
+                <CalendarToday className="sidebarIcon" /> Categories
+              </li>
+            </Link>
+            <Link to="/admin/inventories">
+              <li
+                className={
+                  objParams[2] === 'inventories'
+                    ? 'sidebarListItem active'
+                    : 'sidebarListItem '
+                }
+              >
+                <Inventory className="sidebarIcon" /> Inventories
+              </li>
+            </Link>
+
             {/* <li className="sidebarListItem">
               <CalendarToday className="sidebarIcon" /> Logs
             </li> */}

@@ -1,0 +1,39 @@
+.filter-date-inventory {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-date-inventory .form-date-container {
+  display: flex;
+  align-items: center;
+}
+.filter-date-inventory .form-date-container .form-date-item {
+  margin: 0px 10px;
+}
+.filter-date-inventory .form-date-container .form-date-item:first-child {
+  margin-left: 5px;
+}
+.filter-date-inventory .form-date-container .form-date-item:last-child {
+  margin-top: 4px;
+  margin-right: 5px;
+}
+.categoriesList
+  .filter-date-inventory
+  .form-date-container
+  .form-date-item
+  .btn-submit
+  button {
+  width: 100px;
+  border: none;
+  padding: 15px 6px;
+  background-color: rgb(170, 43, 20);
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffff;
+  display: block;
+}
+.pagination-container-inventories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

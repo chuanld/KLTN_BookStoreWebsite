@@ -23,6 +23,7 @@ function DetailProduct(props) {
   const user = useSelector((state) => state.user.current)
 
   const [detailProduct, setDetailProduct] = useState([])
+  const [totalStock, setTotalStock] = useState()
   const [category, setCategory] = useState()
 
   const [onLoad, setOnLoad] = useState(false)
@@ -35,6 +36,7 @@ function DetailProduct(props) {
       if (params) {
         const res = await productApi.getProductById(params.id)
         setDetailProduct(res.product)
+        setTotalStock(res.totalStock)
       }
     })()
   }, [params])
@@ -103,6 +105,7 @@ function DetailProduct(props) {
           product={detailProduct}
           onSubmit={addCart}
           category={category}
+          totalStock={totalStock}
         />
         <div className="detail-info">
           <div className="product_content">

@@ -285,17 +285,19 @@ export default function OrderDetail() {
             <div className="btn_checkout">
               <h6>
                 Status:{' '}
-                {orderInfoDetail.status === 5
+                {orderInfoDetail.status === 6
+                  ? 'Đã nhận đơn hàng'
+                  : orderInfoDetail.status === 5
                   ? 'Đã thanh toán đơn hàng'
                   : orderInfoDetail.status === 4
-                  ? 'Đã giao đơn hàng'
+                  ? 'Đang giao đơn hàng'
                   : orderInfoDetail.status === 3
-                  ? 'Tạm hoãn đơn'
+                  ? 'Tạm hoãn đơn hàng'
                   : orderInfoDetail.status === 2
-                  ? 'Đã xác nhận đơn'
+                  ? 'Đã xác nhận đơn hàng'
                   : orderInfoDetail.status === 1
-                  ? 'Đã hủy đơn'
-                  : 'Chờ xác nhận đơn'}
+                  ? 'Đã hủy đơn hàng'
+                  : 'Chờ xác nhận đơn hàng'}
               </h6>
               <br />
               <h6>

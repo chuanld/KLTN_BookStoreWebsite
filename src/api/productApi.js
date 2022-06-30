@@ -17,6 +17,10 @@ const productApi = {
     const url = '/api/banners'
     return axiosClient.get(url)
   },
+  getInventories(queryParams) {
+    const url = '/api/inventory'
+    return axiosClient.get(url, { params: { ...queryParams } })
+  },
 }
 
 export default productApi

@@ -17,6 +17,7 @@ function FormDataProduct(props) {
       .number()
       .required('Please enter book price')
       .typeError('Please enter book price'),
+
     description: yup.string().required('Please enter book description').min(10),
     content: yup.string().required('Please enter book content').min(20),
     author: yup.string().required('Please enter book author'),
@@ -38,6 +39,7 @@ function FormDataProduct(props) {
       publisher: product.publisher || '',
       category: product.category || '',
       discount: product.discount || '',
+      stock: '',
     },
     resolver: yupResolver(schema),
   })
@@ -52,6 +54,7 @@ function FormDataProduct(props) {
         publisher: product.publisher,
         category: product.category,
         discount: 100 - product.discount,
+        stock: '',
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product])
@@ -63,10 +66,10 @@ function FormDataProduct(props) {
   }
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <TextField
           // name='productId'
-          label='Product ID'
+          label="Product ID"
           defaultValue={product._id}
           placeholder={product._id}
           className={'input-info-update'}
@@ -80,74 +83,84 @@ function FormDataProduct(props) {
         />
       </div>
 
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='title'
+          name="title"
           placeholder={product.title}
           form={form}
-          label='Title Book'
+          label="Title Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
 
-      <div className='row update-info-book'>
+      <div className="row update-info-book rows__cate-disc">
         <InputField
-          name='price'
+          name="price"
           placeholder={JSON.stringify(product.price)}
           form={form}
-          label='Price Book'
+          label="Price Book"
           className={'input-info-update'}
-          height={'30px'}
-          width='560px'
-          type='number'
+          height={'55px'}
+          width="260px"
+          type="number"
+        />
+        <InputField
+          name="stock"
+          placeholder={JSON.stringify(product.totalStock)}
+          form={form}
+          label="Stock (Book)"
+          className={'input-info-update'}
+          height={'50px'}
+          width="160px"
+          type="number"
         />
       </div>
 
-      <div className='row update-info-book'>
-        <label htmlFor='description'>Description</label>
+      <div className="row update-info-book">
+        <label htmlFor="description">Description</label>
         <TextAreaField
-          name='description'
+          name="description"
           placeholder={product.description}
           form={form}
-          label='Description Book'
-          width='560px'
+          label="Description Book"
+          width="560px"
           minRows={5}
         />
       </div>
-      <div className='row update-info-book'>
-        <label htmlFor='content'>Content</label>
+      <div className="row update-info-book">
+        <label htmlFor="content">Content</label>
         <TextAreaField
-          name='content'
+          name="content"
           placeholder={product.content}
           form={form}
-          label='Content Book'
-          width='560px'
+          label="Content Book"
+          width="560px"
           minRows={10}
         />
       </div>
 
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='author'
+          name="author"
           placeholder={product.author}
           form={form}
-          label='Author Book'
+          label="Author Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
-      <div className='row update-info-book'>
+      <div className="row update-info-book">
         <InputField
-          name='publisher'
+          name="publisher"
           placeholder={product.publisher}
           form={form}
-          label='Publisher Book'
+          label="Publisher Book"
           className={'input-info-update'}
           height={'30px'}
-          width='560px'
+          width="560px"
         />
       </div>
 
@@ -163,31 +176,31 @@ function FormDataProduct(props) {
         </select>
       </div> */}
 
-      <div className='row update-info-book rows__cate-disc'>
+      <div className="row update-info-book rows__cate-disc">
         <SelectField
-          name='category'
+          name="category"
           //   placeholder={product.category}
           form={form}
-          label='Category'
+          label="Category"
           height={'55px'}
-          width='260px'
+          width="260px"
           className={'input-info-update'}
           defaulvalue={product.category}
           options={categories}
         />
         <InputField
-          name='discount'
+          name="discount"
           placeholder={JSON.stringify(product.discount)}
           form={form}
-          label='% Discount Book'
+          label="% Discount Book"
           className={'input-info-update'}
           height={'50px'}
-          width='160px'
-          type='number'
+          width="160px"
+          type="number"
         />
       </div>
 
-      <button type='submit'>Update Product</button>
+      <button type="submit">Update Product</button>
     </form>
   )
 }

@@ -131,7 +131,7 @@ export const addToCart = createAsyncThunk('user/addtocart', async (payload) => {
     return result
   } catch (err) {
     const result = {
-      data: err.response.data.msg,
+      msg: err.response.data.msg,
       status: 0,
     }
     return result

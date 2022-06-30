@@ -72,8 +72,10 @@ export default function Order() {
                 <td>
                   <select
                     className={
-                      order.status === 5
-                        ? 'checked_order'
+                      order.status === 6
+                        ? 'received_order'
+                        : order.status === 5
+                        ? 'paid_order'
                         : order.status === 3
                         ? 'delay_order'
                         : order.status === 1
@@ -100,10 +102,13 @@ export default function Order() {
                       Tạm hoãn
                     </option>
                     <option value={4} disabled>
-                      Đã giao hàng
+                      Đang giao hàng
                     </option>
                     <option value={5} disabled>
                       Đã thanh toán
+                    </option>
+                    <option value={6} disabled>
+                      Đã nhận hàng
                     </option>
                   </select>
                 </td>

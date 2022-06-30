@@ -67,6 +67,8 @@ axiosClient.interceptors.request.use(
       '/api/order',
       '/api/products/event_disc',
       '/api/discount',
+      '/api/inventory',
+      '/user/all_users',
     ]
 
     const dynamicURL = [
@@ -107,12 +109,14 @@ axiosClient.interceptors.request.use(
       '/api/upload',
       '/api/destroy',
       '/api/products',
+      '/api/inventory',
       '/api/allproducts',
       '/api/category',
       '/api/order',
       '/api/products/event_disc',
       '/api/discount',
       '/api/log',
+      '/user/all_users',
     ]
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item)

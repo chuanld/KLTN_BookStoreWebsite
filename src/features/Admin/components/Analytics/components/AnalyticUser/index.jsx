@@ -3,6 +3,8 @@ import dayjs from 'dayjs'
 import adminApi from 'api/adminApi'
 import UserRegister from './UserRegister'
 import FormDate from '../../common/FormDate'
+
+import * as XLSX from 'xlsx'
 var advancedFormat = require('dayjs/plugin/advancedFormat')
 dayjs.extend(advancedFormat)
 var quarterOfYear = require('dayjs/plugin/quarterOfYear')
@@ -197,23 +199,23 @@ function AnalyticUser() {
       var elem = {}
       var totals = 0
 
-      ordersDt.forEach((user) => {
+      ordersDt.forEach((ord) => {
         var total = 0
-        if (user.status !== 5) return
+        if (ord.status !== 6) return
         if (distanceType === 'years') {
-          if (dayjs(user.createdAt).format('YYYY') === tl) {
+          if (dayjs(ord.updatedAt).format('YYYY') === tl) {
             total += 1
           }
         } else if (distanceType === 'quarters') {
-          if (dayjs(user.createdAt).format('Q-YYYY') === tl) {
+          if (dayjs(ord.updatedAt).format('Q-YYYY') === tl) {
             total += 1
           }
         } else if (distanceType === 'months') {
-          if (dayjs(user.createdAt).format('MMM-YY') === tl) {
+          if (dayjs(ord.updatedAt).format('MMM-YY') === tl) {
             total += 1
           }
         } else if (distanceType === 'days') {
-          if (dayjs(user.createdAt).format('dd-DD') === tl) {
+          if (dayjs(ord.updatedAt).format('dd-DD') === tl) {
             total += 1
           }
         }
@@ -307,6 +309,72 @@ function AnalyticUser() {
     setDistanceType(value)
   }
 
+  //export
+  const handleExport = () => {
+    var exc = XLSX.utils.book_new()
+    var sheet = XLSX.utils.json_to_sheet(users)
+
+    sheet['!cols'] = [
+      { width: 30 },
+      { width: 30 },
+      { width: 30 },
+      { width: 10 },
+      { width: 25 },
+      { width: 15 },
+      { width: 5 },
+      { width: 20 },
+    ]
+
+    XLSX.utils.book_append_sheet(exc, sheet, 'Doanh Thu')
+    XLSX.utils.sheet_add_aoa(sheet, [['Mã']], { origin: 'A1' })
+    XLSX.utils.sheet_add_aoa(sheet, [['Tên Danh mục']], { origin: 'B1' })
+
+    // const max_width = rows.reduce((w, r) => Math.max(w, r.name.length), 10);
+
+    XLSX.utils.sheet_add_aoa(sheet, [['Doanh thu tổng']], { origin: 'E1' })
+    XLSX.utils.sheet_add_aoa(sheet, [['Tổng thu (COD)']], { origin: 'E2' })
+    XLSX.utils.sheet_add_aoa(sheet, [[`Tổng thu (Paypal)`]], { origin: 'E3' })
+    XLSX.utils.sheet_add_aoa(sheet, [[`Tổng thu (VnPay)`]], { origin: 'E4' })
+
+    var sheet1 = XLSX.utils.json_to_sheet(orders)
+    XLSX.utils.book_append_sheet(exc, sheet1, 'Doanh số đơn')
+    sheet1['!cols'] = [{ width: 25 }, { width: 20 }]
+    XLSX.utils.sheet_add_aoa(sheet1, [['Tình trạng đơn hàng']], {
+      origin: 'A1',
+    })
+
+    XLSX.utils.sheet_add_aoa(sheet1, [['Đơn hàng thành công']], {
+      origin: 'A2',
+    })
+    XLSX.utils.sheet_add_aoa(sheet1, [['Đơn hàng đang chờ']], { origin: 'A3' })
+    XLSX.utils.sheet_add_aoa(sheet1, [['Đơn hàng đã hủy']], { origin: 'A4' })
+
+    // XLSX.utils.sheet_add_aoa(sheet, [[data.data?.users.length]], {
+    //   origin: 'I1',
+    // })
+    // XLSX.utils.sheet_add_aoa(
+    //   sheet,
+    //   [[data.data?.users.filter((x) => x.protocol === 0).length]],
+    //   { origin: 'I2' }
+    // )
+    // XLSX.utils.sheet_add_aoa(
+    //   sheet,
+    //   [[data.data?.users.filter((x) => x.protocol === 1).length]],
+    //   { origin: 'I3' }
+    // )
+    // XLSX.utils.sheet_add_aoa(
+    //   sheet,
+    //   [[data.data?.users.filter((x) => x.protocol === 2).length]],
+    //   { origin: 'I4' }
+    // )
+
+    XLSX.writeFile(
+      exc,
+      `Doanhthu-tu-${start !== '' ? start : '--/--/----'}-den-${
+        end !== '' ? end : '--/--/----'
+      }.xlsx`
+    )
+  }
   return (
     <div className="analytic-chart-section">
       <FormDate

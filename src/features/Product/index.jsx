@@ -55,7 +55,6 @@ function Product({ showLoading, hideLoading }) {
     //   return { ...newParams1 }
     // }
 
-    console.log(params, 'queryParams')
     return {
       ...params,
     }
@@ -71,7 +70,7 @@ function Product({ showLoading, hideLoading }) {
       setResult(res.result)
       setTotalResult(res.totalResult)
       setTotalPage(Math.ceil(res.totalResult / 9))
-      console.log(res, 'res')
+
       if (
         queryParams['title[regex]'] &&
         queryParams['title[regex]'] !== ' ' &&

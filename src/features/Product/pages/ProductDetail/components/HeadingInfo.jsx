@@ -51,15 +51,18 @@ function HeadingInfo(props) {
           </div>
         </div>
 
-        <p className="title_description_split">
-          Mô tả: <br />
-          {product.description}
-        </p>
+        <p className="title_description_split">Mô tả: {product.description}</p>
 
         <p>Thể loại: {category?.name}</p>
         <p>Tác giả: {product.author}</p>
         <p>NXB: {product.publisher}</p>
         <p>Sold: {product.sold}</p>
+        <p>
+          Tình trạng:{' '}
+          {product.totalStock === 0
+            ? 'Hết hàng'
+            : `Còn hàng (${product.totalStock})`}
+        </p>
         {/* <div className="amount">
               <button onClick={() => decrement(detailProduct._id)}> - </button>
               <span>1 {detailProduct.quantity} </span>
@@ -74,12 +77,16 @@ function HeadingInfo(props) {
                     ? () => setQuantityAmount(quantityAmount - 1)
                     : null
                 }
+                disabled={product.totalStock === 0 ? true : false}
               >
                 {' '}
                 -{' '}
               </button>
               <input type="text" value={quantityAmount} readOnly />
-              <button onClick={() => setQuantityAmount(quantityAmount + 1)}>
+              <button
+                onClick={() => setQuantityAmount(quantityAmount + 1)}
+                disabled={product.totalStock === 0 ? true : false}
+              >
                 {' '}
                 +{' '}
               </button>
@@ -87,8 +94,11 @@ function HeadingInfo(props) {
           </div>
           <Link
             to="#"
-            className="cart"
+            className={
+              product.totalStock === 0 ? `cart product-out-of-stock` : 'cart'
+            }
             onClick={() => onSubmit(product._id, quantityAmount)}
+            disabled={product.totalStock === 0 ? true : false}
           >
             Add to cart <AddShoppingCart />
           </Link>

@@ -140,12 +140,14 @@ function Comments(props) {
       {loading && <LoadingComment />}
       {comments.length !== 0 &&
         comments.map((comment) => (
-          <CommentItem
-            key={comment._id}
-            info={info}
-            comment={comment}
-            onSubmit={handleSubmitReply}
-          />
+          <div className="" key={comment._id}>
+            <CommentItem
+              key={comment._id}
+              info={info}
+              comment={comment}
+              onSubmit={handleSubmitReply}
+            />
+          </div>
         ))}
       <Paginate
         params={queryParams}

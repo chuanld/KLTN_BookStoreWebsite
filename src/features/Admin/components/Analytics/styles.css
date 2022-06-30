@@ -51,7 +51,8 @@
 .analytic .analytic-chart .analytic-chart-section .form-date-item {
   margin-right: 20px;
 }
-.analytic .analytic-chart .analytic-chart-section .form-date-item .btn-submit {
+.analytic .analytic-chart .analytic-chart-section .form-date-item .btn-submit,
+.analytic .analytic-chart .analytic-chart-section .form-date-item .btn-export {
   margin-top: 8px;
 }
 .analytic .analytic-chart .analytic-chart-section .loading-data {
@@ -68,6 +69,21 @@
   border: none;
   padding: 15px 5px;
   background-color: rgb(170, 43, 20);
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffff;
+  display: block;
+}
+.analytic
+  .analytic-chart
+  .analytic-chart-section
+  .form-date-item
+  .btn-export
+  button {
+  width: 100%;
+  border: none;
+  padding: 15px 5px;
+  background-color: rgb(14, 156, 38);
   border-radius: 5px;
   cursor: pointer;
   color: #ffff;

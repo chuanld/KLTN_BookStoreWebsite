@@ -7,7 +7,6 @@ function TableOrder(props) {
   const { path } = useRouteMatch()
   const { orders, onSubmit, loadingTable } = props
 
-  const deleteSubmit = () => {}
   const handleChangeStatus = (id, value) => {
     if (!onSubmit) return
     onSubmit(id, value)
@@ -87,8 +86,10 @@ function TableOrder(props) {
           <>
             <select
               className={
-                params.row.status === 5
-                  ? 'checked_order'
+                params.row.status === 6
+                  ? 'received_order'
+                  : params.row.status === 5
+                  ? 'paid_order'
                   : params.row.status === 3
                   ? 'delay_order'
                   : params.row.status === 1
@@ -100,14 +101,15 @@ function TableOrder(props) {
               onChange={(e) =>
                 handleChangeStatus(params.row._id, e.target.value)
               }
-              disabled={params.row.status === 1 || params.row.status === 5}
+              disabled={params.row.status === 1 || params.row.status === 6}
             >
               <option value={0}>Chờ xác nhận</option>
               <option value={1}>Đã huỷ</option>
               <option value={2}>Đã xác nhận</option>
               <option value={3}>Tạm hoãn</option>
-              <option value={4}>Đã giao hàng</option>
+              <option value={4}>Đang giao hàng</option>
               <option value={5}>Đã thanh toán</option>
+              <option value={6}>Đã nhận hàng</option>
             </select>
           </>
         )

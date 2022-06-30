@@ -6,9 +6,11 @@ import InputField from 'components/form-controls/InputField'
 
 import TextAreaField from 'components/form-controls/TextAreaField'
 import SelectField from 'components/form-controls/SelectField'
+import { useSelector } from 'react-redux'
 
 function FormCreateProduct(props) {
   const { product, categories, onSubmit } = props
+  const user = useSelector((state) => state.user.current)
   const schema = yup.object().shape({
     product_id: yup.string().required('Please enter book Tag ID'),
     title: yup.string().required('Please enter book title'),
@@ -17,6 +19,10 @@ function FormCreateProduct(props) {
       .number()
       .required('Please enter book price')
       .typeError('Please enter book price'),
+    stock: yup
+      .number()
+      .required('Please enter book stock')
+      .typeError('Book stock must be a Number'),
     description: yup.string().required('Please enter book description').min(10),
     content: yup.string().required('Please enter book content').min(20),
     author: yup.string().required('Please enter book author'),
@@ -29,6 +35,7 @@ function FormCreateProduct(props) {
       product_id: product.product_id || '',
       title: product.title || '',
       price: product.price || 0,
+      stock: product?.productStock || '',
       description: product.description || '',
       content: product.content || '',
       author: product.author || '',
@@ -43,6 +50,7 @@ function FormCreateProduct(props) {
         product_id: product.product_id,
         title: product.title,
         price: product.price,
+        stock: product?.productStock || '',
         description: product.description,
         content: product.content,
         author: product.author,
@@ -54,7 +62,7 @@ function FormCreateProduct(props) {
 
   const handleSubmit = (values) => {
     if (!onSubmit) return
-    onSubmit({ ...values })
+    onSubmit({ ...values, createdBy: user._id })
     // console.log(values)
   }
   return (
@@ -83,15 +91,25 @@ function FormCreateProduct(props) {
         />
       </div>
 
-      <div className="row update-info-book">
+      <div className="row update-info-book rows__cate-disc">
         <InputField
           name="price"
           placeholder={JSON.stringify(product.price)}
           form={form}
           label="Price Book"
           className={'input-info-update'}
-          height={'30px'}
-          width="560px"
+          height={'55px'}
+          width="260px"
+          type="number"
+        />
+        <InputField
+          name="stock"
+          // placeholder={JSON.stringify(product.price)}
+          form={form}
+          label="Stock Book"
+          className={'input-info-update'}
+          height={'50px'}
+          width="160px"
           type="number"
         />
       </div>

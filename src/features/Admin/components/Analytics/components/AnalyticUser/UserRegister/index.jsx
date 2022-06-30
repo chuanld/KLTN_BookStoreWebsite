@@ -16,7 +16,7 @@ function UserRegister(props) {
         backgroundColor: CSS_COLOR_NAMES,
         borderColor: 'rgb(75, 192, 192)',
         showLine: true,
-        borderWidth: 1,
+        borderWidth: 1.8,
         fill: false,
 
         tension: 0.3,
@@ -28,7 +28,7 @@ function UserRegister(props) {
         backgroundColor: CSS_COLOR_NAMES,
         borderColor: 'rgb(75, 75, 75)',
         showLine: true,
-        borderWidth: 1,
+        borderWidth: 1.8,
         fill: false,
 
         tension: 0.3,
@@ -40,7 +40,7 @@ function UserRegister(props) {
       datalabels: {
         // color: "white",
         formatter: function (value, context) {
-          // return context.dataset?.labels[context.dataIndex];
+          // return context?.dataset?.labels[context?.dataIndex]
           return null
           // ;
         },

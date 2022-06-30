@@ -38,7 +38,6 @@ export default function Breadcrumb(props) {
   const [product, setProduct] = useState({})
   const [account, setAccount] = useState({})
   const [order, setOrder] = useState()
-  console.log(id, 'iddddddddd')
 
   const getProductById = async (id) => {
     try {
@@ -169,6 +168,7 @@ const breadcrumbNameMap = {
   '/admin/accounts/*': 'Detail Account',
   '/admin/products': 'List Products',
   '/admin/categories': 'List Categories',
+  '/admin/inventories': 'Inventories Report',
   '/admin/orders': 'List Orders',
   '/admin/events': 'Events',
   '/admin/events-fsale': 'Flash Sales',

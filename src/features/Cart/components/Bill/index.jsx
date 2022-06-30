@@ -71,7 +71,6 @@ export default function Bill({ orderOwner, info, cart, voucher, onSubmit }) {
   }, [cart])
 
   const tranSuccess = async (payment) => {
-    console.log(orderInfo, 'sssssssssssssssss')
     const option = { type: 'Paypal payment', paywith: 'default' }
     const { paymentID, address } = payment
     const data = {

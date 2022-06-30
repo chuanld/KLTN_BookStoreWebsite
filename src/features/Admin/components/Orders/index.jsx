@@ -79,36 +79,26 @@ function Orders() {
 
   const handleChangeStatus = async (id, status) => {
     try {
-      console.log(id, status)
-      // const res = await axiosClient.patch(
-      //   `/api/order/${id}`,
-      //   {
-      //     status: status,
-      //   },
-      //   {
-      //     headers: { Authorization: token },
-      //   }
-      // );
       const res = await adminApi.updateStatus(id, status)
       setCallback(!callback)
       toast.success(res.msg)
     } catch (err) {
-      toast.error(err.response.msg)
+      toast.error(err.response.data.msg)
     }
   }
   return (
     <>
-      <div className='session-heading'>
+      <div className="session-heading">
         <Breadcrumb />
       </div>
-      <div className='orderlist'>
-        <div className='orderListTitle'>
+      <div className="orderlist">
+        <div className="orderListTitle">
           <h4>System have {orders.length} ordered</h4>
         </div>
-        <div className='userList_toolbar_wrapper'>
+        <div className="userList_toolbar_wrapper">
           <FilterTab params={queryParams} onSubmit={handleFilterChanges} />
         </div>
-        <div className='ordersList'>
+        <div className="ordersList">
           <TableOrder
             orders={orders}
             onSubmit={handleChangeStatus}
@@ -116,7 +106,7 @@ function Orders() {
           />
         </div>
 
-        <div className='pagination-container'>
+        <div className="pagination-container">
           <Paginate
             params={queryParams}
             totalPage={totalPage}
