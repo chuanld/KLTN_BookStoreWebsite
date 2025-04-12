@@ -6,5 +6,6 @@ export const StorageKeys = {
 
 export const DOMAIN_SERVER = {
   TEST: 'http://localhost:5000/',
-  PROD: 'https://app-bookstore-kltn.herokuapp.com/',
+  // PROD: 'https://app-bookstore-kltn.herokuapp.com/',
+  PROD: 'https://kltn-ecommerce-be.onrender.com/',
 }
