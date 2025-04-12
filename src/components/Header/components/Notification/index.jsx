@@ -151,10 +151,10 @@ function Notification(props) {
             {notifyLogs.length > 0 &&
               notifyLogs.map((noti) => {
                 if (noti.logType.includes('rating-book')) {
-                  return <NotiRating noti={noti} />
+                  return <NotiRating noti={noti} handleCheckedNotify={handleCheckedNotify}/>
                 }
                 if (noti.logType.includes('payment-book')) {
-                  return <NotiPayment noti={noti} />
+                  return <NotiPayment noti={noti} handleCheckedNotify={handleCheckedNotify}/>
                 }
                 return undefined
               })}
